@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"  href="css/register.css" type="text/css">
+<script stc="../js/login.js"></script>
+<!-- <script src="../js/userregister.js"></script> -->
+<title>注册网页</title>
+</head>
+
+<body>
+	<div id="in_all">
+    	<div class="top">
+        	<div class="bor_all">
+            	<div class="left">
+                	<span><a href="index.html" target="_blank">波奇首页</a></span>
+                    <span><a href="shoppingindex.html" target="_blank">波奇商城</a></span>
+                    <span><a href="baike.html" target="_blank">波奇百科</a></span>
+                </div>
+                <div class="right">
+                	<span><a href="#" target="_blank">登录</a></span>
+                    <span><a href="#" target="_blank">注册</a></span>
+                    <span><a href="#" target="_blank">微博</a></span>
+                    <span><a href="#" target="_blank">微信</a></span>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+			<div class="bor_content">
+            	<div class="up_con">
+                	<div class="left">
+                    	<em class="left"><img src="registerimg/logo.gif" style="width:190px;height:88px;"></em>
+                        <h1 style="color:#999;" class="left" onClick="useregister()">用户注册</h1>
+                        
+                    </div>
+                    <div class="right">
+                    	<span style="font-size:12px;font-family:SimSun;">已有波奇帐号，<a  href="login.html" style="color:blue;">直接登录</a></span>
+                    </div>
+                </div>
+                <div class="down_con">
+                	<div class="lecon left">
+                    	<div class='reg_tit'>
+                        	<div class="email_reg">
+                            	<em></em>
+                                邮箱注册
+                            </div>
+                            <div class='reg_info'>
+                            	<form action=" "  method="post" class="box_info">
+                                	<div class="uname bifo">
+                                    	<span style="padding-left:32px" id="email" class="left" onBlur="checkzcemail()">邮箱:</span>
+                                        <input type="text" maxlength="40" placeholder="请输入您的电子邮箱地址" class="uname_text left" style="width:250px;height:38px;font-size:16px;position:relative;">
+                                        <div class="showWarning left" id="showEmail" style="display:none;"></div>
+                                    </div>
+                                    <div class="pwd bifo">
+                                    	<span class="left">设置密码:</span>
+                                        <input type="password" onBlur="checkzcpwd()" maxlength="20" class="pwd_text left" id="pwds" placeholder="6-20大小写英文字幕,数字或符号" style="width:250px;height:38px;font-size:16px;position:relative;">
+                                        <span class="show_info" id="showPwd" style="display:none;"></span>
+                                    </div>
+                                    <div class="pwd2 bifo">
+                                    	<span class="left">确认密码:</span>
+                                        <input type="password" onBlur="checkzcpwdagain()" maxlength="20" class="pwd_text2 left" id="pwd" placeholder="请再次输入密码" style="width:250px;height:38px;font-size:16px;">
+                                        <span class="show_info" id="showSure" style="display:none;"></span>
+                                    </div>
+                                    <div class="nick bifo">
+                                    	<span style="padding-left:32px" class="left" id="uname">昵称:</span>
+                                        <input type="text" onBlur="checkzcuname()" maxlength="10" class="sname_text left" placeholder="请输入昵称" style="width:250px;height:38px;font-size:16px;">
+                                        <span class="show_info" id="showId" style="display:none;"></span>
+                                    </div>
+                                    <div class="check_pic bifo">
+                                    	<span style="padding-left:16px" class="left">验证码:</span>
+                                        <div class="kuangkuang left">
+                                       	 	 <input type="text" onBlur="checkzccode()" maxlength="4" class="check_text  left" id="check_text" style="width:80px;height:38px;font-size:16px;border:none;outline:none;">
+                                       		 <img src="../js/valiCodeImg.jsp" class="yanzhengtu" onclick="changeVilidateCode(this)" border="0" title="点击图片刷新验证码" size="10" />
+                                        </div>
+                                        <div class="yyy left" >
+                                        	<span class="show_info2"></span>
+                                        </div>
+                                          
+                                    </div>
+                                    <div class="click_read" style="padding-left:74px;margin-top:30px;">
+                                    	<input type="checkbox"> 我已阅读并同意<a href="#" target="_blank" style="color:blue;">《波奇网服务协议》</a></div>
+                                    </div>
+                                    <div class='register' style="padding-left:130px;margin-top:30px;margin-bottom:40px;">
+                                    	<input type="submit"  style="cursor:pointer;" value="注册">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="right">
+                        	<img src="registerimg/reg_ad.jpg">
+                        </div>
+                    </div>
+                </div> 
+            </div>        
+        </div>
+        <div id="footer">
+        	<div id="footer-auto">
+                <div id="footer-bot">
+                    <p id="footer-link">
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">关于波奇</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">友情链接</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">诚聘英才</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">联系我们</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">网站地图</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">意见反馈</a>
+                        <span>|</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">帮助中心</a>
+                        <span>|</span>
+                        <span>客服热线：400-820-6098</span>
+                        
+                    </p>
+                    <p id="copy">
+                        <span>Copyright  2007-2015 Boqii.com All Rights Reserved 光橙（上海）信息科技有限公司 版权所有</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">沪ICP备13034501号-2</a>
+                        <span>增值电信业务经营许可证：</span>
+                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">沪B2-20140120</a>
+                    </p>
+                    <p id="footimg">
+                        <a href="#" target="_blank">
+                            <img width="100" height="35" src="registerimg/foot_gs.png">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img width="100" height="35" src="registerimg/foot_kx.png">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img width="100" height="35" src="registerimg/foot_zx.png">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img width="100" height="35" src="registerimg/foot_cx.png">
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="jquery-2.1.1.js"></script>
+<script src="register.js"></script>
+</html>

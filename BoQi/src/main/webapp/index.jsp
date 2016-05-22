@@ -1,6 +1,2 @@
-<html>
-<body>
-<h2>Hello World!</h2>
--------------ttttttt
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<jsp:forward page="boqi_index.action"/>
