@@ -15,5 +15,4 @@ public class BoqiAction {
 		
 		return "shoppingindex";
 	}
-	
 }
