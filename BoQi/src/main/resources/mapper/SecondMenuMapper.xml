@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.SecondMenuMapper" >
+	<!-- 获取一个种类的二级分类 -->
+	<select id="getProType" parameterType="string" resultType="SecondMenu">
+		select s.* from secondmenu s,firstmenu f where s.fid=f.fid and pet=#{type} and s.status=1
+	</select>
+	<select id="getByFid" parameterType="string" resultType="SecondMenu">
+		select * from secondmenu where fid=#{fid} and status=1
+	</select>
+</mapper>

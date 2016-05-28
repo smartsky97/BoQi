@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.UserMapper" >
+	<!-- 分页查询 -->
+	<select id="getPageUsers" parameterType="map" resultType="UserInfo">
+		select * from(select a.*,rownum rn from (select *from bquserinfo order by usid) a where
+		rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+	<select id="getUserTotal" resultType="int">
+		select count(usid) from bquserinfo
+	</select>
+	<select id="getUserByUsid" parameterType="int" resultType="UserInfo">
+		select * from bquserinfo where usid=#{usid}
+	</select>
+	<select id="findUserByInfo" parameterType="map" resultType="UserInfo"> 
+	select * from (select a.*,rownum rn from (select usid,uname,email,status,money from bquserinfo where qq!=154564645
+		<choose>
+			<when test="uname!=null ">
+				 and uname like '%${uname}%' 
+			</when>
+			<when test="email!=null ">
+				 and email like '%${email}%'
+			</when>
+			<when test="status!=null">
+				and status=#{status} 
+			</when>
+		</choose>
+		order by usid) a where rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+</mapper>

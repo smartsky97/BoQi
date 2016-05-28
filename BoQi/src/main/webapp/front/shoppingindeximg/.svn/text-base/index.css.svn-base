@@ -1,0 +1,1045 @@
+@charset "UTF-8";
+.w1190, .shop_top_auto {
+  width: 1190px;
+}
+
+.w990, .evaluate_l {
+  width: 990px;
+}
+
+.mrauto, .shop_top_auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inline-block, .dog_l_num span, .wchat dl dd span {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: middle;
+}
+
+.text-overflow, .zx ul li a, .hot_pro_b_body dl dd, .dog_c_t dl dd, .ev_list dl dd {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/***media query***/
+@media screen and (max-width: 1190px) {
+  .w1190, .shop_top_auto {
+    width: 990px;
+  }
+}
+/*左侧菜单*/
+#shop_top_cont {
+  background: #f3f3f3;
+  height: 451px;
+}
+
+/*轮播*/
+.banner {
+  width: 800px;
+}
+
+.banner_content {
+  width: 800px;
+  height: 360px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.banner_img {
+  width: 2400px;
+  height: 360px;
+}
+.banner_img a {
+  float: left;
+  width: 800px;
+  height: 360px;
+}
+.banner_img a img {
+  display: block;
+  width: 800px;
+  height: 360px;
+}
+
+.banner_num {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+.banner_num span {
+  float: left;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background: #f3f3f3;
+  text-align: center;
+  font: 14px/24px "arial";
+  color: #333;
+  margin: 0 3px;
+  border-radius: 12px;
+}
+.banner_num span.current {
+  color: #fff;
+  background: #e53;
+}
+
+.banner_bot {
+  background: #f3f3f3;
+  width: 800px;
+  overflow: hidden;
+}
+
+.banner_bot_body {
+  width: 801px;
+}
+.banner_bot_body img {
+  float: left;
+  margin: 1px 1px 0 0;
+  background: #fff;
+}
+
+/*右侧广告*/
+.shop_r {
+  width: 200px;
+  background: #fff;
+  border-bottom: 1px solid #f3f3f3;
+  height: 450px;
+  position: relative;
+}
+
+.zx {
+  padding: 10px;
+}
+.zx ul li {
+  padding: 5px 0 0;
+  font-family: arial,"SimSun";
+  overflow: hidden;
+}
+.zx ul li a {
+  color: #333;
+  float: left;
+  max-width: 180px;
+}
+
+.zx_tit {
+  padding: 0 0 3px;
+  overflow: hidden;
+}
+.zx_tit p {
+  color: #333;
+  font: 16px/18px "Microsoft YaHei";
+  float: left;
+}
+
+.turn {
+  float: right;
+}
+.turn span {
+  float: left;
+  width: 15px;
+  height: 15px;
+  background: url("../../images/icon.png") no-repeat;
+  margin: 3px 3px 0;
+  cursor: pointer;
+}
+.turn span.prev {
+  background-position: -170px -38px;
+}
+.turn span.prev:hover {
+  background-position: -170px -57px;
+}
+.turn span.next {
+  background-position: -190px -38px;
+}
+.turn span.next:hover {
+  background-position: -190px -57px;
+}
+
+.zx_go {
+  width: 2000px;
+}
+.zx_go ul {
+  width: 180px;
+}
+
+.dy {
+  padding: 0 10px;
+}
+.dy strong {
+  color: #333;
+  font-family: "SimSun";
+}
+
+.dy_bot {
+  padding: 5px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+.dy_text {
+  width: 110px;
+  border: 1px solid #ccc;
+  border-right: none;
+  background: #f6f6f6;
+  color: #999;
+  float: left;
+  padding: 0 5px;
+  height: 22px;
+  line-height: 22px;
+}
+
+.dy_bot div {
+  position: absolute;
+  left: 0;
+  z-index: 2;
+  top: 32px;
+  line-height: 22px;
+  padding: 0 10px;
+  width: 149px;
+  font-family: "SimSun";
+}
+
+.dy_success {
+  color: #2a0;
+  background: #fffdee;
+  border: 1px solid #ddb;
+}
+
+.dy_err {
+  color: #d43;
+  background: #ffebec;
+  border: 1px solid #ffbdbf;
+}
+
+.dy_btn {
+  background: #e53;
+  color: #fff;
+  font-weight: bold;
+  width: 50px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.dy_btn:hover {
+  background: #d40;
+}
+
+/*火爆商品*/
+.hot_pro_t {
+  overflow: hidden;
+  line-height: 22px;
+}
+.hot_pro_t h2 {
+  float: left;
+  color: #e53;
+  font-size: 20px;
+}
+.hot_pro_t a {
+  float: right;
+  font-size: 14px;
+  color: #666;
+}
+.hot_pro_t a:hover {
+  color: #e53;
+}
+
+.hot_pro_b_body {
+  overflow: hidden;
+}
+.hot_pro_b_body dl {
+  float: left;
+  width: 176px;
+  border: 1px solid #e6e6e6;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  padding: 20px 10px 15px;
+  /* &:hover{
+  	border:1px solid $color_hover;
+  } */
+}
+.hot_pro_b_body dl.first {
+  border-left: 1px solid #e6e6e6;
+  /* &:hover{
+  	border:1px solid $color_hover;
+  } */
+}
+.hot_pro_b_body dl.six {
+  width: 178px;
+  border-right: 1px solid #e6e6e6;
+  /* &:hover{
+  	border:1px solid $color_hover;
+  } */
+}
+.hot_pro_b_body dl dt {
+  height: 120px;
+  overflow: hidden;
+}
+.hot_pro_b_body dl dt img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin-left: 28px;
+  transition: all .3s ease;
+  zoom: 1;
+}
+.hot_pro_b_body dl dd {
+  font-family: arial,"Microsoft YaHei";
+  padding-top: 10px;
+}
+.hot_pro_b_body dl dd a {
+  font-size: 14px;
+  color: #666;
+}
+.hot_pro_b_body dl dd a:hover {
+  color: #e53;
+}
+.hot_pro_b_body dl dd span {
+  width: 50%;
+}
+.hot_pro_b_body dl dd span.l {
+  float: left;
+  color: #e53;
+  font-size: 14px;
+  font-family: arial,"SimSun";
+}
+.hot_pro_b_body dl dd span.r {
+  float: right;
+  color: #666;
+  text-align: right;
+}
+.hot_pro_b{
+  height: 212px;
+  overflow: hidden;
+}
+/*品牌*/
+.brand_bot {
+  height: 270px;
+  position: relative;
+}
+.brand_bot img {
+  position: absolute;
+}
+
+.brand_1 {
+  left: 0;
+  top: 0;
+}
+
+.brand_2 {
+  left: 200px;
+  top: 0;
+}
+
+.brand_3 {
+  left: 200px;
+  top: 140px;
+}
+
+.brand_4 {
+  left: 400px;
+  top: 0;
+}
+
+.brand_5 {
+  left: 600px;
+  top: 0;
+}
+
+.brand_6 {
+  left: 600px;
+  top: 140px;
+}
+
+.brand_7 {
+  left: 800px;
+  top: 0;
+}
+
+.brand_8 {
+  left: 1000px;
+  top: 0;
+}
+
+.brand_9 {
+  left: 1000px;
+  top: 140px;
+}
+
+/*狗狗商品*/
+.dog_top {
+  border-bottom: 2px solid #e53;
+  height: 38px;
+  overflow: hidden;
+}
+
+.dog_tit {
+  width: 190px;
+  float: left;
+  padding: 5px 0 0;
+}
+.dog_tit em {
+  background: url("../../images/icon.png") no-repeat;
+  width: 35px;
+  height: 30px;
+  float: left;
+  margin-right: 5px;
+}
+.dog_tit h2 {
+  font: 20px/30px "Microsoft YaHei";
+  color: #e53;
+}
+.dog_tit h2 a {
+  color: #e53;
+}
+
+.dog_nav {
+  float: left;
+  height: 32px;
+  padding: 6px 0 0;
+}
+.dog_nav a {
+  font: 16px/32px "Microsoft YaHei";
+  float: left;
+  height: 32px;
+  background: url("../../images/line.jpg") no-repeat right 8px;
+  padding: 0 15px;
+  color: #333;
+}
+.dog_nav a.current {
+  color: #fff;
+  padding: 0 16px;
+  margin: 0 -1px;
+  background: #e53;
+}
+.dog_nav a.current.last {
+  background: #e53;
+}
+.dog_nav a:hover {
+  color: #fff !important;
+  padding: 0 16px;
+  margin: 0 -1px;
+  background: #e53;
+}
+.dog_nav a.last {
+  background: none;
+}
+.dog_nav a.last:hover {
+  background: #e53;
+}
+
+.dog_top a:hover {
+  text-decoration: underline;
+}
+
+.dog_bot {
+  overflow: hidden;
+}
+
+.dog_l {
+  width: 190px;
+  height: 480px;
+  position: relative;
+}
+
+.dog_l_img {
+  width: 570px;
+  height: 480px;
+  overflow: hidden;
+}
+.dog_l_img a {
+  float: left;
+  width: 190px;
+  height: 480px;
+}
+.dog_l_img a img {
+  width: 190px;
+  height: 480px;
+  display: block;
+}
+
+.dog_l_num {
+  background: url("../../images/icon.png") no-repeat 0 -38px;
+  position: absolute;
+  left: 60px;
+  bottom: 10px;
+  width: 54px;
+  height: 20px;
+  overflow: hidden;
+  padding: 0 8px;
+  text-align: center;
+}
+.dog_l_num span {
+  width: 10px;
+  height: 10px;
+  background: url("../../images/icon.png") no-repeat -97px -38px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.dog_l_num span.current {
+  background: url("../../images/icon.png") no-repeat -79px -38px;
+}
+
+.dog_c {
+  height: 480px;
+  overflow: hidden;
+  width: 800px;
+}
+
+.dog_body {
+  height: 422px;
+  overflow: hidden;
+}
+
+.dog_c_t {
+  overflow: hidden;
+}
+.dog_c_t dl {
+  float: left;
+  width: 174px;
+  border: 1px solid #fff;
+  padding: 20px 12px 15px;
+  height: 174px;
+  /* &:hover{
+  	border:1px solid $color_hover;
+  } */
+}
+.dog_c_t dl.first {
+  border-left: 1px solid #e6e6e6;
+}
+.dog_c_t dl.first:hover {
+  border: 1px solid #e53;
+}
+.dog_c_t dl.six {
+  width: 178px;
+  border-right: 1px solid #e6e6e6;
+}
+.dog_c_t dl.six:hover {
+  border: 1px solid #e53;
+}
+.dog_c_t dl dt {
+  height: 120px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.dog_c_t dl dt img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin-left: 28px;
+  transition: all .3s ease;
+  zoom: 1;
+}
+.dog_c_t dl dd {
+  font-family: arial,"Microsoft YaHei";
+  padding-top: 7px;
+}
+.dog_c_t dl dd a {
+  font-size: 14px;
+  color: #666;
+}
+.dog_c_t dl dd a:hover {
+  color: #e53;
+}
+.dog_c_t dl dd span {
+  width: 50%;
+}
+.dog_c_t dl dd span.l {
+  float: left;
+  color: #e53;
+  font-size: 14px;
+  font-family: arial,"SimSun";
+}
+.dog_c_t dl dd span.r {
+  float: right;
+  color: #666;
+  text-align: right;
+}
+
+.dog_c_t dl.dog_c_t_1 {
+  border-top: none;
+}
+
+.dog_c_t dl.dog_c_t_2 {
+  border-top: none;
+}
+
+.dog_c_t dl.dog_c_t_3 {
+  border-top: none;
+}
+
+.dog_c_t dl.dog_c_t_4 {
+  border-top: none;
+}
+
+.dog_c_b {
+  overflow: hidden;
+}
+.dog_c_b img {
+  float: left;
+  width: 80px;
+  height: 36px;
+  border: 1px solid #e6e6e6;
+  border-left: none;
+  padding: 10px 9px 10px 10px;
+}
+.dog_c_b img.last {
+  border-right: none;
+  padding: 10px;
+}
+
+.dog_r {
+  width: 178px;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  padding: 10px;
+  height: 459px;
+}
+
+.dog_r_t {
+  font: 16px/18px "Microsoft YaHei";
+  color: #e53;
+}
+
+.dog_r_b dl {
+  margin-top: 12px;
+  overflow: hidden;
+}
+.dog_r_b dl dt {
+  float: left;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.dog_r_b dl dt img {
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+.dog_r_b dl dd {
+  font-family: arial,"Microsoft YaHei";
+  padding-top: 5px;
+  color: #e53;
+  font-size: 14px;
+}
+.dog_r_b dl dd.name {
+  height: 38px;
+  line-height: 18px;
+  overflow: hidden;
+  padding: 0;
+}
+.dog_r_b dl dd a {
+  font-size: 14px;
+  color: #666;
+}
+.dog_r_b dl dd a:hover {
+  color: #e53;
+}
+
+/*猫咪商品*/
+.cat_tit em {
+  background-position: -57px 0;
+}
+
+/*猫咪商品*/
+.small_tit em {
+  background-position: -113px 0;
+  margin-right: 0;
+}
+
+/*水族商品*/
+.water_tit em {
+  background-position: -170px 0;
+  margin-right: 5px;
+}
+
+/*爬虫商品*/
+.reptile_tit em {
+  background-position: -227px 0;
+  margin-right: 5px;
+}
+
+/*热门评价*/
+.evaluate {
+  overflow: hidden;
+}
+
+.evaluate_tit {
+  border-bottom: 2px solid #e53;
+  padding-bottom: 5px;
+}
+.evaluate_tit em {
+  background: url("../../images/icon.png") no-repeat -113px -38px;
+  width: 28px;
+  height: 25px;
+  float: left;
+  margin-right: 5px;
+}
+.evaluate_tit h2 {
+  font: 20px/25px "Microsoft YaHei";
+  color: #e53;
+}
+
+.ev_bot {
+  overflow: hidden;
+  width: 989px;
+  height: 182px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.ev_bot_auto {
+  width: 991px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ev_content {
+  height: 91px;
+}
+
+.ev_list {
+  float: left;
+  padding: 15px;
+  border-left: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  font-family: arial,"SimSun";
+  width: 464px;
+}
+.ev_list dl {
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+.ev_list dl dt img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  border-radius: 20px;
+}
+.ev_list dl dd {
+  color: #999;
+  text-align: middle;
+  padding: 5px 0 0;
+}
+.ev_list ul {
+  float: left;
+  width: 315px;
+  padding: 0 20px;
+}
+.ev_list ul li {
+  overflow: hidden;
+  color: #e53;
+}
+.ev_list ul li em {
+  font-style: normal;
+  float: left;
+}
+.ev_list ul li span {
+  float: right;
+}
+.ev_list ul li.text {
+  color: #666;
+  line-height: 18px;
+  padding: 5px 0 0;
+  height: 34px;
+  overflow: hidden;
+}
+
+.pro {
+  width: 60px;
+  height: 60px;
+  float: right;
+}
+
+.attention {
+  width: 190px;
+}
+
+.wchat dl {
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  height: 70px;
+}
+.wchat dl dt {
+  height: 70px;
+  width: 70px;
+  background: url("../../images/icon.png") no-repeat;
+  float: left;
+  margin-right: 10px;
+}
+.wchat dl dt.foot_w1 {
+  background-position: -113px -77px;
+}
+.wchat dl dt.foot_w2 {
+  background-position: -113px -159px;
+}
+.wchat dl dd {
+  color: #666;
+  padding: 3px 0 0;
+  overflow: hidden;
+}
+.wchat dl dd em {
+  color: #e53;
+  font-style: normal;
+  font-weight: bold;
+}
+.wchat dl dd span {
+  width: 16px;
+  height: 14px;
+  background: url("../../images/icon.png") no-repeat -195px -77px;
+  margin-left: 6px;
+}
+.wchat dl dd a {
+  color: #666;
+}
+
+.foot_wb {
+  float: left;
+  width: 80px;
+  height: 28px;
+  background: url("../../images/icon.png") no-repeat -195px -96px;
+}
+
+.foot_wb:hover {
+  background-position: -195px -130px;
+}
+
+/* .menu_list_l.last{height:64px;} */
+/***media query***/
+@media screen and (max-width: 1190px) {
+  .hot_pro_b dl.five {
+    border-right: 1px solid #e6e6e6;
+    /* &:hover{border:1px solid $color_hover;} */
+  }
+
+  .dog_c_t {
+    border-right: 1px solid #e6e6e6;
+  }
+
+  .dog_c_t dl.dog_c_t_4 {
+    padding: 20px 12px 15px 11px;
+  }
+
+  .dog_c_t dl.dog_c_t_8 {
+    padding: 20px 12px 15px 11px;
+  }
+
+  .dog_c_b img.last {
+    border-right: 1px solid #e6e6e6;
+    padding: 10px 9px 10px 10px;
+  }
+}
+
+
+html, body {
+    _height: 100%;
+}
+
+.email-sub-mask {
+    display: none;
+    position: fixed;
+    _position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#44000000, endColorstr=#44000000);
+    _background: #ccc;
+}
+
+.email-sub-dialog {
+    display: none;
+    position: fixed;
+    _position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9900;
+    width: 761px;
+    background: #DD4433;
+    border: 2px solid #DD4433;
+}
+
+.email-sub-hd {
+    position: relative;
+    padding: 0 10px;
+    height: 32px;
+    font: 700 14px/32px 'Simsun';
+    color: #fff;
+}
+
+.email-sub-hd h6 {
+    font: inherit;
+    font-family: 'Microsoft Yahei';
+}
+
+.email-sub-close {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    background: url(../../images/email_subscription/close.png) 0 0 no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.email-sub-bd {
+    padding: 30px;
+    overflow: hidden;
+    background: #fff;
+    color: #333;
+}
+
+.email-sub-row {
+    clear: both;
+    margin-bottom: 10px;
+    overflow: hidden;
+    font: 12px/34px 'Simsun';
+}
+
+.email-sub-field,
+.email-sub-span,
+.email-sub-warning,
+.email-sub-item,
+.email-sub-img,
+.email-sub-inner {
+    display: inline;
+    float: left;
+}
+
+.email-sub-field {
+    width: 165px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.email-sub-field em {
+    color: #f00;
+}
+
+.email-sub-warning {
+    padding-left: 10px;
+    color: #999;
+}
+
+.email-sub-input {
+    padding: 5px;
+    width: 178px;
+    height: 22px;
+    border: 1px solid #ddd;
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+.email-sub-list {
+    width: 535px;
+    line-height: 1.5;
+}
+
+.email-sub-item {
+    margin: 10px 15px 10px 0;
+    width: 163px;
+    height: 60px;
+}
+
+.email-sub-img {
+    margin-right: 10px;
+}
+
+.email-sub-tit {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.email-sub-txt {
+    color: #999;
+}
+
+.email-sub-txt em {
+    color: #f65;
+}
+
+.email-sub-oper {
+    margin-top: 5px;
+    vertical-align: top;
+}
+
+.email-sub-oper input {
+    margin-top: 3px;
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+}
+
+.email-sub-oper label {
+    vertical-align: top;
+}
+
+.email-sub-submit {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 68px;
+    height: 26px;
+    background: #f65;
+    border: 1px solid #d43;
+    line-height: 26px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Microsoft Yahei';
+}
+
+.email-sub-success {
+    width: 565px;
+}
+
+.email-sub-success .email-sub-bd {
+    padding: 40px 0;
+}
+
+.email-sub-faild {
+    width: 510px;
+}
+
+.email-sub-faild .email-sub-bd {
+    padding: 50px 0 60px;
+}
+
+.email-sub-article {
+    font: 14px/20px 'Simsun';
+    text-align: center;
+}
+
+.email-sub-p {
+    padding-bottom: 5px;
+}
+
+.email-sub-p .email-sub-submit {
+    margin-top: 20px;
+}
+
+.email-sub-stIcon {
+    margin: 0 10px 3px 0;
+}
+
+.email-sub-tip {
+    padding-top: 30px;
+    color: #999;
+}
+
+/*.email-sub-error {
+    display: none;
+    clear: both;
+    color: #f00;
+    line-height: 1.5;
+}*/
+

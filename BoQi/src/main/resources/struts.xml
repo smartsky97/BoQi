@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    
+	<constant name="struts.objectFactory" value="spring" />
+	
+    <package name="default" namespace="/" extends="json-default">
+    	<action name="back_*" class="backAction" method="{1}">
+    		<result name="{1}">/back/{1}.jsp</result>
+    	</action>
+    
+    	<action name="*_*" class="{1}Action" method="{2}">
+    		<result name="GetTop" type="json">
+    			<param name="root">productinfos</param>
+    		</result>
+    		<result name="secs" type="json">
+    			<param name="root">secsl</param>
+    		</result>
+    		<result name="PageBrandInfo" type="json">
+    			<param name="root">rows,total</param>
+    		</result>
+    		<result name="pageUserInfo" type="json">
+    			<param name="root">rows</param>
+    		</result>
+    		<result name="getUserByid" type="json">
+    			<param name="root">user</param>
+    		</result>
+    		<result name="selectUsers" type="json">
+    			<param name="root">rows</param>
+    		</result>
+    		<result name="{2}">/front/{2}.jsp</result>
+    	</action>
+    	
+    </package>
+</struts>
