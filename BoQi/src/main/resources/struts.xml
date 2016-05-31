@@ -10,7 +10,7 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
     <package name="default" namespace="/" extends="json-default">
-    	<action name="back_*" class="backAction" method="{1}">
+    	<action name="back-*" class="backAction" method="{1}">
     		<result name="{1}">/back/{1}.jsp</result>
     	</action>
     
@@ -22,19 +22,14 @@
     			<param name="root">secsl</param>
     		</result>
     		<result name="PageBrandInfo" type="json">
-    			<param name="root">rows,total</param>
-    		</result>
-    		<result name="pageUserInfo" type="json">
     			<param name="root">rows</param>
     		</result>
-    		<result name="getUserByid" type="json">
-    			<param name="root">user</param>
-    		</result>
-    		<result name="selectUsers" type="json">
-    			<param name="root">rows</param>
-    		</result>
+    		<result name="paymoney">/front/paymoney.jsp</result>
+    		<result name="index">/front/index.jsp</result>
     		<result name="{2}">/front/{2}.jsp</result>
     	</action>
     	
     </package>
+    
+    
 </struts>

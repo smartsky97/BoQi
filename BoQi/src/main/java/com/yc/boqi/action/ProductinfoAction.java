@@ -30,6 +30,7 @@ import com.yc.boqi.service.BrandService;
 import com.yc.boqi.service.FirstMenuService;
 import com.yc.boqi.service.ProductinfoService;
 import com.yc.boqi.service.SecondMenuService;
+import com.yc.boqi.util.AllSessions;
 @Controller
 public class ProductinfoAction implements ServletRequestAware,ServletResponseAware,ModelDriven<Productinfo>{
 	private HttpServletRequest request;
@@ -100,9 +101,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 
 	//获取每个类型的前8个商品
 	public String GetTop8(){
-		System.out.println("啦啦啦");
 		productinfos = productinfoService.GetTop8();
-		System.out.println("莫妮卡："+productinfos);
 		return "GetTop";
 	}
 	//获取后台狗狗商品信息
@@ -161,7 +160,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		    for(String as:pictruesFileName){
 		    	picture += as+",";
 		    }
-		    picture = picture.substring(0, picture.length()-2);
+		    picture = picture.substring(0, picture.length()-1);
 	    }
 	    System.out.println("pp:"+picture);
 	    productinfo.setPictrue(picture);
@@ -169,7 +168,11 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	    productinfoService.addProduct(productinfo);
 	}
 
-	
+	public String product(){
+		Productinfo pro = productinfoService.findAproduct(productinfo.getProid());
+		request.getSession().setAttribute(AllSessions.PRODUCT_ONE, pro);
+		return "product";
+	}
 
 	
 

@@ -3,6 +3,7 @@ package com.yc.boqi.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.yc.boqi.entity.IndexProductBean;
 import com.yc.boqi.entity.Productinfo;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 
@@ -19,4 +20,18 @@ public interface ProductinfoMapper {
 	 * @return
 	 */
 	public boolean addProduct(Productinfo productinfo);
+	/**
+	 * 查询一个商品的所有信息
+	 * @param orderid：商品id
+	 * @return
+	 */
+	public Productinfo findAproduct(int proid);
+	// index.jsp页面商品的狗部分查询信息
+	List<IndexProductBean> findIndexDogPro();
+
+	// index.jsp页面商品的猫部分查询信息
+	List<IndexProductBean> findIndexCatPro();
+
+	// index.jsp页面商品的小宠部分查询信息
+	List<IndexProductBean> findIndexsmallPro();
 }

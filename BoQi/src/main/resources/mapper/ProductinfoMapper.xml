@@ -22,4 +22,25 @@
 		insert into productinfo values(seq_proid.nextval,#{proname},#{nature},#{brandid},#{tid},#{suitpet}
 		,#{pictrue},#{promarprice},#{bqpri},#{prosales},#{prointro},#{inventory},#{status},null,null)
 	</insert>
+	<!-- 查询一个商品的信息 -->
+	<select id="findAproduct" parameterType="int" resultType="Productinfo">
+		select * from productinfo where proid=#{proid}
+	</select>
+	<!--lsp：index.jsp页面狗商品的部分查询信息  -->
+	<select id="findIndexDogPro" resultType="IndexProductBean">
+		select * from (select p.proid,f.fid,p.proname,p.prointro,p.pictrue,rownum rn from secondmenu s,productinfo p,firstmenu f 
+ 	where p.suitpet='狗' and s.tid=p.tid and f.fid=s.fid order by p.proid asc) where rn<![CDATA[<]]>=4
+	</select>
+	
+	<!--lsp：index.jsp页面猫商品的部分查询信息  -->
+	<select id="findIndexCatPro" resultType="IndexProductBean">
+		select * from (select p.proid,f.fid,p.proname,p.prointro,p.pictrue,rownum rn from secondmenu s,productinfo p,firstmenu f 
+ 			where p.suitpet='猫' and s.tid=p.tid and f.fid=s.fid  order by p.proid asc) where rn<![CDATA[<]]>=4
+	</select>
+	
+	<!--lsp：index.jsp页面小宠商品的部分查询信息  -->
+	<select id="findIndexsmallPro" resultType="IndexProductBean">
+		select * from (select p.proid,f.fid,p.proname,p.prointro,p.pictrue,rownum rn from secondmenu s,productinfo p,firstmenu f 
+ 			where p.suitpet='小宠' and s.tid=p.tid and f.fid=s.fid  order by p.proid asc) where rn<![CDATA[<]]>=4
+	</select>
 </mapper>

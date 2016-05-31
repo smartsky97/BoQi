@@ -15,7 +15,8 @@
 		<option value="3">配货中</option>
 		<option value="4">已发货</option>
 		<option value="5">已收货</option>
-		<option value="6">退货</option>
+		<option value="5">已收货但删除</option>
+		<option value="7">退货</option>
 	</select>
 	&nbsp;&nbsp;<a href="javascript:findOrderInfoByInfo()" style="margin-top:-5px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">查询</a>
 	<a href="javascript:changeToPai()" style="margin-top:-5px;margin-left:15px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">转配货</a>
@@ -33,13 +34,13 @@ $(function(){
 	var editRow=undefined;
 
 	//未确认	取消	确认	已付款	配货中	已发货	已收货	退货
-	var statusObj=[{sid:0,sname:'失效'},{sid:1,sname:'待付款'},{sid:2,sname:'已付款'},{sid:3,sname:'配货中'},{sid:4,sname:'已发货'},{sid:5,sname:'已收货'},{sid:6,sname:'退货'}];
+	var statusObj=[{sid:0,sname:'失效'},{sid:1,sname:'待付款'},{sid:2,sname:'已付款'},{sid:3,sname:'配货中'},{sid:4,sname:'已发货'},{sid:5,sname:'已收货'},{sid:6,sname:'已收货但删除'},{sid:7,sname:'退货'}];
 	//给修改订单的状态添加状态属性
 	//$(".checked").append();
 
 	datagrid=$('#ordercontent_info').datagrid({
 		url:'orderContentServlet',
-		queryParams:{op:"getPageOrderInfo"},
+		//queryParams:{op:"getPageOrderInfo"},
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",
@@ -52,7 +53,7 @@ $(function(){
 		    {field:'orderids',title:'订单编号',width:100,align:'center',checkbox:true},
 		    {field:'orderid',title:'订单编号',width:100,align:'center'},
 		    {field:'uname',title:'客户姓名',width:100,align:'center',editor:{type:"text",options:{required:true}}},
-		    {field:'starttime10',title:'订单日期',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+		    {field:'starttime',title:'订单日期',width:100,align:'center',editor:{type:"text",options:{required:true}}},
 		    {field:'ordersum',title:'订单金额',width:100,align:'center',editor:{type:"text",options:{required:true}}},
 		    {field:'orderstate',title:'订单状态',width:100,align:'center',editor:{type:"combobox",options:{
 				required:true,valueField:'sid',textField:'sname',data:statusObj}},

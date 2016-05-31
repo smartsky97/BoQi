@@ -181,7 +181,6 @@ function ftos(){
 		<label style="float:left;">商品介绍：</label><textarea maxlength="25" name="prointro" id="dogPro_intro" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br /> 
 		<label>商品状态：</label><select name="status" id="dogPro_status"class="myinput"></select><br /> <br />  
 		<input type="submit" value="添加"/>
-		<!-- <a href="javascript:addDogProInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a> -->
 	</form>
 	<div style="float:right;width:380px;margin-right:20px;">
 		<fieldset id="news_pic_show">

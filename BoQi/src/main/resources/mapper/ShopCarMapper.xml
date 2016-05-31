@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.ShopCarMapper" >
+	<select id="checkIfSave" parameterType="map" resultType="ShopCar">
+		select * from shopcar where proid=#{proid} and usid=#{usid}
+	</select>
+	<!-- 向购物车中添加一条数据 -->
+	<insert id="addAInfo" parameterType="map">
+		insert into shopcar values(#{proid},#{usid},#{inventory},'','')
+	</insert>
+	
+	<select id="getAllInfo" parameterType="int" resultType="ShopCarBean">
+		select p.proid,proname,nature,bqpri,pictrue,usid,s.inventory from shopcar s,productinfo p where s.proid=p.proid and s.usid=#{usid}
+	</select>
+</mapper>

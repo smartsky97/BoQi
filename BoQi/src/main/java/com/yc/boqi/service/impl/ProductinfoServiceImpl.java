@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.boqi.entity.IndexProductBean;
 import com.yc.boqi.entity.Productinfo;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 import com.yc.boqi.mapper.ProductinfoMapper;
@@ -41,6 +42,24 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		return productinfoMapper.addProduct(productinfo);
 	}
 
-	
+	@Override
+	public Productinfo findAproduct(int orderid) {
+		return productinfoMapper.findAproduct(orderid);
+	}
+
+	@Override
+	public List<IndexProductBean> findIndexDogPro() {
+		return productinfoMapper.findIndexDogPro();
+	}
+
+	@Override
+	public List<IndexProductBean> findIndexCatPro() {
+		return productinfoMapper.findIndexCatPro();
+	}
+
+	@Override
+	public List<IndexProductBean> findIndexsmallPro() {
+		return productinfoMapper.findIndexsmallPro();
+	}
 
 }
