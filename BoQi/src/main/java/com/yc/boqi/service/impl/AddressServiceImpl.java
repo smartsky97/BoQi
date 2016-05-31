@@ -20,5 +20,9 @@ public class AddressServiceImpl implements AddressService {
 	public void addone(Address address) {
 		addressMapper.addOne(address);
 	}
+	@Override
+	public List<Address> findByUsidAll(int usid) {
+		return addressMapper.getByUsidAll(usid);
+	}
 
 }

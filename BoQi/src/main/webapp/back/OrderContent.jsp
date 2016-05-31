@@ -39,8 +39,7 @@ $(function(){
 	//$(".checked").append();
 
 	datagrid=$('#ordercontent_info').datagrid({
-		url:'orderContentServlet',
-		//queryParams:{op:"getPageOrderInfo"},
+		url:'ordercontent_findAllOrders.action',
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",

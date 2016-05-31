@@ -1,11 +1,17 @@
 package com.yc.boqi.entity;
 
+import java.io.Serializable;
+
 /**
  * index.jsp页面的商品部分信息展示
  * @author liushuping
  *
  */
-public class IndexProductBean {
+public class IndexProductBean  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6571391084408034131L;
 	private int proid;
 	private int fid;
 	private int tid;

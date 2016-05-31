@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.UserInfoMapper" >
+	<insert id="getRegister" parameterType="UserInfo">
+		insert into bquserinfo(usid,email,registerpwd,paypwd,uname) values(seq_usid.nextval,#{email},#{registerpwd},${paypwd},#{uname})
+	</insert>
+	
+	<select id="selectUserInfo" parameterType="UserInfo" resultType="UserInfo">
+		select * from bquserinfo where usid=#{usid}
+	</select>
+	
+	<select id="selectOrderInfo" parameterType="UserInfo" resultType="OrderForm">
+  		select oc.orderid,o.proid,p.nature,p.proname,o.pronum,p.bqpri,oc.ordersum,a.addname,o.status from ordercontent oc, orderform o, productinfo p, address a 
+  		where p.proid=o.proid and oc.usid=a.usid and oc.orderid=o.orderid and oc.usid=1001 and orderstate!=0 and orderstate!=6 order by oc.orderid asc
+	</select>
+	
+	<select id="selectwzg" resultType="int">
+		select count(orderid) from orderform where status=1 
+	</select>
+	
+	<select id="selectfinish" resultType="int">
+		select count(orderid) from orderform where status=4 
+	</select>
+	
+	<select id="selectpingjia" resultType="int">
+		select count(orderid) from orderform where status=6 
+	</select>
+	
+	<delete id="delOrder" parameterType="int">
+		delete from orderform where orderid=#{orderid}
+	</delete>
+	<!-- 分页查询 -->
+	<select id="getPageUsers" parameterType="map" resultType="UserInfo">
+		select * from(select a.*,rownum rn from (select *from bquserinfo order by usid) a where
+		rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+	<select id="getUserTotal" resultType="int">
+		select count(usid) from bquserinfo
+	</select>
+	<select id="getUserByUsid" parameterType="int" resultType="UserInfo">
+		select * from bquserinfo where usid=#{usid}
+	</select>
+	<select id="findUserByInfo" parameterType="map" resultType="UserInfo"> 
+	select * from (select a.*,rownum rn from (select usid,uname,email,status,money from bquserinfo where qq!=154564645
+		<choose>
+			<when test="uname!=null and uname!=''">
+				 and uname like '%${uname}%' 
+			</when>
+			<when test="email!=null and uname!=''">
+				 and email like '%${email}%'
+			</when>
+			<when test="status!=null">
+				and status=#{status} 
+			</when>
+		</choose>
+		order by usid) a where rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+</mapper>

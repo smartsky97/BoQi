@@ -1,5 +1,7 @@
 package com.yc.boqi.mapper;
 
-public interface OrderformMapper {
+import com.yc.boqi.entity.OrderForm;
 
+public interface OrderformMapper {
+	public void addfrom(OrderForm orderForm);
 }

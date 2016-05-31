@@ -15,7 +15,7 @@ $(function(){
 						title:"用户信息管理",
 						closable:true,
 						fit:true,
-						href:"back_UserInfo.action"
+						href:"back-UserInfo.action"
 					});
 				}
 			}
@@ -32,7 +32,7 @@ $(function(){
 						title:"品牌信息管理",
 						closable:true,
 						fit:true,
-						href:"back_BrandInfo.action"
+						href:"back-BrandInfo.action"
 					});
 				}
 			}else if(node.id=="dogpro_manager"){
@@ -43,7 +43,7 @@ $(function(){
 						title:"狗狗商品信息管理",
 						closable:true,
 						fit:true,
-						href:"back_dogproInfo.action"
+						href:"back-dogproInfo.action"
 					});
 				}
 			}else if(node.id=="catpro_manager"){
@@ -54,7 +54,7 @@ $(function(){
 						title:"猫猫商品信息管理",
 						closable:true,
 						fit:true,
-						href:"back_catproInfo.action"
+						href:"back-catproInfo.action"
 					});
 				}
 			}else if(node.id=="smlpro_manager"){
@@ -65,7 +65,7 @@ $(function(){
 						title:"小宠商品信息管理",
 						closable:true,
 						fit:true,
-						href:"back_smlproInfo.action"
+						href:"back-smlproInfo.action"
 					});
 				}
 			}else if(node.id=="watpro_manager"){
@@ -76,7 +76,7 @@ $(function(){
 						title:"水族商品信息管理",
 						closable:true,
 						fit:true,
-						href:"back_watproInfo.action"
+						href:"back-watproInfo.action"
 					});
 				}
 			}else if(node.id=="pacpro_manager"){
@@ -87,7 +87,7 @@ $(function(){
 						title:"爬虫商品信息管理",
 						closable:true,
 						fit:true,
-						href:"back_pacproInfo.action"
+						href:"back-pacproInfo.action"
 					});
 				}
 			}
@@ -104,7 +104,7 @@ $(function(){
 						title:"订单信息",
 						closable:true,
 						fit:true,
-						href:"back_OrderContent.action"
+						href:"back-OrderContent.action"
 					});
 				}
 			}
@@ -121,7 +121,7 @@ $(function(){
 						title:"狗狗百科管理",
 						closable:true,
 						fit:true,
-						href:"back_dogBk.action"
+						href:"back-dogBk.action"
 					});
 				}
 			}else if(node.id=="catbk_manager"){
@@ -132,7 +132,7 @@ $(function(){
 						title:"猫猫百科管理",
 						closable:true,
 						fit:true,
-						href:"back_catBk.action"
+						href:"back-catBk.action"
 					});
 				}
 			}else if(node.id=="watbk_manager"){
@@ -143,7 +143,7 @@ $(function(){
 						title:"水族百科管理",
 						closable:true,
 						fit:true,
-						href:"back_watBk.action"
+						href:"back-watBk.action"
 					});
 				}
 			}
@@ -160,7 +160,7 @@ $(function(){
 						title:"订单信息",
 						closable:true,
 						fit:true,
-						href:"back_AdInfo.action"
+						href:"back-AdInfo.action"
 					});
 				}
 			}

@@ -43,4 +43,8 @@
 		select * from (select p.proid,f.fid,p.proname,p.prointro,p.pictrue,rownum rn from secondmenu s,productinfo p,firstmenu f 
  			where p.suitpet='小宠' and s.tid=p.tid and f.fid=s.fid  order by p.proid asc) where rn<![CDATA[<]]>=4
 	</select>
+	<!-- 修改商品库存 -->
+	<update id="updateGoodsNum" parameterType="map">
+		update productinfo set inventory=inventory-#{pronum} where proid=#{proid}
+	</update>
 </mapper>

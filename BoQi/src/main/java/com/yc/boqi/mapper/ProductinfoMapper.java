@@ -34,4 +34,6 @@ public interface ProductinfoMapper {
 
 	// index.jsp页面商品的小宠部分查询信息
 	List<IndexProductBean> findIndexsmallPro();
+	
+	public void updateGoodsNum(Map<String, Object> so);
 }

@@ -1148,106 +1148,106 @@
 	           </div>
 	       </div>
 	       <!--水箱-->
-	       <div class="dogThing bigTop">
-	       	   <div class="dogMore smallTop">
-	               <div class='dog_tit'>
-	               	<em></em>
-	           		<h2>
-	                   	<a href="#" target="_blank">水族商品</a>
-	                   </h2>
-	               </div>
-	               <div class="dog_nav">
-	               		<a href="#" target="_blank" class="showColor" name="鱼缸">鱼缸</a>
-	                       <a href="#" target="_blank" name="鱼饲料">鱼饲料</a>
-	                       <a href="#" target="_blank" name="药水">药水</a>
-	                       <a href="#" target="_blank" name="过滤材料">过滤材料</a>
-	                       <a href="#" target="_blank" name="氧气泵">氧气泵</a>
-	                       <a href="#" target="_blank" name="潜水泵">潜水泵</a>
-	                       <a href="#" target="_blank" name="控温设备">控温设备</a>
-	                       <a href="#" target="_blank" class='last current' name="造景装饰">造景装饰</a>  
-	               </div>
-	           </div>
-	           <div class="dogShow">
-	               <div class="dog_l left ll">
-	               	<a href="#" target="_blank">
-	               		<img src="shoppingindeximg/shoppicpath1429495184.jpg">
-	               	</a>
-	               </div>
-	               <div class="dog_r left rr ">
-	               	<div class="dog_r_up">
-	                   	<div class="dog_r_show1" style="display:block;" name="鱼缸">
-	                           
+			<div class="dogThing bigTop">
+				<div class="dogMore smallTop">
+				    <div class='dog_tit'>
+				    	<em></em>
+						<h2>
+				        	<a href="#" target="_blank">水族商品</a>
+				        </h2>
+				    </div>
+				    <div class="dog_nav">
+				    		<a href="#" target="_blank" class="showColor" name="鱼缸">鱼缸</a>
+				            <a href="#" target="_blank" name="鱼饲料">鱼饲料</a>
+				            <a href="#" target="_blank" name="药水">药水</a>
+				            <a href="#" target="_blank" name="过滤材料">过滤材料</a>
+				            <a href="#" target="_blank" name="氧气泵">氧气泵</a>
+				            <a href="#" target="_blank" name="潜水泵">潜水泵</a>
+				            <a href="#" target="_blank" name="控温设备">控温设备</a>
+				            <a href="#" target="_blank" class='last current' name="造景装饰">造景装饰</a>  
+				    </div>
+				</div>
+				<div class="dogShow">
+					<div class="dog_l left ll">
+				    	<a href="#" target="_blank">
+				    		<img src="shoppingindeximg/shoppicpath1429495184.jpg">
+				    	</a>
+				    </div>
+				    <div class="dog_r left rr ">
+				    	<div class="dog_r_up">
+				        	<div class="dog_r_show1" style="display:block;" name="鱼缸">
+				        	
+				    		</div>
+						    <div class="dog_r_show1" style="display:none;" name="鱼饲料">
+						       	
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="药水">
+						       	
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="过滤材料">
+						       	
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="氧气泵">
+						              
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="潜水泵">
+						       	
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="控温设备">
+						       	
+						    </div>
+						    <div class="dog_r_show1" style="display:none;" name="造景装饰">
+						      
+						    </div>
+						</div>
+						<div class="dog_r_down">
+	                    	<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+	                        <a class='last_small_pic' href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
 	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="鱼饲料">
-	                       	
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="药水">
-	                       	
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="过滤材料">
-	                       	
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="氧气泵">
-	                              
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="潜水泵">
-	                       	
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="控温设备">
-	                       	
-	                    </div>
-	                    <div class="dog_r_show1" style="display:none;" name="造景装饰">
-	                     
-	                    </div>
-	                   <div class="dog_r_down">
-	                   	<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                       <a class='last_small_pic' href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
-	                   </div>
-	               </div>
-	               <div class="water_s right ss">
-	               	<div class="left_tit">波奇推荐</div>
-	                   <div class='right_all'>
-	                   	<dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                       <dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                       <dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                       <dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                       <dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                       <dl>
-	                       	<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
-	                           <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
-	                           <dd class="low left">¥ 10.40</dd>
-	                       </dl>
-	                   </div>
-	               </div>
-	           </div>
-	       </div>
-		</div>
+					</div>
+					<div class="water_s right ss">
+							<div class="left_tit">波奇推荐</div>
+							<div class='right_all'>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+								<dl>
+									<dt class="left"><a herf='#' target="_blank"><img src="shoppingindeximg/shoppicpath11415353704_thumb.jpg"></a></dt>
+								    <dd class="left"><a class='right_all_check' href="#" target="_blank">哈格 什锦高钙弹力洁齿魔块dfdsfd100g </a></dd>
+								    <dd class="low left">¥ 10.40</dd>
+								</dl>
+							</div>
+						</div>
+				</div>
+			</div>
 	       <!--爬行动物-->
 	       <div class="DogThing bigTop">
 	       	<div class="dogMore smallTop">

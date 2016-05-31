@@ -28,6 +28,12 @@ public class AddressAction implements ModelDriven<Address>,ServletRequestAware{
 		request.getSession().setAttribute(AllSessions.ADDRESSBYUSID, adds);
 		return "paymoney";
 	}
+	
+	public String showALl(){
+		adds = addressService.findByUsidAll(address.getUsid());
+		request.getSession().setAttribute(AllSessions.ADDRESSBYUSID, adds);
+		return "paymoney";
+	}
 
 	@Override
 	public Address getModel() {

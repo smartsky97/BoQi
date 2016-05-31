@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<c:set scope="application" var="path" value="<%=request.getContextPath()%>"></c:set>
 <table id="user_info" data-options="fit:true"></table>
 <div id="show_user_info_find" style="width:100%,text-align:left">
 	<span  style="margin-top:5px;">姓名：</span><input  style="margin-top:5px;" type="text" name="uname" id="show_user_uname">
@@ -37,8 +38,8 @@ $(function(){
 	var statusObj=[{usid:0,sname:'不可用'},{usid:1,sname:'可用'}];
 	
 	datagrid=$('#user_info').datagrid({
-		url:'userServlet',
-		queryParams:{op:"getPageUserInfo"},
+		url:'userInfo_getUserInfo.action',
+		//queryParams:{op:"getPageUserInfo"},
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",
@@ -77,8 +78,8 @@ $(function(){
 //弹开详情页面
 function showUserDetail(usid){
 	$("#users_show_userInfo").dialog("open");
-	$.post("userServlet",{op:"findUserByUsid",usid:usid},function(data){
-		var ordercontent=data.rows;
+	$.post("userInfo_getUserByUsid.action",{usid:usid},function(data){
+		var ordercontent=data;
 		console.info(data);
 		
 		
@@ -93,22 +94,22 @@ function showUserDetail(usid){
 		$("#content_user_email").empty();
 		$("#content_user_likePet").empty();
 		
-		$("#content_user_name").append(checknull(ordercontent.uname ));
-		$("#content_user_sex").append(checknull(ordercontent.sex ));
-		$("#content_user_tel").append(checknull(ordercontent.tel ));
-		$("#content_user_birt").append(checknull(ordercontent.birthday ));
-		$("#content_user_city").append(checknull(ordercontent.city ));
-		$("#content_user_street").append(checknull(ordercontent.street ));
-		$("#content_user_prosi").append(checknull(ordercontent.profession ));
-		$("#content_user_QQ").append(checknull(ordercontent.qq ));
-		$("#content_user_email").append(checknull(ordercontent.email ));
-		$("#content_user_likePet").append(checknull(ordercontent.hobbypet ));
+		$("#content_user_name").append(checknull(data.uname ));
+		$("#content_user_sex").append(checknull(data.sex ));
+		$("#content_user_tel").append(checknull(data.tel ));
+		$("#content_user_birt").append(checknull(data.birthday ));
+		$("#content_user_city").append(checknull(data.city ));
+		$("#content_user_street").append(checknull(data.street ));
+		$("#content_user_prosi").append(checknull(data.profession ));
+		$("#content_user_QQ").append(checknull(data.qq ));
+		$("#content_user_email").append(checknull(data.email ));
+		$("#content_user_likePet").append(checknull(data.hobbypet ));
 		
 	},"json");
 }
 
 function checknull(data){
-	if( data=='' || data.length<1){
+	if( data==null || data.length<1){
 		return "暂无";
 	}else{
 		return data;
@@ -121,8 +122,8 @@ function findUserInfoByInfo(){
 	var status = $.trim($("#status").val());
 	
 	$('#user_info').datagrid({
-		url:'userServlet',
-		queryParams:{op:"findUserByInfo",uname:uname,email:email,status:status}
+		url:'userInfo_getUserByInfo.action',
+		queryParams:{uname:uname,email:email,status:status}
 	});
 }
 </script>

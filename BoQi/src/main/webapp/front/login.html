@@ -18,56 +18,49 @@
                 <span>用户登录</span>
             </div>
             <div id="login-body">
-            	<form id="login-form">
-                	<div id="form-left">
-                    	<a href="#">
-                        	<img src="shoppingimg/loginlogo.jpg"/>
-                        </a>
-                    </div>
-                    <div id="form-right">
-                    	<div class="login-list">
-                        	<img src="shoppingimg/login-user.png">
-                            <input id="text1" placeholder="请输入用户名/手机号/邮箱" type="text" onblur="changeUname()"/>
-                        </div>
-                        <div class="login-list">
-                        	<img src="shoppingimg/login-pwd.png">
-                            <input id="text2" type="password" onblur="changePwd()"/>
-                        </div>
-                       
-                        	
-                         <div id="login_tip"  style="display:none"></div>
-                        <div id="login-text">
-                        	<label>
-                            	<input type="checkbox"/>
-                                自动登录
-                            </label>
-                           	
-                            	<a id="login-text-a1" href="" onmouseover="changeColor(this)" onmouseout="reColor(this)">忘记密码</a>
-                                |
-                                <a id="login-text-a2" href="" onmouseover="changeColor(this)" onmouseout="reColor(this)">免费注册</a>
-                            
-                        </div>
-                        <div id="login-button">
-                        	<a id="a_login" href="javascript:userLogin();">登录</a>
-                        </div>
-                        <div id="other_body">
-                        	<div id="other_text">
-                            	<span>使用合作网站账号登录</span>
-                            </div>
-                            <div id="other">
-                            	<a id="other-a1" href="#" onmouseover="changeColor(this)" onmouseout="reColor(this)">支付宝</a>
-                                |
-                                <a href="#" onmouseover="changeColor(this)" onmouseout="reColor(this)">新浪微博</a>
-                                |
-                                <a href="#" onmouseover="changeColor(this)" onmouseout="reColor(this)">QQ</a>
-                                |
-                                <a href="#" onmouseover="changeColor(this)" onmouseout="reColor(this)">微信</a>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </form>
-            </div>
+				<form id="login-form" method="post" action="userInfo_login.action">
+					<div id="form-left">
+						<a href="#"> <img src="shoppingimg/loginlogo.jpg" />
+						</a>
+					</div>
+					<div id="form-right">
+						<div class="login-list">
+							<img src="shoppingimg/login-user.png"/> 
+							<input id="text1" placeholder="请输入用户名/手机号/邮箱" type="text" onblur="changeUname()" name="uname" value="kk"/>
+						</div>
+						<div class="login-list">
+							<img src="shoppingimg/login-pwd.png"> <input id="text2" type="password" onblur="changePwd()" name="registerpwd" value="a"/>
+						</div>
+
+						<div id="login_tip" style="display: none"></div>
+						<div id="login-text">
+							<label> <input type="checkbox" /> 自动登录
+							</label> <a id="login-text-a1" href="" onmouseover="changeColor(this)"
+								onmouseout="reColor(this)">忘记密码</a> | <a id="login-text-a2"
+								href="" onmouseover="changeColor(this)"
+								onmouseout="reColor(this)">免费注册</a>
+
+						</div>
+						<div id="login-button">
+							<input id="a_login" type="submit" class="input-button" value="登录"/>
+						</div>
+						<div id="other_body">
+							<div id="other_text">
+								<span>使用合作网站账号登录</span>
+							</div>
+							<div id="other">
+								<a id="other-a1" href="#" onmouseover="changeColor(this)"
+									onmouseout="reColor(this)">支付宝</a> | <a href="#"
+									onmouseover="changeColor(this)" onmouseout="reColor(this)">新浪微博</a>
+								| <a href="#" onmouseover="changeColor(this)"
+									onmouseout="reColor(this)">QQ</a> | <a href="#"
+									onmouseover="changeColor(this)" onmouseout="reColor(this)">微信</a>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
         </div>
     </div>
     <div id="footer">

@@ -45,25 +45,25 @@
                                 邮箱注册
                             </div>
                             <div class='reg_info'>
-                            	<form action=" "  method="post" class="box_info">
+                            	<form action="user_register.action"  method="post" class="box_info">
                                 	<div class="uname bifo">
                                     	<span style="padding-left:32px" id="email" class="left" onBlur="checkzcemail()">邮箱:</span>
-                                        <input type="text" maxlength="40" placeholder="请输入您的电子邮箱地址" class="uname_text left" style="width:250px;height:38px;font-size:16px;position:relative;">
+                                        <input type="text" name="email" maxlength="40" placeholder="请输入您的电子邮箱地址" class="uname_text left" style="width:250px;height:38px;font-size:16px;position:relative;">
                                         <div class="showWarning left" id="showEmail" style="display:none;"></div>
                                     </div>
                                     <div class="pwd bifo">
                                     	<span class="left">设置密码:</span>
-                                        <input type="password" onBlur="checkzcpwd()" maxlength="20" class="pwd_text left" id="pwds" placeholder="6-20大小写英文字幕,数字或符号" style="width:250px;height:38px;font-size:16px;position:relative;">
+                                        <input type="password" name="registerpwd" onBlur="checkzcpwd()" maxlength="20" class="pwd_text left" id="pwds" placeholder="6-20大小写英文字幕,数字或符号" style="width:250px;height:38px;font-size:16px;position:relative;">
                                         <span class="show_info" id="showPwd" style="display:none;"></span>
                                     </div>
                                     <div class="pwd2 bifo">
                                     	<span class="left">确认密码:</span>
-                                        <input type="password" onBlur="checkzcpwdagain()" maxlength="20" class="pwd_text2 left" id="pwd" placeholder="请再次输入密码" style="width:250px;height:38px;font-size:16px;">
+                                        <input type="password"  onBlur="checkzcpwdagain()" maxlength="20" class="pwd_text2 left" id="pwd" placeholder="请再次输入密码" style="width:250px;height:38px;font-size:16px;">
                                         <span class="show_info" id="showSure" style="display:none;"></span>
                                     </div>
                                     <div class="nick bifo">
                                     	<span style="padding-left:32px" class="left" id="uname">昵称:</span>
-                                        <input type="text" onBlur="checkzcuname()" maxlength="10" class="sname_text left" placeholder="请输入昵称" style="width:250px;height:38px;font-size:16px;">
+                                        <input type="text" name="uname" onBlur="checkzcuname()" maxlength="10" class="sname_text left" placeholder="请输入昵称" style="width:250px;height:38px;font-size:16px;">
                                         <span class="show_info" id="showId" style="display:none;"></span>
                                     </div>
                                     <div class="check_pic bifo">

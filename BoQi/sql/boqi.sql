@@ -27,10 +27,6 @@ insert into bquserinfo values(1004,'kk','a','a',null,'男','122121121212',10,0,n
 drop table bquserinfo;
 select * from bquserinfo;
 
-select * from(select a.*,rownum rn from (select *from bquserinfo order by usid) a where
-		rownum<=10) b where rn>0
-
-
 insert into userinfo values(seq_usid.nextval,'navy','a',123456,'adf','男',123456,0,0.0,'','','','',1336558111,'163@234335','中华田园犬',0,0,'');
 select * from(select t.*,row_number() over (partition by t.tid order by t.proid desc) RN from productinfo t) where RN <=8
 //这里的

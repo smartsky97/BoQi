@@ -5,8 +5,4 @@
 		select * from bquserinfo where uname=#{uname} and
 		registerpwd=#{registerpwd}
 	</select>
-	<!-- 注册新用户 -->
-	<insert id="getRegister" parameterType="UserInfo">
-		insert into bquserinfo(usid,email,registerpwd,uname) values(seq_usid.nextval,#{email},#{registerpwd},#{uname})
-	</insert>
 </mapper>

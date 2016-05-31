@@ -140,6 +140,11 @@
 		  <artifactId>smartupload</artifactId>
 		  <version>1.0</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.pojava</groupId>
+		    <artifactId>datetime</artifactId>
+		    <version>3.0.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 	  	<finalName>BoQi</finalName>

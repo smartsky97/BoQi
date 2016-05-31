@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
@@ -20,7 +20,222 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link href="css/shopping.css" rel="stylesheet" type="text/css" />
 	<link href="css/publicThing.css" type="text/css" rel="stylesheet"> 
-
+	<script type="text/javascript" src="jquery/jquery-1.11.3.min.js"></script>
+	<script>
+	//最下面的页面选择显示
+	function showPage(){
+		var yeshi = parseInt(${(allsearch+19)/20});
+		$("#allye").replaceWith(yeshi);
+		if((${allsearch})<21){
+			$("#pagination").css("display","none");
+		}else if((${allsearch})<181){
+			$("#pagination").css("display","block");
+			for(var i=1;i<=yeshi;i++){
+				var turl = location.search;
+				var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+				var yeye = turl.substring(turl.indexOf("ye=")+3);
+				if(yeye == i){
+					$("#thisthere").append("<a href='../productServlet?op=searchBy&ci="+hehe+"&ye="+i+"&order=proid' class='thisye' style='margin-left:5px;'>"+i+"</a>");
+				}else{
+					$("#thisthere").append("<a href='../productServlet?op=searchBy&ci="+hehe+"&ye="+i+"' class='thisye1' style='margin-left:5px;'>"+i+"</a>");
+				}		
+			}
+		}else{
+			$("#pagination").css("display","block");
+		}
+		var turl = location.search;
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		$("#thisYe").empty();
+		$("#thisYe").append(yeye);
+		//判断是否显示首页，上一页
+		if(yeye == 1){
+			$("#beginpage").css("display","none");
+			$("#lastpage").css("display","none");
+		}else{
+			$("#beginpage").css("display","inline");
+			$("#lastpage").css("display","inline");
+		}
+		//判断是否显示下一页，末页
+		if(yeye == ${(allsearch+20-allsearch%20)/20}){
+			$("#nextpage").css("display","none");
+			$("#endpage").css("display","none");
+		}else{
+			$("#nextpage").css("display","inline");
+			$("#endpage").css("display","inline");
+		}
+		//判断排序的显示
+		if(order.indexOf('prosales%20desc,proid%20desc')!= -1){  //%20 == 空格
+			$(".zonghe").css("background","#f63");
+			$(".zonghe").css("color","#fff");
+			$("#xiaoliang").css("background","#fff");
+			$("#xiaoliang").css("color","black");
+			$("#jiage").css("background","#fff");
+			$("#jiage").css("color","black");
+			$("#xinping").css("background","#fff");
+			$("#xinping").css("color","black");
+		}else if(order.indexOf('prosales%20desc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#f63");
+			$("#xiaoliang").css("color","#fff");
+			$("#jiage").css("background","#fff");
+			$("#jiage").css("color","black");
+			$("#xinping").css("background","#fff");
+			$("#xinping").css("color","black");
+		}else if(order.indexOf('prosales%20asc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#f63");
+			$("#xiaoliang").css("color","#fff");
+			$("#jiage").css("background","#fff");
+			$("#jiage").css("color","black");
+			$("#xinping").css("background","#fff");
+			$("#xinping").css("color","black");
+		}else if(order.indexOf('bqpri%20desc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#fff");
+			$("#xiaoliang").css("color","black");
+			$("#jiage").css("background","#f63");
+			$("#jiage").css("color","#fff");
+			$("#xinping").css("background","#fff");
+			$("#xinping").css("color","black");
+		}else if(order.indexOf('bqpri%20asc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#fff");
+			$("#xiaoliang").css("color","black");
+			$("#jiage").css("background","#f63");
+			$("#jiage").css("color","#fff");
+			$("#xinping").css("background","#fff");
+			$("#xinping").css("color","black");
+		}else if(order.indexOf('proid%20asc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#fff");
+			$("#xiaoliang").css("color","black");
+			$("#jiage").css("background","#fff");
+			$("#jiage").css("color","black");
+			$("#xinping").css("background","#f63");
+			$("#xinping").css("color","#fff");
+		}else if(order.indexOf('proid%20desc')!= -1){
+			$(".zonghe").css("background","#fff");
+			$(".zonghe").css("color","black");
+			$("#xiaoliang").css("background","#fff");
+			$("#xiaoliang").css("color","black");
+			$("#jiage").css("background","#fff");
+			$("#jiage").css("color","black");
+			$("#xinping").css("background","#f63");
+			$("#xinping").css("color","#fff");
+		}
+	}
+	//下一页
+	function nextpage(){
+		var turl = location.search;
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
+		if(yeye<=${(allsearch+20-allsearch%20)/20}){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+yeye;
+		}
+	}
+	//上一页
+	function lastpage(){
+		var turl = location.search;
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))-1;
+		if(yeye>0){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+yeye;
+		}
+	}
+	//最后一页
+	function endpage(){
+		var turl = location.search;
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
+		if(yeye<=${(allsearch+20-allsearch%20)/20}){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
+		}
+	}
+	//首页
+	function beginpage(){
+		var turl = location.search;
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));
+		if(yeye!=1){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+1;
+		}
+	}
+	function skippage(){
+		var skipye = $(".page_text").val();
+		var turl = location.search;
+		var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		if(skipye == yeye){
+		}else if(skipye>0 && skipye<=${(allsearch+20-allsearch%20)/20}){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+skipye;
+		}else if(skipye>${(allsearch+20-allsearch%20)/20}){
+			window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
+		}
+	}
+	//综合排序
+	function orderBy(){
+		var turl = location.search;
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		window.location.href="../productServlet?order=prosales desc,proid desc&op=searchBy&ci="+hehe+"&ye="+1;
+	}
+	//根据销量来排序
+	function orderByCont(){
+		var turl = location.search;
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		if(order.indexOf('prosales')!= -1){
+			if(order.indexOf('prosales asc')!= -1){
+				window.location.href="../productServlet?order=prosales desc&op=searchBy&ci="+hehe+"&ye="+1;
+			}else{
+				window.location.href="../productServlet?order=prosales asc&op=searchBy&ci="+hehe+"&ye="+1;
+			}
+		}else{
+			window.location.href="../productServlet?order=prosales desc&op=searchBy&ci="+hehe+"&ye="+1;
+		}
+	}
+	//根据价格来排序
+	function orderByPrice(){
+		var turl = location.search;
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		if(order.indexOf('bqpri')!= -1){
+			if(order.indexOf('bqpri asc')!= -1){
+				window.location.href="../productServlet?order=bqpri desc&op=searchBy&ci="+hehe+"&ye="+1;
+			}else{
+				window.location.href="../productServlet?order=bqpri asc&op=searchBy&ci="+hehe+"&ye="+1;
+			}
+		}else{
+			window.location.href="../productServlet?order=bqpri desc&op=searchBy&ci="+hehe+"&ye="+1;
+		}
+	}
+	//根据时间来排序
+	function orderByTime(){
+		var turl = location.search;
+		var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+		var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+		if(order.indexOf('proid')!= -1){
+			if(order.indexOf('proid asc')!= -1){
+				window.location.href="../productServlet?order=proid desc&op=searchBy&ci="+hehe+"&ye="+1;
+			}else{
+				window.location.href="../productServlet?order=proid asc&op=searchBy&ci="+hehe+"&ye="+1;
+			}
+		}else{
+			window.location.href="../productServlet?order=proid desc&op=searchBy&ci="+hehe+"&ye="+1;
+		}
+	}
+	window.onload=showPage(); 
+	</script>
   </head>
   
   <body>
@@ -472,222 +687,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	</div>
   </body>
-</html>
-<script type="text/javascript" src="jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/shopping.js"></script>
 <script type="text/javascript" src="js/shoppingSearch.js"></script>
-<script>
-//最下面的页面选择显示
-function showPage(){
-	var yeshi = parseInt(${(allsearch+19)/20});
-	$("#allye").replaceWith(yeshi);
-	if((${allsearch})<21){
-		$("#pagination").css("display","none");
-	}else if((${allsearch})<181){
-		$("#pagination").css("display","block");
-		for(var i=1;i<=yeshi;i++){
-			var turl = location.search;
-			var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-			var yeye = turl.substring(turl.indexOf("ye=")+3);
-			if(yeye == i){
-				$("#thisthere").append("<a href='../productServlet?op=searchBy&ci="+hehe+"&ye="+i+"&order=proid' class='thisye' style='margin-left:5px;'>"+i+"</a>");
-			}else{
-				$("#thisthere").append("<a href='../productServlet?op=searchBy&ci="+hehe+"&ye="+i+"' class='thisye1' style='margin-left:5px;'>"+i+"</a>");
-			}		
-		}
-	}else{
-		$("#pagination").css("display","block");
-	}
-	var turl = location.search;
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	$("#thisYe").empty();
-	$("#thisYe").append(yeye);
-	//判断是否显示首页，上一页
-	if(yeye == 1){
-		$("#beginpage").css("display","none");
-		$("#lastpage").css("display","none");
-	}else{
-		$("#beginpage").css("display","inline");
-		$("#lastpage").css("display","inline");
-	}
-	//判断是否显示下一页，末页
-	if(yeye == ${(allsearch+20-allsearch%20)/20}){
-		$("#nextpage").css("display","none");
-		$("#endpage").css("display","none");
-	}else{
-		$("#nextpage").css("display","inline");
-		$("#endpage").css("display","inline");
-	}
-	//判断排序的显示
-	if(order.indexOf('prosales%20desc,proid%20desc')!= -1){  //%20 == 空格
-		$(".zonghe").css("background","#f63");
-		$(".zonghe").css("color","#fff");
-		$("#xiaoliang").css("background","#fff");
-		$("#xiaoliang").css("color","black");
-		$("#jiage").css("background","#fff");
-		$("#jiage").css("color","black");
-		$("#xinping").css("background","#fff");
-		$("#xinping").css("color","black");
-	}else if(order.indexOf('prosales%20desc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#f63");
-		$("#xiaoliang").css("color","#fff");
-		$("#jiage").css("background","#fff");
-		$("#jiage").css("color","black");
-		$("#xinping").css("background","#fff");
-		$("#xinping").css("color","black");
-	}else if(order.indexOf('prosales%20asc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#f63");
-		$("#xiaoliang").css("color","#fff");
-		$("#jiage").css("background","#fff");
-		$("#jiage").css("color","black");
-		$("#xinping").css("background","#fff");
-		$("#xinping").css("color","black");
-	}else if(order.indexOf('bqpri%20desc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#fff");
-		$("#xiaoliang").css("color","black");
-		$("#jiage").css("background","#f63");
-		$("#jiage").css("color","#fff");
-		$("#xinping").css("background","#fff");
-		$("#xinping").css("color","black");
-	}else if(order.indexOf('bqpri%20asc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#fff");
-		$("#xiaoliang").css("color","black");
-		$("#jiage").css("background","#f63");
-		$("#jiage").css("color","#fff");
-		$("#xinping").css("background","#fff");
-		$("#xinping").css("color","black");
-	}else if(order.indexOf('proid%20asc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#fff");
-		$("#xiaoliang").css("color","black");
-		$("#jiage").css("background","#fff");
-		$("#jiage").css("color","black");
-		$("#xinping").css("background","#f63");
-		$("#xinping").css("color","#fff");
-	}else if(order.indexOf('proid%20desc')!= -1){
-		$(".zonghe").css("background","#fff");
-		$(".zonghe").css("color","black");
-		$("#xiaoliang").css("background","#fff");
-		$("#xiaoliang").css("color","black");
-		$("#jiage").css("background","#fff");
-		$("#jiage").css("color","black");
-		$("#xinping").css("background","#f63");
-		$("#xinping").css("color","#fff");
-	}
-}
-//下一页
-function nextpage(){
-	var turl = location.search;
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
-	if(yeye<=${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+yeye;
-	}
-}
-//上一页
-function lastpage(){
-	var turl = location.search;
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))-1;
-	if(yeye>0){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+yeye;
-	}
-}
-//最后一页
-function endpage(){
-	var turl = location.search;
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
-	if(yeye<=${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
-	}
-}
-//首页
-function beginpage(){
-	var turl = location.search;
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));
-	if(yeye!=1){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+1;
-	}
-}
-function skippage(){
-	var skipye = $(".page_text").val();
-	var turl = location.search;
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	if(skipye == yeye){
-	}else if(skipye>0 && skipye<=${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+skipye;
-	}else if(skipye>${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
-	}
-}
-//综合排序
-function orderBy(){
-	var turl = location.search;
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	window.location.href="../productServlet?order=prosales desc,proid desc&op=searchBy&ci="+hehe+"&ye="+1;
-}
-//根据销量来排序
-function orderByCont(){
-	var turl = location.search;
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	if(order.indexOf('prosales')!= -1){
-		if(order.indexOf('prosales asc')!= -1){
-			window.location.href="../productServlet?order=prosales desc&op=searchBy&ci="+hehe+"&ye="+1;
-		}else{
-			window.location.href="../productServlet?order=prosales asc&op=searchBy&ci="+hehe+"&ye="+1;
-		}
-	}else{
-		window.location.href="../productServlet?order=prosales desc&op=searchBy&ci="+hehe+"&ye="+1;
-	}
-}
-//根据价格来排序
-function orderByPrice(){
-	var turl = location.search;
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	if(order.indexOf('bqpri')!= -1){
-		if(order.indexOf('bqpri asc')!= -1){
-			window.location.href="../productServlet?order=bqpri desc&op=searchBy&ci="+hehe+"&ye="+1;
-		}else{
-			window.location.href="../productServlet?order=bqpri asc&op=searchBy&ci="+hehe+"&ye="+1;
-		}
-	}else{
-		window.location.href="../productServlet?order=bqpri desc&op=searchBy&ci="+hehe+"&ye="+1;
-	}
-}
-//根据时间来排序
-function orderByTime(){
-	var turl = location.search;
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	if(order.indexOf('proid')!= -1){
-		if(order.indexOf('proid asc')!= -1){
-			window.location.href="../productServlet?order=proid desc&op=searchBy&ci="+hehe+"&ye="+1;
-		}else{
-			window.location.href="../productServlet?order=proid asc&op=searchBy&ci="+hehe+"&ye="+1;
-		}
-	}else{
-		window.location.href="../productServlet?order=proid desc&op=searchBy&ci="+hehe+"&ye="+1;
-	}
-}
-window.onload=showPage(); 
-</script>
+
+</html>

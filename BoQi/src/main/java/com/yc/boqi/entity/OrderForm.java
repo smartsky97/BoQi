@@ -15,10 +15,6 @@ public class OrderForm implements Serializable{
 	private double bqpri;
 	private String orrmid;
 	
-
-
-
-
 	public OrderForm(int orderid, int proid, String nature, String proname,
 			int pronum, double bqpri, String orrmid, int status) {
 		super();
