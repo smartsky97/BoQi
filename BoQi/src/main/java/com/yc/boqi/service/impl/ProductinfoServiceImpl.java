@@ -62,4 +62,18 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		return productinfoMapper.findIndexsmallPro();
 	}
 
+	@Override
+	public List<Productinfo> findNatureByName(String name) {
+		String[] tnames = name.split(",");
+		return productinfoMapper.findNatureByName(tnames);
+	}
+
+	@Override
+	public List<Productinfo> findPriceByNaNa(String name, String nature) {
+		Map<String, Object> so = new HashMap<String, Object>();
+		so.put("name", name);
+		so.put("nature", nature);
+		return productinfoMapper.findPriceByNaNa(so);
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yc.boqi.entity.BackOrderContentBean;
 import com.yc.boqi.entity.OrderContent;
 import com.yc.boqi.mapper.OrdercontentMapper;
 import com.yc.boqi.mapper.ProductinfoMapper;
@@ -58,6 +59,21 @@ public class OrdercontentServiceImpl implements OrdercontentService {
 		type.put("two", (page-1)*rows);
 		
 		return ordercontentMapper.getAll(type);
+	}
+	@Override
+	public BackOrderContentBean findOneBackOrder(int orderid) {
+		return ordercontentMapper.getBackOrder(orderid);
+	}
+	@Override @Transactional
+	public int updateOrderToLing(String ids) {
+		int a;
+		if(ids.contains(",") && ids.indexOf("or")<=0){
+			String[] as = ids.split(",");
+			a = ordercontentMapper.updateOrderByIds(as);
+		}else{
+			a = ordercontentMapper.updateOrderById(ids);
+		}
+		return a;
 	}
 
 	

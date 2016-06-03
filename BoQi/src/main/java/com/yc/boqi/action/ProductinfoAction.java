@@ -44,7 +44,11 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	private SecondMenuService secondMenuService;
 	@Autowired
 	private BrandService brandService;
-	private List<Top8ProductinfoBean> productinfos;
+	private List<Top8ProductinfoBean> productinfos;//前台的数据获取
+	private List<Productinfo> natureo;
+	public List<Productinfo> getNatureo() {
+		return natureo;
+	}
 	JsonObject jb = new JsonObject();
 	JsonParser parser = new JsonParser();
 	Gson gson = new Gson();
@@ -134,7 +138,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 			e.printStackTrace();
 		}
 	}
-	
+	//添加商品
 	public void AddProduction(){
 		String path =ServletActionContext.getServletContext().getRealPath("upload/");
         System.out.println("上传的地址："+path);
@@ -174,6 +178,14 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		return "product";
 	}
 
-	
-
+	//后台获取商品属性
+	public String getNatureByName(){
+		natureo = productinfoService.findNatureByName(productinfo.getProname());
+		return "natureo";
+	}
+	//后台根据商品名和属性来查询商品价格
+	public String getPriceByNaNa(){
+		natureo = productinfoService.findPriceByNaNa(productinfo.getProname(), productinfo.getNature());
+		return "natureo";
+	}
 }

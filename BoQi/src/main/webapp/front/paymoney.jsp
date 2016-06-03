@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		//显示所有地址
 		function onclick_show_all(){
-			window.location.href();
+			window.location.href="address_showAll.action?usid="+${loginUser.usid};
 		}
 		
 		function clickAddress(add){

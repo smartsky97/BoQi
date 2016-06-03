@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.yc.boqi.entity.BackOrderContentBean;
 import com.yc.boqi.entity.Brand;
 import com.yc.boqi.entity.FirstMenu;
 import com.yc.boqi.entity.Productinfo;
@@ -21,6 +22,7 @@ import com.yc.boqi.entity.SecondMenu;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 import com.yc.boqi.mapper.BrandMapper;
 import com.yc.boqi.mapper.FirstMenuMapper;
+import com.yc.boqi.mapper.OrdercontentMapper;
 import com.yc.boqi.mapper.ProductinfoMapper;
 import com.yc.boqi.mapper.SecondMenuMapper;
 
@@ -36,7 +38,8 @@ public class testAll {
 	private FirstMenuMapper firstMenuMapper;
 	@Autowired
 	private SecondMenuMapper secondMenuMapper;
-
+	@Autowired
+	private OrdercontentMapper ordercontentMapper;
 	@Test
 	public void testFindTop8() {
 		List<Top8ProductinfoBean> mi = productinfoMapper.findTop8OfProductByLei();
@@ -74,6 +77,13 @@ public class testAll {
 	
 	@Test
 	public void testpro3() {
+		BackOrderContentBean mi = ordercontentMapper.getBackOrder(1033);
+		System.out.println("aaa:"+mi);
+		assertNotNull("出错了",mi);
+	}
+	
+	@Test
+	public void testpro4() {
 		Productinfo mi = productinfoMapper.findAproduct(3021);
 		System.out.println("aaa:"+mi);
 		assertNotNull("出错了",mi);

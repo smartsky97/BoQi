@@ -23,7 +23,16 @@ public class OrdercontentAction implements ServletRequestAware,ModelDriven<Order
 	@Autowired
 	private OrdercontentService ordercontentService;
 	private String orders;
+	private String orderids;//后台删除数据的id；拼接
 	private List<OrderContent> ords;
+	private int changeRows;//数据执行的条数
+	
+	public int getChangeRows() {
+		return changeRows;
+	}
+	public void setOrderids(String orderids) {
+		this.orderids = orderids;
+	}
 	public List<OrderContent> getOrds() {
 		return ords;
 	}
@@ -50,6 +59,11 @@ public class OrdercontentAction implements ServletRequestAware,ModelDriven<Order
 		ords = ordercontentService.findAll(Integer.parseInt(page),Integer.parseInt(rows));
 		System.out.println("订单："+ords);
 		return "findAllOrder";
+	}
+	
+	public String updateToLing(){
+		changeRows = ordercontentService.updateOrderToLing(orderids);
+		return "updatetoling";
 	}
 	@Override
 	public OrderContent getModel() {

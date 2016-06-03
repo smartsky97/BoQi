@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <table id="ordercontent_info" data-options="fit:true"></table>
 <div id="show_order_info_find" style="width:100%,text-align:left">
 	<a href="javascript:revise()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
@@ -15,7 +14,7 @@
 		<option value="3">配货中</option>
 		<option value="4">已发货</option>
 		<option value="5">已收货</option>
-		<option value="5">已收货但删除</option>
+		<option value="6">已收货但删除</option>
 		<option value="7">退货</option>
 	</select>
 	&nbsp;&nbsp;<a href="javascript:findOrderInfoByInfo()" style="margin-top:-5px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">查询</a>
@@ -23,7 +22,6 @@
 	<a href="javascript:changeToFa()" style="margin-top:-5px;margin-left:15px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">转发货</a>
 	
 </div>
-
 <script>
 var datagrid;
 var op;
@@ -79,15 +77,17 @@ $(function(){
 	<center>
 	<div id="content_show" id="content_show">
 		<div class="content_buyer wwidth">
-			<label class="tt" style="margin-left:20px;">买家昵称：</label><span class="tt" id="content_buyer_name"></span>
-			<label class="tt" style="margin-left:60px;">买家电话：</label><span class="tt" id="content_buyer_tel"></span></br/><br/>
-			<label class="tt" style="margin-left:20px;">买家地址：</label><span class="tt" id="content_buyer_addr"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">买&nbsp;家&nbsp;昵&nbsp;称&nbsp;：</label><span class="tt" id="content_buyer_name"></span>
+			<label class="tt" style="margin-left:60px;">买&nbsp;家&nbsp;电&nbsp;话&nbsp;：</label><span class="tt" id="content_buyer_tel"></span></br/><br/></br/><br/>
+			<label class="tt" style="margin-left:20px;">收货人姓名：</label><span class="tt" id="content_shou_name"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">收货人电话：</label><span class="tt" id="content_shou_tel"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">收&nbsp;货&nbsp;地&nbsp;址&nbsp;：</label><span class="tt" id="content_shou_addr"></span></br/><br/>
 		</div>
 		<div id="content_up" class="wwidth">
-			<label class="tt" style="margin-left:20px;">订单编号：</label><span class="tt" id="content_id"></span></br/><br/>
-			<label class="tt" style="margin-left:20px;">成交时间：</label><span class="tt" id="content_maketime"></span>
-			<label class="tt" style="margin-left:60px;">付款时间：</label><span class="tt" id="content_paytime"></span>
-			<label class="tt" style="margin-left:60px;">确认时间：</label><span class="tt" id="content_suretime"></span>
+			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">创&nbsp;建&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_maketime"></span>
+			<label class="tt" style="margin-left:60px;">付&nbsp;款&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_paytime"></span>
+			<label class="tt" style="margin-left:60px;">确&nbsp;认&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_suretime"></span>
 		</div>
 		<table id="content_table">
 			<thead>
@@ -122,15 +122,24 @@ $(function(){
 	<div id="content_show">
 		<div id="buyerID" style="display:none;"></div>
 		<div class="content_buyer wwidth">
-			<label class="tt" style="margin-left:20px;">买家昵称：</label><input class="tt" id="content_buyer_name2"></input>
-			<label class="tt" style="margin-left:60px;">买家电话：</label><input class="tt" id="content_buyer_tel2"></input></br/><br/>
-			<label class="tt" style="margin-left:20px;">买家地址：</label><input style="width:400px;" class="tt" id="content_buyer_addr2"></input></br/><br/>
-		</div>
+			<label class="tt" style="margin-left:20px;">买&nbsp;家&nbsp;昵&nbsp;称&nbsp;：</label><span class="tt" id="content_buyer_name2"></span>
+			<label class="tt" style="margin-left:60px;">买&nbsp;家&nbsp;电&nbsp;话&nbsp;：</label><span class="tt" id="content_buyer_tel2"></span></br/><br/></br/><br/>
+			<label class="tt" style="margin-left:20px;">收货人昵称：</label><input class="tt" id="content_shou_name2"></input>
+			<label class="tt" style="margin-left:60px;">收货人电话：</label><input class="tt" id="content_shou_tel2"></input></br/><br/>
+			<label class="tt" style="margin-left:20px;">收货人地址：</label> 
+				<span style="float:left;">
+					<select id="sheng" name="province"></select> 省 &nbsp;&nbsp;
+					<select id="shi" name="city"></select> 市 &nbsp;&nbsp;
+					<select id="xian" name="country"></select> 县 &nbsp;&nbsp;
+					<select id="xiang" name="street"></select> 镇或街道 </br/><br/>
+				</span>
+				<input style="width:420px;margin-left: 90px;" class="tt" id="content_shou_addr2"></input>
+		</div></br/>
 		<div id="content_up" class="wwidth">
-			<label class="tt" style="margin-left:20px;">订单编号：</label><span class="tt" id="content_id2"></span></br/><br/>
-			<label class="tt" style="margin-left:20px;">成交时间：</label><span class="tt" id="content_maketime2"></span>
-			<label class="tt" style="margin-left:60px;">付款时间：</label><span class="tt" id="content_paytime2"></span>
-			<label class="tt" style="margin-left:60px;">确认时间：</label><span class="tt" id="content_suretime2"></span>
+			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id2"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">成&nbsp;交&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_maketime2"></span>
+			<label class="tt" style="margin-left:60px;">付&nbsp;款&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_paytime2"></span>
+			<label class="tt" style="margin-left:60px;">确&nbsp;认&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_suretime2"></span>
 		</div>
 		<table id="content_table">
 			<thead>
@@ -162,6 +171,16 @@ $(function(){
 	</center>
 </div>
 <script>
+var yuanName;
+var yuantel;
+var yuanshen;
+var yuanshi;
+var yuanxian;
+var yuanxiang;
+var yuanaddr;
+
+
+
 //订单状态转到配货
 function changeToPai(){
 	//获取所有被选中的行
@@ -293,14 +312,12 @@ function del(){
 				for( i = 0;i<rows.length-1;i++){
 					orderids += rows[i].orderid+",";
 				}
-				///console.info("last="+i);
+				
 				orderids += rows[i].orderid;
-				console.info(rows);
-				console.info(orderids);
 				//讲要删除aid发送到服务器
-				$.post("orderContentServlet",{op:"delOrderInfo",orderids:orderids},function(data){
-					console.info(data);
-					if(data == 1){//添加成功
+				$.post("ordercontent_updateToLing.action",{orderids:orderids},function(data){
+					console.info("返回成功的条数"+data);
+					if(data != 0){//添加成功
 						$.messager.show({
 							title:'删除提示',
 							msg:'订单删除成功...',
@@ -316,105 +333,88 @@ function del(){
 		});
 	}
 }
-function tt(){
+/* function tt(){
 	$("#content_tbody2").children("tr").eq(0).children("th").eq(1).children("select").val("100Kg");
-}
+} */
 //弹开修改页面
 function showNewsDetail2(orderid){
 	$("#ordercontent_show_ordercontentInfo2").dialog("open");
-	$.post("orderContentServlet",{op:"findOrderContentByorderid",orderid:orderid},function(data){
-		var ordercontent=data.rows;
+	$.post("backOrder_findBackOrderContent.action",{orderid:orderid},function(data){
+		var ordercontent=data;
 		var starttime=checkNull(ordercontent.starttime);
 		var paytime=checkNull(ordercontent.paytime);
 		var endtime=checkNull(ordercontent.endtime);
 		var sum=0;   //商品全部加起来的价格
 		var sname="";   //商品拼接起来的商品名
 		
-		$("#content_id2").empty();
-		$("#content_buyer_addr2").val("");
-		$("#content_maketime2").empty();
-		$("#content_paytime2").empty();
-		$("#content_suretime2").empty();
-		$("#total_money2").empty();
-		$("#content_buyer_name2").val("");
-		$("#content_buyer_tel2").val("");
+		$("#content_shou_addr2").val("");
+		$("#content_shou_name2").val("");
+		$("#content_shou_tel2").val("");
 		$("#content_tbody2").empty();
-		$("#buyerID").empty();
 		
-		$("#content_id2").append(ordercontent.orderid);
-		$("#content_maketime2").append(starttime);
-		$("#content_paytime2").append(paytime);
-		$("#content_suretime2").append(endtime);
-		//$("#total_money2").val(ordercontent.ordersum);
-		$.post("addressServlet",{op:"findAddressByUsid",usid:ordercontent.usid},function(data){
-			var ordercontent2=data.getidd;
-			$("#buyerID").append(ordercontent2.addid);
-			$("#content_buyer_name2").val(ordercontent2.addname);
-			$("#content_buyer_tel2").val(ordercontent2.tel);
-			$("#content_buyer_addr2").val(ordercontent2.readdr);
-		},"json");
+		$("#content_id2").html(ordercontent.orderid);
+		$("#content_maketime2").html(starttime);
+		$("#content_paytime2").html(paytime);
+		$("#content_suretime2").html(endtime);
+		$("#content_shou_name2").val(ordercontent.addname);
+		$("#content_shou_tel2").val(ordercontent.atel);
+		$("#content_buyer_name2").html(ordercontent.uname);  //买家姓名
+		$("#content_buyer_tel2").html(ordercontent.utel);	//买家电话
+		initLocation({sheng_val:ordercontent.shen,shi_val:ordercontent.shi,xian_val:ordercontent.xian,xiang_val:"<?php echo $v['street']?>"});
+		$("#xiang").val(ordercontent.zhenjie);
+		$("#content_shou_addr2").val(ordercontent.readdr);
+		$("#buyerID").html(ordercontent.addid);
 		//向方框中加值
-		$.post("orderFormServlet",{op:"getOneOrderInfo",orderid:orderid},function(data){
-			console.info(data);
-      		for(var i=0;i<data.hhhgggg.length;i++){
-      			$("#content_tbody2").append("<tr><th>"+data.hhhgggg[i]['proname']+"</th><th id='buchengda'><select name='tid' onchange='changePrice(this)' id='news_newstype' class='myinput'>"+data.hhhgggg[i]['nature']+"</th><th><input class='content_jiage' onblur='changemoney()' style='width:80px;'/></th><th><input class='content_jiage2' onblur='changemoney()' style='width:80px;'/>  </th><th class='lastwo'>"+data.hhhgggg[i]['status']+"<span class='thing_proid'>"+data.hhhgggg[i]['orrmid']+"</span><span style='display:none;' id='chage_proid'>"+data.hhhgggg[i]['proid']+"</span></th></tr>");
-      			
-				$("#content_tbody2").children("tr").eq(i).children("th").eq(2).children("input").val(data.hhhgggg[i]['bqpri']);
-				$("#content_tbody2").children("tr").eq(i).children("th").eq(3).children("input").val(data.hhhgggg[i]['pronum']);
-				sum+=data.hhhgggg[i]['bqpri']*data.hhhgggg[i]['pronum'];
-				sname+=data.hhhgggg[i]['proname']+",";
-				tty = $("#content_tbody2").children("tr").length;
-      		}
-      		$("#total_money2").append(sum);
-      		getNature(sname);
-		},"json");
+      	for(var i=0;i<ordercontent.goods.length;i++){
+      		$("#content_tbody2").append("<tr><th>"+ordercontent.goods[i]['proname']
+      			+"</th><th id='buchengda'><select name='tid' onchange='changePrice(this)' id='news_newstype' class='myinput'>"
+      			+ordercontent.goods[i]['nature']+"</th><th><input class='content_jiage' onblur='changemoney()' style='width:80px;'/>"
+      			+"</th><th><input class='content_jiage2' onblur='changemoney()' style='width:80px;'/></th><th class='lastwo'>"
+      			+ordercontent.goods[i]['status']+"<span class='thing_proid'>"+ordercontent.goods[i]['orrmid']
+      			+"</span><span style='display:none;' id='chage_proid'>"+ordercontent.goods[i]['proid']+"</span></th></tr>");
+     			
+			$("#content_tbody2").children("tr").eq(i).children("th").eq(2).children("input").val(ordercontent.goods[i]['bqpri']);
+			$("#content_tbody2").children("tr").eq(i).children("th").eq(3).children("input").val(ordercontent.goods[i]['pronum']);
+			sum+=ordercontent.goods[i]['bqpri']*ordercontent.goods[i]['pronum'];
+			sname+=ordercontent.goods[i]['proname']+",";
+			tty = $("#content_tbody2").children("tr").length;
+      	}
+      	$("#total_money2").html(sum);
+      	getNature(sname);
 	},"json");
-	
 }
-
-	
 
 	var pid; 
 	//弹开详情页面
 	function showNewsDetail(orderid){
 		$("#ordercontent_show_ordercontentInfo").dialog("open");
-		$.post("orderContentServlet",{op:"findOrderContentByorderid",orderid:orderid},function(data){
-			var ordercontent=data.rows;
+		$.post("backOrder_findBackOrderContent.action",{orderid:orderid},function(data){
+			var ordercontent=data;
 			var starttime=checkNull(ordercontent.starttime);
 			var paytime=checkNull(ordercontent.paytime);
 			var endtime=checkNull(ordercontent.endtime);
 			
-			$("#content_id").empty();
-			$("#content_buyer_addr").empty();
-			$("#content_maketime").empty();
-			$("#content_paytime").empty();
-			$("#content_suretime").empty();
-			$("#total_money").empty();
-			$("#content_buyer_name").empty();
-			$("#content_buyer_tel").empty();
 			$("#content_tbody").empty();
 			
-			$("#content_id").append(ordercontent.orderid);
-			$("#content_maketime").append(starttime);
-			$("#content_paytime").append(paytime);
-			$("#content_suretime").append(endtime);
-			$("#total_money").append(ordercontent.ordersum);
+			$("#content_id").html(ordercontent.orderid);  //订单编号
+			$("#content_maketime").html(starttime);  //创建时间
+			$("#content_paytime").html(paytime);  //付款时间
+			$("#content_suretime").html(endtime);  //收货时间
+			$("#content_buyer_name").html(ordercontent.uname);  //买家姓名
+			$("#content_buyer_tel").html(ordercontent.utel);	//买家电话
+			$("#content_shou_name").html(ordercontent.addname);  //收货人姓名
+			$("#content_shou_tel").html(ordercontent.atel);	//收货人电话
+			$("#content_shou_addr").html(ordercontent.shen+" "+ordercontent.shi+" "+ordercontent.xian+" "+ordercontent.zhenjie+" "+ordercontent.readdr);  //收货人地址
+			var total=0;
+			for(var i=0;i<ordercontent.goods.length;i++){
+				$("#content_tbody").append("<tr><th>"+"<img src=\"upload/"+ordercontent.goods[i]['pictrue']+"\" alt=\"图片暂时为空\" style=\"width:100px;height:100px;\"/><br/>"+ordercontent.goods[i]['proname']+"</th><th>"+ordercontent.goods[i]['nature']+"</th><th>"+ordercontent.goods[i]['bqpri']+"</th><th>"+ordercontent.goods[i]['pronum']+"</th><th class='llas'>"+checkStatus(ordercontent.goods[i]['status'])+"</th></tr>");
+      			total = total+ordercontent.goods[i]['bqpri']*ordercontent.goods[i]['pronum'];
+			}
+			$("#total_money").html(total);  //总价
 			
-			$.post("addressServlet",{op:"findAddressByUsid",usid:ordercontent.usid},function(data){
-				var ordercontent2=data.getidd;
-				
-				$("#content_buyer_name").append(ordercontent2.addname);
-				$("#content_buyer_tel").append(ordercontent2.tel);
-				$("#content_buyer_addr").append(ordercontent2.readdr);
-			},"json");
-			$.post("orderFormServlet",{op:"getOneOrderInfo",orderid:orderid},function(data){
-				console.info(data);
-          		for(var i=0;i<data.hhhgggg.length;i++){
-					$("#content_tbody").append("<tr><th>"+data.hhhgggg[i]['proname']+"</th><th>"+data.hhhgggg[i]['nature']+"</th><th>"+data.hhhgggg[i]['bqpri']+"</th><th>"+data.hhhgggg[i]['pronum']+"</th><th class='llas'>"+checkStatus(data.hhhgggg[i]['status'])+"</th></tr>");
-          		}
-			},"json");
 		},"json");
 	}
+	
 	function checkNull(data){
 		if(data==null || data==""){
 			return "待定";
@@ -424,8 +424,9 @@ function showNewsDetail2(orderid){
 	}
 	//获取每一行的属性
 	function getNature(data){
-		$.post("productServlet",{op:"findNatureByName",name:data},function(data){
-			var nature = data.natureo;
+		$.post("productinfo_getNatureByName.action",{proname:data},function(data){
+			var nature = data;
+			
 			//根据列表的行数来循环
 			for(var i=0;i<tty;i++){
 				var ssname=$("#content_tbody2").children("tr").eq(i).children("th").eq(0).html();
@@ -443,7 +444,6 @@ function showNewsDetail2(orderid){
 						obj.append($(opt));
 					}
 				}
-				
 			}
 		},"json");
 	}
@@ -464,8 +464,8 @@ function showNewsDetail2(orderid){
 		console.info(data);
 		var nnn = $(data).parent().parent().children("th").eq(0).html();
 		console.info($(data).parent().parent());
-		$.post("productServlet",{op:"findPriceByNameAndNature",nnn:nnn,nnt:nnt},function(data2){
-			var datah = data2.ppri;
+		$.post("productinfo_getPriceByNaNa.action",{proname:nnn,nature:nnt},function(data2){
+			var datah = data2;
 			$(data).parent().parent().children("th").eq(2).children("input").val("");
 			$(data).parent().parent().children("th").eq(2).children("input").val(datah[0].bqpri);
 			
@@ -479,11 +479,15 @@ function showNewsDetail2(orderid){
 	function sendInfo(){
 		var allString="";
 		//买家姓名
-		var addname=$("#content_buyer_name2").val();
+		var addname=$("#content_shou_name2").val();
 		//买家电话
-		var tel=$("#content_buyer_tel2").val();
+		var tel=$("#content_shou_tel2").val();
 		//买家地址
-		var readdr=$("#content_buyer_addr2").val();
+		var shen = $("#sheng").val();
+		var shi = $("#shi").val();
+		var xian = $("#xian").val();
+		var xiang = $("#xiang").val();
+		var readdr=$("#content_shou_addr2").val();
 		//订单编号
 		var contentBigId = $("#content_id2").html();
 		//订单的id
@@ -494,28 +498,27 @@ function showNewsDetail2(orderid){
 			console.info(data);
 		})
 		//更新收货人的信息
-		$.post("addressServlet",{op:"updateSomeInfo",addname:addname,tel:tel,readdr:readdr,addid:addid},function(data){
+		/* $.post("addressServlet",{op:"updateSomeInfo",addname:addname,tel:tel,readdr:readdr,addid:addid},function(data){
 			if(data==1){
 				//alert("修改成功");
 				//$("#ordercontent_show_ordercontentInfo2").dialog("close");
 			}else{
 				//alert("修改失败")
 			}
-		},"json");
+		},"json"); */
 		//更新订单的详细信息
 		for(var i=0;i<tty;i++){
 			var shangID = $("#content_tbody2").children("tr").eq(i).children("th").eq(4).children("#chage_proid").html()+",";
 			
 			//旧的编号
 			var xiangID = $("#content_tbody2").children("tr").eq(i).children("th").eq(4).children(".thing_proid").html()+",";
-			//var orderId = $("#content_id2").html()+",";
 			var danjia = $("#content_tbody2").children("tr").eq(i).children("th").eq(2).children("input").val()+",";
 			var numb = $("#content_tbody2").children("tr").eq(i).children("th").eq(3).children("input").val()+",";
 			var status = $("#content_tbody2").children("tr").eq(i).children("th").eq(4).html().substr(0,1)+",";
 			allString+=shangID+danjia+numb+status+xiangID;
 		}
 		console.info(allString);
-		$.post("orderFormServlet",{op:"updateInfo",allString:allString},function(data){
+		$.post("backOrder_updateBackOrder",{allString:allString,addname:addname,atel:tel,shen:shen,shi:shi,xian:xian,zhenjie:xiang,readdr:readdr,addid:addid},function(data){
 		 if(data==1){
 				alert("修改成功");
 				$("#ordercontent_show_ordercontentInfo2").dialog("close");
@@ -554,3 +557,6 @@ function showNewsDetail2(orderid){
 		});
 	}
 </script>
+<script type="text/javascript" src="front/js/GlobalProvinces_main.js"></script>
+<script type="text/javascript" src="front/js/GlobalProvinces_extend.js"></script>
+<script type="text/javascript" src="front/js/initLocation.js"></script>

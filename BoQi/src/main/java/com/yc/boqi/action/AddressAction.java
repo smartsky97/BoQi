@@ -29,7 +29,7 @@ public class AddressAction implements ModelDriven<Address>,ServletRequestAware{
 		return "paymoney";
 	}
 	
-	public String showALl(){
+	public String showAll(){
 		adds = addressService.findByUsidAll(address.getUsid());
 		request.getSession().setAttribute(AllSessions.ADDRESSBYUSID, adds);
 		return "paymoney";

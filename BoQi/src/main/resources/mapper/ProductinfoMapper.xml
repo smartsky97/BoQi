@@ -47,4 +47,15 @@
 	<update id="updateGoodsNum" parameterType="map">
 		update productinfo set inventory=inventory-#{pronum} where proid=#{proid}
 	</update>
+	<!-- 根据商品名查询商品 -->
+	<select id="findNatureByName" parameterType="string" resultType="Productinfo">
+		select proid,proname,nature from productinfo where proname in
+		<foreach item="names" index="index" collection="array" open="(" separator="," close=")">
+        	#{names}
+        </foreach>
+	</select>
+	
+	<select id="findPriceByNaNa" parameterType="map" resultType="Productinfo">
+		select * from productinfo where proname=#{name} and nature=#{nature}
+	</select>
 </mapper>

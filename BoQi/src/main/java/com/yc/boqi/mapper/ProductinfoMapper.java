@@ -34,6 +34,10 @@ public interface ProductinfoMapper {
 
 	// index.jsp页面商品的小宠部分查询信息
 	List<IndexProductBean> findIndexsmallPro();
-	
+	//把订单状态改为失效
 	public void updateGoodsNum(Map<String, Object> so);
+	//获取商品的属性
+	public List<Productinfo> findNatureByName(String[] names);
+	//根据商品名和商品属性查询商品
+	public List<Productinfo> findPriceByNaNa(Map<String, Object> so);
 }

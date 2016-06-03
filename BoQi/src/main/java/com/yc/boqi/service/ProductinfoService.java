@@ -37,4 +37,13 @@ public interface ProductinfoService {
 
 	// index.jsp页面商品的小宠部分查询信息
 	public List<IndexProductBean> findIndexsmallPro();
+	//根据商品名查询商品
+	public List<Productinfo> findNatureByName(String name);
+	/**
+	 * 根据商品名和商品属性查询商品属性
+	 * @param name 商品名
+	 * @param nature 商品属性
+	 * @return
+	 */
+	public List<Productinfo> findPriceByNaNa(String name,String nature);
 }
