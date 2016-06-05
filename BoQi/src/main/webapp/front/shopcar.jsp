@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -20,46 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/car.css">
 	<link href="css/publicThing.css" type="text/css" rel="stylesheet"> 
 	
-	<script type="text/javascript" src=jquery/jquery.1.4.2-min.js></script>
-	<script type="text/javascript" src="js/car.js"></script>	
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-	<script>
-	var uname = "${loginUser.uname}";
-	$.post("../shopCarServlet?d="+new Date,{op:"findShopCar",uname:uname});
-	
-	$(function(){
-		showTotal();
-	});
-	function showTotal(){
-		var total=0;
-		//获得已选中复选框
-		$(":checkbox[name=list][checked=true]").each(function(){
-			var id=$(this).val();
-			//通过id找到当前小计元素，获取他的text()
-			var text=$("#"+id+"small").text();
-			total+=Number(text);
-		});
-		//显示总计
-		$(".money").text(total);
-	}
-	function gopay(){
-		var bbb= $("#mytable").children("tbody").children("tr");
-		var coun = $("#mytable").children("tbody").children("tr").length;
-		var song ="";
-		for(var i=0;i<coun;i++){
-			if($("#mytable").children("tbody").children("tr").eq(i).children("#checkeded").children(".list").attr('checked')){
-				var kaka = $("#mytable").children("tbody").children("tr").eq(i).children("#checkeded").children(".list");
-				song+=kaka.val()+","+$("#mytable").children("tbody").children("tr").eq(i).children(".pname_product").children("a").html()+","+$("#mytable").children("tbody").children("tr").eq(i).find(".price_product").html()+","+$("#mytable").children("tbody").children("tr").eq(i).find(".counts_product").val()+","+$("#mytable").children("tbody").children("tr").eq(i).find(".small_product").html()+";";
-			}
-		}
-		$.post("../shopCarServlet?d="+new Date,{op:"saveshopcar",song:song},function(){
-			window.location.href="paymoney.jsp";
-		});
-	}
-	</script>
   </head>
   
   <body>
@@ -105,56 +65,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <td class="active">操作</td>
                     </tr>
                 </table>
-                <table border="0" cellpadding="0" id="mytable" class="productinfo">
+                <table border="0" cellpadding="0" id="mytable" class="productinfo" style="width: 100%; text-align: center;">
                 	<c:forEach items="${findAllcar}" var="item">
                 		<tr class="product_list" style="border-bottom: 1px dashed grey;min-height:200px;">
-	                		<td id="checkeded" algin="left">
-                				<input type="checkbox" name="list" value="${item.proid }" class="list" style="margin-left:50px;margin-top:40px" />
+	                		<td style="width:20%;" class="fi">
+	                			<span id="checkeded">
+                				<input type="checkbox" name="list" value="${item.proid }" class="list" style="margin-top:-53px;"/>
+                				</span>
+                				<span class="pname_product">
+                					<c:choose>
+			                			<c:when test="${fn:contains(item.pictrue, ',')}">
+			                				<img src="../upload/${fn:substringBefore(item.pictrue,',' ) }" alt="图片暂时为空" style="width:100px;height:100px;"/>
+			                			</c:when>
+			                			<c:otherwise>
+			                				<img src="../upload/${item.pictrue }" alt="图片暂时为空" style="width:100px;height:100px;"/>
+			                			</c:otherwise>
+		                			</c:choose>
+		                            <a >${item.proname}</a>
+                				</span>
                 			</td>
-	                		<td class="pname_product">
-	                            <img src="../${item.picture}" alt="图片暂时为空" style="width:125px;height:125px;"/>
-	                            <a >${item.proname}</a>
-	                        </td>
 	                        <td class="price_product">${item.bqpri }</td>
 	                        <td class="acounts_product">
-	                            <input class="reduce_product" type="button" onclick="jiansu()" id="${item.proid }jian" value="-"/>
-	                            <input class="counts_product" type="text" id="${item.proid }inventory" value="${item.inventory }"/>
-	                            <input class="plus_product" type="button" onclick="zensu()" id="${item.proid }jia" value="+"/>
+	                        	<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+								<input class="momey_input counts_product" type="text" disabled="disabled" value="1" name="">
+								<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
 	                        </td>
-                        	<td class="small_product" id="${item.proid }small">${item.inventory*item.bqpri }</td>
+                        	<td class="small_product" id="${item.proid }small">${item.inventory*item.bqpri}</td>
                         	<td class="active_product">
-                           		<a target="_blank" href="">移入收藏夹</a>
+                           		<a target="_blank" href="">移入收藏夹</a><br/>
                             	<a href="javascript:void(0)" class="delete" id="${ item.proid}delete" onClick="del(this)">删除</a>
                         	</td>
                     	</tr>
                 	</c:forEach>
                 </table>
             </div> 
-        <!-- <div id="dingdan" display="none">
-        	<p>收货人信息</p>
-        	<a blank="_target">+<span>新增收货地址</span></a>
-        	<p>支付方式</p>
-        	<ul>
-	        	<a blank="_target">
-	        		<li>在线支付</li>
-	        	</a>
-	        	<a blank="_target">
-	        		<li>在线支付</li>
-	        	</a>
-	        	<a blank="_target">
-	        		<li>在线支付</li>
-	        	</a>
-	        	<a blank="_target">
-	        		<li>在线支付</li>
-	        	</a>
-        	</ul>
-        </div> -->
         <div id="jiesuan">
             <ul>
                 <li class="all">全选</li>
                 <li class="delete">删除选中的商品</li>
                 <li class="clean">清空购物车</li>
-                <li class="more">已选择<span class="four">4</span>件,总价：￥<span class="money">1776.00</span><a  onclick="gopay()" class="go">去结算</a></li>
+                <li class="more">已选择<span class="four">4</span>件,总价：￥<span class="money"></span><a  onclick="gopay()" class="go">去结算</a></li>
             </ul>
         </div>
     </div>
@@ -203,4 +153,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
     </div>
 </body>
+<script type="text/javascript" src=jquery/jquery.1.4.2-min.js></script>
+<script type="text/javascript" src="js/car.js"></script>	
 </html>

@@ -30,6 +30,7 @@ import com.yc.boqi.service.BrandService;
 import com.yc.boqi.service.FirstMenuService;
 import com.yc.boqi.service.ProductinfoService;
 import com.yc.boqi.service.SecondMenuService;
+import com.yc.boqi.util.AllSessions;
 @Controller
 public class ProductinfoAction implements ServletRequestAware,ServletResponseAware,ModelDriven<Productinfo>{
 	private HttpServletRequest request;
@@ -43,7 +44,11 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	private SecondMenuService secondMenuService;
 	@Autowired
 	private BrandService brandService;
-	private List<Top8ProductinfoBean> productinfos;
+	private List<Top8ProductinfoBean> productinfos;//前台的数据获取
+	private List<Productinfo> natureo;
+	public List<Productinfo> getNatureo() {
+		return natureo;
+	}
 	JsonObject jb = new JsonObject();
 	JsonParser parser = new JsonParser();
 	Gson gson = new Gson();
@@ -100,9 +105,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 
 	//获取每个类型的前8个商品
 	public String GetTop8(){
-		System.out.println("啦啦啦");
 		productinfos = productinfoService.GetTop8();
-		System.out.println("莫妮卡："+productinfos);
 		return "GetTop";
 	}
 	//获取后台狗狗商品信息
@@ -135,7 +138,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 			e.printStackTrace();
 		}
 	}
-	
+	//添加商品
 	public void AddProduction(){
 		String path =ServletActionContext.getServletContext().getRealPath("upload/");
         System.out.println("上传的地址："+path);
@@ -161,7 +164,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		    for(String as:pictruesFileName){
 		    	picture += as+",";
 		    }
-		    picture = picture.substring(0, picture.length()-2);
+		    picture = picture.substring(0, picture.length()-1);
 	    }
 	    System.out.println("pp:"+picture);
 	    productinfo.setPictrue(picture);
@@ -169,8 +172,20 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	    productinfoService.addProduct(productinfo);
 	}
 
-	
+	public String product(){
+		Productinfo pro = productinfoService.findAproduct(productinfo.getProid());
+		request.getSession().setAttribute(AllSessions.PRODUCT_ONE, pro);
+		return "product";
+	}
 
-	
-
+	//后台获取商品属性
+	public String getNatureByName(){
+		natureo = productinfoService.findNatureByName(productinfo.getProname());
+		return "natureo";
+	}
+	//后台根据商品名和属性来查询商品价格
+	public String getPriceByNaNa(){
+		natureo = productinfoService.findPriceByNaNa(productinfo.getProname(), productinfo.getNature());
+		return "natureo";
+	}
 }

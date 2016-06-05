@@ -10,7 +10,7 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
     <package name="default" namespace="/" extends="json-default">
-    	<action name="back_*" class="backAction" method="{1}">
+    	<action name="back-*" class="backAction" method="{1}">
     		<result name="{1}">/back/{1}.jsp</result>
     	</action>
     
@@ -22,7 +22,10 @@
     			<param name="root">secsl</param>
     		</result>
     		<result name="PageBrandInfo" type="json">
-    			<param name="root">rows,total</param>
+    			<param name="root">rows</param>
+    		</result>
+    		<result name="findAllOrder" type="json">
+    			<param name="root">ords</param>
     		</result>
     		<result name="pageUserInfo" type="json">
     			<param name="root">rows</param>
@@ -36,9 +39,7 @@
     		<result name="DogPet" type="json">
     			<param name="root">jasonObject</param>
     		</result>
-    		<result name="IdDog" type="json">
-    			<param name="root">pet</param>
-    		</result>
+    		
     		<result name="addDog" type="json">
     			<param name="root">jasonObject</param>
     		</result>
@@ -52,8 +53,25 @@
     			<param name="root">jasonObject</param>
     		</result>
     		<result name="searchPro">/front/shoppingSearch.jsp</result>
+    		<result name="backOrderContentBean" type="json">
+    			<param name="root">backOrderContentBean</param>
+    		</result>
+    		<result name="updatetoling" type="json">
+    			<param name="root">changeRows</param>
+    		</result>
+    		<result name="natureo" type="json">
+    			<param name="root">natureo</param>
+    		</result>
+    		<result name="paymoney">/front/paymoney.jsp</result>
+    		<result name="index">/front/index.jsp</result>
+    		<result name="registerSuccess">/front/login.jsp</result>
+    		<result name="baikeindex">/front/baike.html</result>
+    		<result name="getuserInfo">/front/MyBoQi.jsp</result>
+    		<result name="redirectMyBoQi">/front/redirect.jsp</result>
     		<result name="{2}">/front/{2}.jsp</result>
     	</action>
     	
     </package>
+    
+    
 </struts>

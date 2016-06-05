@@ -1,4 +1,5 @@
 //JavaScript Document
+var uname = "${loginUser.uname}";
 $(function(){
 	$('.city_left').mouseover(function(){
 		$('.city_left').css('border-left','1px solid #CCC');
@@ -29,11 +30,10 @@ $(function(){
 		$('.top-lix').css('outline','0px solid #CCC');
 		$('#toolbar-linjian').css('display','none');
 	});	
-});
-
-$(".list").mousedown(function(){
-	var num=0;
-	$
+	$('.add_mi').click(function() {
+		$(this).css('background', 'url("serviceimg/mail_1.jpg") no-repeat').siblings('.add_mi').css('background', 'url("serviceimg/mail.jpg") no-repeat')
+	})
+	showTotal();
 });
 
 
@@ -53,45 +53,73 @@ $(".list").mousedown(function(){
 		}
 	}
 */
+/*function show_allMoney(){
+	var total_money = $(".money");
+	var small_total = $(".small_product");
+	var b = 0;
+	for (var i = 0; i < small_total.length; i++) {
+		b += parseFloat($(small_total[i]).html());
+	}
+	total_money.html(b);
+}*/
 
-   /*$(document).ready(function(){
-        function GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
-            var context = "";
-            if (r != null)
-                 context = r[2];
-            reg = null;
-            r = null;
-            return context == null || context == "" || context == "undefined" ? "" : context;
-        }
-        
-        $("#p").text(GetQueryString("txt"));
-    })*/
+function onclick_btnAdd(a) {
+	var out_momey = $(".out_momey");
+	var input_ = $(a).prev();
+	var input_val = $(a).prev().val();
+	var input_add = parseInt(input_val) + 1;
+	input_.val(input_add);
+	var pri1 = $(a).parent().prev().text();
+	$(a).parent().next().text(pri1*$(a).prev().val());
+	showTotal();
+}
+
+function onclick_reduce(b) {
+	var out_momey = $(".out_momey");
+	var input_ = $(b).next();
+	var input_val = $(b).next().val();
+	if (input_val <= 1) {
+		alert("商品个数不能小于1！")
+	} else {
+		var input_add = parseInt(input_val) - 1;
+		input_.val(input_add);
+		var pri2 = $(b).parent().prev().text();
+		$(b).parent().next().text(pri2*$(b).next().val());
+		showTotal();
+	}
+}
 
 
-
-
-//数量的改变
-$(document).ready(function(){
-    var data= $(this).siblings(".counts_product");
-    $('.reduce_product').attr('disabled',true);
-    //数量的增加
-    $(".plus_product").click(function(){
-        $(this).siblings(".counts_product").val(parseInt(data.val())+1);
-        if(parseInt(data.val())!=1){
-        	 $(this).siblings(".reduce_product").attr("disabled",false);
-           
-        }
-    });
-    //数量的减小
-    $(".reduce_product").click(function(){
-    	$(this).siblings(".counts_product").val(parseInt(data.val())-1);
-        if(parseInt(data.val())==1){
-        	$(this).siblings(".reduce_product").attr('disabled',true);
-        }
-    });
-});
+function showTotal(){
+	var total=0;
+	//获得已选中复选框
+	$(":checkbox[name=list][checked=true]").each(function(){
+		var id=$(this).val();
+		//通过id找到当前小计元素，获取他的text()
+		var text=$("#"+id+"small").text();
+		total+=Number(text);
+	});
+	//显示总计
+	$(".money").text(total);
+}
+function gopay(){
+	var bbb= $("#mytable").children("tbody").children("tr");
+	var coun = $("#mytable").children("tbody").children("tr").length;
+	var song ="";
+	for(var i=0;i<coun;i++){
+		if($("#mytable").children("tbody").children("tr").eq(i).children(".fi").children("#checkeded").children(".list").attr('checked')){
+			var kaka = $("#mytable").children("tbody").children("tr").eq(i).children(".fi").children("#checkeded").children(".list");
+			song+=kaka.val()+","+$("#mytable").children("tbody").children("tr").eq(i).children(".fi").children(".pname_product").children("a").html()
+				+","+$("#mytable").children("tbody").children("tr").eq(i).find(".price_product").html()+","
+				+$("#mytable").children("tbody").children("tr").eq(i).find(".counts_product").val()+","
+				+$("#mytable").children("tbody").children("tr").eq(i).find(".small_product").html()+","
+				+$("#mytable").children("tbody").children("tr").eq(i).find(".pname_product").find("img").attr("src")+";";
+		}
+	}
+	$.post("shopCar_saveshopcar.action?song="+song,function(){
+		window.location.href="boqi_paymoney.action";
+	});
+}
 
 
 

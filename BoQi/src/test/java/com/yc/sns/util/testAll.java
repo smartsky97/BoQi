@@ -15,16 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.yc.boqi.entity.BackOrderContentBean;
 import com.yc.boqi.entity.Brand;
 import com.yc.boqi.entity.FirstMenu;
 import com.yc.boqi.entity.Pet;
 import com.yc.boqi.entity.Productinfo;
 import com.yc.boqi.entity.SecondMenu;
 import com.yc.boqi.entity.Top8ProductinfoBean;
-import com.yc.boqi.entity.UserInfo;
 import com.yc.boqi.mapper.BrandMapper;
 import com.yc.boqi.mapper.FirstMenuMapper;
 import com.yc.boqi.mapper.PetMapper;
+import com.yc.boqi.mapper.OrdercontentMapper;
 import com.yc.boqi.mapper.ProductinfoMapper;
 import com.yc.boqi.mapper.SecondMenuMapper;
 import com.yc.boqi.mapper.UserMapper;
@@ -46,19 +47,10 @@ public class testAll {
 	@Autowired
 	private PetMapper petMapper;
 
+	private OrdercontentMapper ordercontentMapper;
 	@Test
 	public void testFindTop8() {
 		List<Top8ProductinfoBean> mi = productinfoMapper.findTop8OfProductByLei();
-		System.out.println("aaa:"+mi);
-		assertNotNull("出错了",mi);
-	}
-	
-	@Test
-	public void testFindUser() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("one", 1);
-		map.put("two", 0);
-		List<UserInfo> mi = userMapper.getPageUsers(map);
 		System.out.println("aaa:"+mi);
 		assertNotNull("出错了",mi);
 	}
@@ -98,6 +90,9 @@ public class testAll {
 		map.put("one", 10);
 		map.put("two", 0);
 		List<Pet> mi = petMapper.findPetByFamily(map);
+	}
+	public void testpro3() {
+		BackOrderContentBean mi = ordercontentMapper.getBackOrder(1033);
 		System.out.println("aaa:"+mi);
 		assertNotNull("出错了",mi);
 	}
@@ -143,6 +138,12 @@ public class testAll {
 			
 		}
 		assertNotNull("出错了",falg);
+	}
+	@Test
+	public void testpro4() {
+		Productinfo mi = productinfoMapper.findAproduct(3021);
+		System.out.println("aaa:"+mi);
+		assertNotNull("出错了",mi);
 	}
 	
 	

@@ -178,4 +178,6 @@ public class Productinfo implements Serializable{
 				+ ", brandname=" + brandname + ", tname=" + tname + "]";
 	}
 	
+	
+	
 }

@@ -3,257 +3,259 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath+"/front/"%>">
-    
-    <title>购物车</title>
-    
+<head>
+	<base href="<%=basePath+"/front/"%>">
+	<title>购物车</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="css/car2.css">
-	<link href="css/publicThing.css" type="text/css" rel="stylesheet"> 
-	
+	<link href="css/publicThing.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src=jquery/jquery.1.4.2-min.js></script>
-	<script type="text/javascript" src="js/car.js"></script>	
-
+	<script type="text/javascript" src=jquery/jquery-2.1.1.js></script>
+	<script type="text/javascript" src="js/GlobalProvinces_main.js"></script>
+	<script type="text/javascript" src="js/GlobalProvinces_extend.js"></script>
+	<script type="text/javascript" src="js/initLocation.js"></script>
+	<script type="text/javascript" src="js/car.js"></script>
 	<script>
-	var uname = "${loginUser.uname}";
-	var sum = 0;		
-	//地址
-	var prov=new Array();
-	prov['湖南省']=['长沙市','常德市','衡阳市','湘潭市','益阳市'];
-	prov['广东省']=['广州市','佛山市','深圳市','东莞市'];
-	prov['湘潭市']=['石潭镇','易俗河','花石','湘潭县'];
-	
-	function change(){
-		var pro =document.myform.provs;
-		for(var i=0;i<spanro.length;i++){
-			//判断是否有选中的选项
-			if(pro[i].selected==true){
-				console.info(pro[i].value);
-				//通过省份创建城市选项
-				add(pro[i].value);
-			}
-		}
-	}
-	
-	function add(provice){
-		document.myform.city.length=0;
-		for(var i=0;i<spanrov[provice].length;i++){
-			var op=new Option(prov[provice][i],prov[provice][i]);
-			document.myform.city.options.add(op);
-		}
-	}
-
-	function changed(){
-		var city =document.myform.city;
-		for(var i=0;i<city.length;i++){
-			if(city[i].selected==true){
-				console.info(city[i].value);
-				add(city[i].value);
-			}
-		}
-	}
-	
-	function add1(city){
-		document.myform.town.length=0;
-		for(var i=0;i<city[city].length;i++){
-			var op1=new Option(city[city][i],city[city][i]);
-			document.myform.town.options.add(op1);
-		}
-	}
-
-	Date.prototype.format = function(format){ 
-		var o = { 
-			"M+" : this.getMonth()+1, //month 
-			"d+" : this.getDate(), //day 
-			"h+" : this.getHours(), //hour 
-			"m+" : this.getMinutes(), //minute 
-			"s+" : this.getSeconds(), //second 
-			"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
-			"S" : this.getMilliseconds() //millisecond 
-		} 
-
-		if(/(y+)/.test(format)) { 
-			format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
-		} 
-
-		for(var k in o) { 
-			if(new RegExp("("+ k +")").test(format)) { 
-				format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
-			} 
-		} 
-		return format; 
-	} 
-
-	
-	//点击提交订单
-	function payle(){
-		var unamer = $("#username").val();
-		var usertel = $("#usertel").val();
-		var useraddress = $("#useraddress").val();
-		var mytime = new Date();
-		var mystr = mytime.format("yyyy-MM-dd hh:mm:ss"); 
+		var uname = "${loginUser.uname}";
+		var sum = 0;		
+		var addressID = "";
 		
-		if(unamer == null || unamer == "" || usertel == null || usertel == "" || useraddress == null || useraddress == ""){
-			alert("请输入完整的收货地址");
-		}else{
-			var payword = prompt("请输入您的支付密码","");
-			if(payword == ("${loginUser.paypwd}")){
-				$.post("../orderContentServlet",{op:"addDingdan",usid:${loginUser.usid},readdr:useraddress,starttime:mystr.toLocaleString( ),paytime:mystr.toLocaleString( ),ordersum:sum},function(data){
-					$.post("../orderContentServlet",{op:"addxiangxi",xinxi:"${shopinfo}",bianhao:data},function(){
-						showTime();
-					});
-				});
+		//点击提交订单
+		function payle(){
+			var ordersum =  $(".yingfumoney").html();
+			var seperator1 = "-";
+		    var seperator2 = ":";
+		    var orders = "";
+			var currentdate = "";
+			
+			var list = $(".pname_order");
+			for(var i=0;i<list.length;i++){
+				var thingID = $(list[i]).children(".product_order").children("#shangID").html();
+				var num = $(list[i]).children(".acounts_order").html();
+				var danjia = $(list[i]).children(".price_order").html();
+				orders += thingID+","+num+","+danjia+";";
+			}
+			if(addressID == ""){
+				alert("请填写您的收货地址");
 			}else{
-				alert("密码错误");
+				$.post("ordercontent_uploadorder.action",{addid:addressID,ordersum:ordersum,orders:orders});
+			}
+		} 
+		//点击关闭
+		function onclick_close() {
+			var shade_content = $(".shade_content");
+			var shade = $(".shade");
+			if (confirm("确认关闭么！此操作不可恢复")) {
+				shade_content.hide();
+				shade.hide();
 			}
 		}
-	}
-	
-	
-    function showTime() {
-        alert("success");
-        window.close();     
-    }
-	//添加信息
-	function addinfo(){
-		var infofo = "${shopinfo}";
-		var shu = infofo.split(";");
-		
-		for(var i=0;i<shu.length-1;i++){
-			var shu2 = shu[i].split(",");
-			//alert("<tr class='pname_order'><td class='product_order' style='border-bottom: 1px dashed grey;'><img src='' alt='图片暂时为空'/><a>"+shu2[1]+"</a>	</td><td class='price_order'>"+shu2[2]+"元</td><td class='acounts_order'>"+shu2[3]+"</td><td class='small_order' id='small'>"+shu2[4]+"元</td></tr>");
-			$("#mytables").append("<tr class='pname_order'><td class='product_order'><img src='' alt='图片暂时为空' class='shangimg'/><br/><a class='left'>"+shu2[1]+"</a><span id='shangID'>"+shu2[0]+"</span>	</td><td class='price_order'>"+shu2[2]+"元</td><td class='acounts_order'>"+shu2[3]+"</td><td class='small_order' id='small'>"+shu2[4]+"元</td></tr>");
-			sum+= parseInt(shu2[4]);
+		//添加新地址
+		function onclick_open() {
+			$(".shade_content").show();
+			$(".shade").show();
+			var input_out = $(".input_style");
+			for (var i = 0; i <= input_out.length; i++) {
+				if ($(input_out[i]).val() != "") {
+					$(input_out[i]).val("");
+				}
+			}
 		}
-		$(".yingfumoney").html("￥"+sum);
-
-	}
-	window.onload=addinfo; 
-	
+		//显示所有地址
+		function onclick_show_all(){
+			window.location.href="address_showAll.action?usid="+${loginUser.usid};
+		}
+		
+		function clickAddress(add){
+			addressID = $(add).attr("id");
+		}
+		
+		//添加信息
+		function addinfo(){
+			var infofo = "${shopinfo}";
+			var shu = infofo.split(";");
+			var shing = "";
+			for(var i=0;i<shu.length-1;i++){
+				var shu2 = shu[i].split(",");
+				$("#mytables").append("<tr class='pname_order'><td class='product_order'><img src='"+shu2[5]+"' alt='图片暂时为空' class='shangimg'/><br/><a>"+shu2[1]+"</a><span id='shangID'>"+shu2[0]+"</span>	</td><td class='price_order'>"+shu2[2]+"</td><td class='acounts_order'>"+shu2[3]+"</td><td class='small_order' id='small'>"+shu2[4]+"元</td></tr>");
+				sum+= parseInt(shu2[4]);
+			}
+			$(".yingfumoney").html(sum);
+		}
+		$(function() {
+			$(".shade_content").hide();
+			$(".shade").hide();
+			initLocation({sheng_val:"--",shi_val:"--",xian_val:"<?php echo $v['country']?>",xiang_val:"<?php echo $v['street']?>"});
+			addinfo();
+		})
 	</script>
-  </head>
-  
-  <body>
- <%@include file="publicThing.jsp" %>  
-    
-    <div id="ad-mod" style="display:none"></div>
-    
-    <div id="center">
-        <div id="cleft">
-                <img src="registerimg/logo.gif"/>
-         </div>
-        <p class="point">>>></p>
-        <div id="cright">
-            <div class="red">
-            </div>
-            <div class="number">
-                <ul>
-                    <li  class="one">
-                        <span>1</span>
-                        <p>我的购物车</p>
-                    </li>
-                    <li  class="two">
-                        <span>2</span>
-                        <p>核对订单信息</p>
-                    </li>
-                    <li  class="three">
-                        <span>3</span>
-                        <p>订单提交成功</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-       <!--  <span style="float:left;margin-left:-250px;margin-top:160px;">江浙沪皖满60即免运费</span> -->
-        <span style="float:right;margin-right:-350px;margin-top:160px;"><a target="_blank" href="">继续购物></a></span>
-        	<div id="dingdan">
-				<div id="dizhi">
-					<span class="stitle">收货人信息</span></br>
-					收货人：<input type="text" id="username"></br></br>
-					电话：<input type="text" id="usertel"></br></br>
-					地址：<input type="textarea" id="useraddress"></br></br>
+</head>
+<body>
+	<%@include file="publicThing.jsp"%>
+
+	<div id="ad-mod" style="display: none"></div>
+
+	<div id="center">
+		<div id="ctop">
+			<div id="cleft">
+				<img src="registerimg/logo.gif" />
+			</div>
+			<p class="point">>>></p>
+			<div id="cright">
+				<div class="red"></div>
+				<div class="number">
+					<ul>
+						<li class="one"><span>1</span>
+							<p>我的购物车</p></li>
+						<li class="two"><span>2</span>
+							<p>核对订单信息</p></li>
+						<li class="three"><span>3</span>
+							<p>订单提交成功</p></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="cfoot">
+			<div id="dingdan">
+				<div id="showadd">
+					<div id="addrs">
+						<c:forEach items="${oneusersaddress}" var="item">
+							<div class="add_mi" onclick="clickAddress(this)" id="${item.addid}">
+								<p style="border-bottom:1px dashed #ccc;line-height:28px;font-size:12px;width: 203px;margin-bottom: 5px;">${item.shen }${item.shi }(${item.addname}收)</p>
+								<p style="color: #666;font-size: 12px;line-height: 20px;margin-bottom: 5px;width: 203px;">${item.xian }&nbsp;&nbsp;${item.zhenjie }&nbsp;&nbsp;${item.readdr}&nbsp;${item.tel }</p>
+							</div>
+						</c:forEach>
+					</div>
+					
+					<div class="open_new left">
+						<button onclick="javascript:onclick_open();" class="open_btn">使用新地址</button>
+						<button onclick="javascript:onclick_show_all();" class="show_all">显示全部地址</button>
+					</div>
 				</div>
 
-	      
-	        	
-	        	<span class="stitle">商品清单<a target="_blank" class="back">返回购物车</a></span>
-	        	<div id="pmenu">
-	        		<table style="border:1px solid green;margin-left:100px;margin-top:20px;" width="80%" border="0" cellspacing="0" collpadding="0">
-	                    <tr class="pmenu">
-	                        <td class="pname">商品</td>
-	                        <td class="price">波奇价(元)</td>
-	                        <td class="acounts">数量</td>
-	                        <td class="mall">小计(元)</td>
-	                    </tr>
-	                </table>
-	                <table border="0" cellpadding="0" id="mytables" class="ordermenu">
-	                	
-	                </table>
-                </div>
-                <span class="yingfu">应付:<span class="yingfumoney">￥123232</span><br/><span class="submit" onclick="payle()">提交订单</span></span>
-                <div>
-         </div>
-         <div id="jiesuan" style="display:none">
-            <ul>
-                <li class="all">全选</li>
-                <li class="delete">删除选中的商品</li>
-                <li class="clean">清空购物车</li>
-                <li class="more">已选择<span class="four">4</span>件商品(总重：60.00kg),总价(不含运费)：￥<span class="money">1776.00</span><a target="_blank" href="" class="go">去结算</a></li>
-            </ul>
-        </div>
-    </div>
-     </div>
-    <div id="foot">
-        	<div id="footer-auto">
-                <div id="footer-bot">
-                    <span id="footer-link">
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">关于波奇</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">友情链接</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">诚聘英才</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">联系我们</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">网站地图</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">意见反馈</a>
-                        <span>|</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">帮助中心</a>
-                        <span>|</span>
-                        <span>客服热线：400-820-6098</span>
-                        
-                    </span>
-                    <span id="copy">
-                        <span>Copyright  2007-2015 Boqii.com All Rights Reserved 光橙（上海）信息科技有限公司 版权所有</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">沪ICP备13034501号-2</a>
-                        <span>增值电信业务经营许可证：</span>
-                        <a href="#" target="_blank" onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">沪B2-20140120</a>
-                    </span>
-                    <span id="footimg">
-                        <a href="#" target="_blank">
-                            <img width="100" height="35" src="registerimg/foot_gs.png">
-                        </a>
-                        <a href="#" target="_blank">
-                            <img width="100" height="35" src="registerimg/foot_kx.png">
-                        </a>
-                        <a href="#" target="_blank">
-                            <img width="100" height="35" src="registerimg/foot_zx.png">
-                        </a>
-                        <a href="#" target="_blank">
-                            <img width="100" height="35" src="registerimg/foot_cx.png">
-                        </a>
-                    </span>
-                </div>
-            </div>
-   
+				<div class="fenge" style="width:100%;border-bottom: 1px dotted grey;"></div>
+				<span class="stitle">商品清单<a target="_blank" class="back">返回购物车</a></span>
+				<span style="float: right; margin-right: 30px; margin-top: 10px;">
+					<a target="_blank" href="">继续购物></a>
+				</span>
+					<table 
+						style="margin-left: 100px;" bordercolor="green"
+						width="80%" border="1" cellspacing="0" collpadding="0">
+						<tbody id="mytables">
+							<tr class="pmenu">
+								<td class="pname">商品</td>
+								<td class="price">波奇价(元)</td>
+								<td class="acounts">数量</td>
+								<td class="mall">小计(元)</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				<div style="overflow:hidden;padding-bottom:20px;">
+					<span class="yingfu">应付:￥<span class="yingfumoney">123232</span>元<br />
+					<span class="submit" onclick="payle()">提交订单</span>
+				</div>
+			</div>
+		</div>
+	</div>
+		<!-- 地址添加 -->
+		<div class="shade"></div>
+		<div class="shade_content">
+			<div class="col-xs-12 shade_colse">
+				<button onclick="javascript:onclick_close();">x</button>
+			</div>
+			<div class="nav shade_content_div">
+				<div class="col-xs-12 shade_title">
+					新增收货地址
+				</div>
+				<div class="col-xs-12 shade_from">
+					<form action="address_addOne" method="post">
+						<input name="usid" value="${loginUser.usid}" style="display:none;">
+						<div class="col-xs-12">
+							<span class="span_style" id="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<select id="sheng" class="selec" name="shen" ></select>
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<select id="shi" class="selec" name="shi"></select>
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;县&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<select id="xian" class="selec" name="xian" ></select>
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">镇或街道</span>
+							<select id="xiang" class="selec" name="zhenjie" ></select>
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">详细地址</span>
+							<input class="input_style" type="" name="readdr" id="tatil_addr" value="" placeholder="&nbsp;&nbsp;请输入您的详细地址" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">邮政编号</span>
+							<input class="input_style" name="postcode" id="number_this" value="" placeholder="&nbsp;&nbsp;请输入您的邮政编号" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" class="span_sty" id="">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+							<input class="input_style" type="" name="addname" id="name_" value="" placeholder="&nbsp;&nbsp;请输入您的姓名" />
+						</div>
+						<div class="col-xs-12">
+							<span class="span_style" id="">手机号码</span>
+							<input class="input_style" id="tel" name="tel" value="" placeholder="&nbsp;&nbsp;请输入您的手机号码" />
+						</div>
+						<div class="col-xs-12">
+							<input class="btn_remove" type="button" id="" onclick="javascript:onclick_close();" value="取消" />
+							<input type="submit" class="sub_set" id="sub_setID" value="提交" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	<div id="foot">
+		<div id="footer-auto">
+			<div id="footer-bot">
+				<span id="footer-link"> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">关于波奇</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">友情链接</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">诚聘英才</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">联系我们</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">网站地图</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">意见反馈</a>
+					<span>|</span> <a href="#" target="_blank"
+					onmouseover="addUnderline(this)" onmouseout="reUnderline(this)">帮助中心</a>
+					<span>|</span> <span>客服热线：400-820-6098</span>
+
+				</span> <span id="copy"> <span>Copyright 2007-2015 Boqii.com
+						All Rights Reserved 光橙（上海）信息科技有限公司 版权所有</span> <a href="#"
+					target="_blank" onmouseover="addUnderline(this)"
+					onmouseout="reUnderline(this)">沪ICP备13034501号-2</a> <span>增值电信业务经营许可证：</span>
+					<a href="#" target="_blank" onmouseover="addUnderline(this)"
+					onmouseout="reUnderline(this)">沪B2-20140120</a>
+				</span> <span id="footimg"> <a href="#" target="_blank"> <img
+						width="100" height="35" src="registerimg/foot_gs.png">
+				</a> <a href="#" target="_blank"> <img width="100" height="35"
+						src="registerimg/foot_kx.png">
+				</a> <a href="#" target="_blank"> <img width="100" height="35"
+						src="registerimg/foot_zx.png">
+				</a> <a href="#" target="_blank"> <img width="100" height="35"
+						src="registerimg/foot_cx.png">
+				</a>
+				</span>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

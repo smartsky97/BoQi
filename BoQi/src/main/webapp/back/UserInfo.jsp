@@ -38,7 +38,7 @@ $(function(){
 	var statusObj=[{usid:0,sname:'不可用'},{usid:1,sname:'可用'}];
 	
 	datagrid=$('#user_info').datagrid({
-		url:'user_getUserInfo.action',
+		url:'userInfo_getUserInfo.action',
 		//queryParams:{op:"getPageUserInfo"},
 		fitColumns:true,
 		striped:true,
@@ -78,7 +78,7 @@ $(function(){
 //弹开详情页面
 function showUserDetail(usid){
 	$("#users_show_userInfo").dialog("open");
-	$.post("user_getUserByUsid.action",{usid:usid},function(data){
+	$.post("userInfo_getUserByUsid.action",{usid:usid},function(data){
 		var ordercontent=data;
 		console.info(data);
 		
@@ -122,7 +122,7 @@ function findUserInfoByInfo(){
 	var status = $.trim($("#status").val());
 	
 	$('#user_info').datagrid({
-		url:'user_getUserByInfo.action',
+		url:'userInfo_getUserByInfo.action',
 		queryParams:{uname:uname,email:email,status:status}
 	});
 }

@@ -11,6 +11,8 @@ function changeUname(){
 	
 }
 
+
+
 function changePwd(){
 	var text2=document.getElementById('text2').value;
 	var tips=document.getElementById('login_tip');

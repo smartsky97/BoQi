@@ -2,7 +2,7 @@ package com.yc.boqi.service;
 
 import java.util.List;
 
-import com.yc.boqi.entity.ShopCar;
+import com.yc.boqi.entity.ShopCarBean;
 
 public interface ShopCarDao {
 	/**
@@ -10,7 +10,7 @@ public interface ShopCarDao {
 	 * @param shopCar
 	 * @return
 	 */
-	public int addProduct(ShopCar shopCar);
+	public int addProduct(ShopCarBean shopCar);
 	
 	/**
 	 * 修改购物车中的商品属性
@@ -32,7 +32,7 @@ public interface ShopCarDao {
 	 * @return
 	 */
 	// public List<ShopCar> find(Integer pageNo,Integer pageSize);
-	public List<ShopCar> find(Integer pageNo,Integer pageSize,String uname);
+	public List<ShopCarBean> find(Integer pageNo,Integer pageSize,String uname);
 	
 	/**
 	 * 根据用户id和商品id查询在购物车中的单个信息
@@ -40,5 +40,5 @@ public interface ShopCarDao {
 	 * @param proid
 	 * @return
 	 */
-	public List<ShopCar> findSingle(int usid,int proid);
+	public List<ShopCarBean> findSingle(int usid,int proid);
 }

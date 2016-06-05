@@ -25,30 +25,20 @@ public class BrandAction implements ServletRequestAware{
 	JsonParser parser = new JsonParser();
 	@Autowired
 	private BrandService brandService;
+	
+	List<Brand> rows;
+	
+	public List<Brand> getRows() {
+		return rows;
+	}
+
 	//后台获取所有品牌信息
-	public void getPageBrandInfo(){
+	public String getPageBrandInfo(){
 		String page = request.getParameter("page");
 		String row = request.getParameter("rows");
 		
-		List<Brand> rows = brandService.find(Integer.parseInt(page),Integer.parseInt(row));
-		int total = brandService.total();
-		System.out.println(page+" - "+rows);
-		Gson gson = new Gson();
-		
-		jb.addProperty("total", total);
-		jb.add("rows", parser.parse(gson.toJson(rows)));
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.println(jb);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		rows = brandService.find(Integer.parseInt(page),Integer.parseInt(row));
+		return "PageBrandInfo";
 	}
 
 	@Override

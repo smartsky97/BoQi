@@ -26,5 +26,6 @@
 			</when>
 		</choose>
 		order by usid) a where rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
-	</select>
+	</select>	
+	
 </mapper>

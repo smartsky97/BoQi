@@ -1,6 +1,0 @@
-@charset "utf-8";
-/* zySearch */
-.zySearch{position:relative;width:520px;margin-top:27px; margin-left:30px; float:left;}
-
-.zySearch .search-input{color:#999;border:1px solid #D0D0D0; height:33px;margin-right:5px;padding:0 10px;width:240px;}
-.zySearch .search-btn{ margin-left:-35px; background:url(../images/sprites.png) no-repeat -174px 0;border:0 none;border-radius:0;color:#FFFFFF;cursor:pointer;height:33px;padding:0;width:30px;text-align:center;vertical-align:middle;white-space:nowrap;margin-bottom:0;font-weight:normal;font-size:14px;display:inline-block;}

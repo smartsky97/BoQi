@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 public class BackAction {
 	
 	public String UserInfo(){
-		
 		return "UserInfo";
 	}
 

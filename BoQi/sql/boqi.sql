@@ -29,10 +29,6 @@ insert into bquserinfo values(1004,'kk','a','a',null,'男','122121121212',10,0,n
 drop table bquserinfo;
 select * from bquserinfo;
 
-select * from(select a.*,rownum rn from (select *from bquserinfo order by usid) a where
-		rownum<=10) b where rn>0
-
-
 insert into userinfo values(seq_usid.nextval,'navy','a',123456,'adf','男',123456,0,0.0,'','','','',1336558111,'163@234335','中华田园犬',0,0,'');
 select * from(select t.*,row_number() over (partition by t.tid order by t.proid desc) RN from productinfo t) where RN <=8
 //这里的
@@ -228,21 +224,25 @@ insert into shopcar values(1001,1001,234,'','');
 
 commit;
 
-
- 收货地址表:
-	收货人   	邮编   	电话   	地址（是否默认）
+收货地址表:
+  收货人     邮编     电话     地址（是否默认）
 create table address(
-	  addid int primary key, --地址编号
+      addid int primary key, --地址编号
       usid int   --用户编号
-      	constraint Rs_usid references bquserinfo(usid),
+        constraint Rs_usid references bquserinfo(usid),
       postcode int not null,     --邮编
       addname varchar2(50),  --收货人姓名
-      tel int not null,          --电话
+      tel varchar2(50) not null,          --电话
+      shen varchar2(1000) not null,  --省
+      shi varchar2(1000) not null,  --市
+      xian varchar2(1000) not null,  --县
+      zhenjie varchar2(1000),  --街道
       readdr varchar2(1000) not null,  --地址
-	  status int,	
+      status int,  
       test15 varchar2(200),      --预留字段
       test16 varchar2(200)   --预留字段
        )
+
 create sequence seq_add start with 9001 increment by 1;
        select * from address where usid=1001
 drop table address;
@@ -263,14 +263,16 @@ create table ordercontent(
   orderstate int,    --订单状态
   usid int    not null          --客户编号
     constraint fk_usid references bquserinfo(usid),
-  readdr varchar2(100) not null,       --收货地址
-  starttime date,				--开始时间
-  paytime date,				--付钱时间
-  endtime date,				--完成时间
-  ordersum number(8,2),	     --一共付的钱
+  addid int not null
+    constraint as_addid references address(addid),       --收货地址
+  starttime date,        --开始时间
+  paytime date,        --付钱时间
+  endtime date,        --完成时间
+  ordersum number(8,2),       --一共付的钱
   test17 varchar2(200),      --预留字段
   test18 varchar2(200)   --预留字段
   )
+
     create sequence seq_orderid start with 1001 increment by 1;
 select o.orderid,orderstate,usid,readdr,starttime,paytime,endtime,ordersum,proname from ordercontent o,productinfo p,orderform om where om.orderid=o.orderid and om.proid=p.proid and o.orderid=1001
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.OrdercontentMapper" >
+	<!-- 添加一个订单 -->
+	<insert id="addOrder" parameterType="OrderContent">
+		<selectKey keyColumn="orderid" keyProperty="orderid" resultType="int" order="BEFORE">
+			select seq_orderid.nextval orderid from dual
+		</selectKey>
+		insert into ordercontent values(#{orderid},1,#{usid},#{addid},to_date(#{starttime},'yyyy-mm-dd hh24:mi:ss'),null,null,#{ordersum},'','')
+	</insert>
+	<!-- 添加订单详情 -->
+	<insert id="addFrom" parameterType="map">
+		insert into orderform values(#{orderid},#{proid},#{pronum},#{bqpri},1,orderform_add.nextval,null)
+	</insert>
+	<!-- 查询所有的订单 -->
+	<select id="getAll" parameterType="map" resultType="OrderContent">
+		select * from(select a.*,rownum rn from (select o.*,b.uname from ordercontent o,bquserinfo b where o.orderstate!=0 order by orderid) a where
+		rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+	
+	<resultMap id="getBackOrderMap" type="BackOrderContentBean">
+		<id property="orderid" column="orderid"/>
+		<collection property="goods" column="orderid" select="findBackOrderFromMap"/>
+	</resultMap>
+	
+	<select id="findBackOrderFromMap" parameterType="int" resultType="BackOrderFromBean">
+		select o.proid,p.proname,p.pictrue,p.nature,o.bqpri,o.pronum,o.status,o.orrmid from orderform o,productinfo p where 
+		o.proid=p.proid and o.orderid=#{orderid}
+	</select>
+	
+	<select id="getBackOrder" parameterType="int" resultMap="getBackOrderMap">
+		select b.uname,b.tel utel,a.addname,a.tel atel,a.shen,a.shi,a.xian,a.zhenjie,a.readdr,o.orderid,o.starttime,o.paytime,o.endtime 
+		from bquserinfo b,address a,ordercontent o where b.usid=o.usid and a.addid=o.addid and o.orderid=#{proid}
+	</select>
+	
+	<update id="updateOrderByIds" parameterType="string">
+		update ordercontent set orderstate=0 where orderid in
+		<foreach item="ids" index="index" collection="array" open="(" separator="," close=")">
+        	#{ids}
+        </foreach>
+	</update>
+	
+	<update id="updateOrderById" parameterType="string">
+		update ordercontent set orderstate=0 where orderid=#{id}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -46,9 +46,12 @@ function showGoodsInfo(){
 	$.post("productinfo_GetTop8.action", function(data){
 		for(var i = 0; i < data.length; i++)
 		{
+			if(data[i].pictrue.indexOf(",")>-1){
+				data[i].pictrue=data[i].pictrue.substring(0,data[i].pictrue.indexOf(","));
+			}
 			$("#"+data[i].fid).append("<dl class='dog_r_shopping1 left'>" +
-					"<dt><a class='thing_pic' target='_blank' href=' '><img src='../upload/"+data[i].pictrue+" ' alt='商品图片'></a></dt>" +
-					"<dd><a class='thing_name' target='_blank' href=' '>"+data[i].proname+"</a></dd>" +
+					"<dt><a class='thing_pic' target='_blank' href='productinfo_product.action?proid="+data[i].proid+"'><img src='../upload/"+data[i].pictrue+"' alt='商品图片'></a></dt>" +
+					"<dd><a class='thing_name' target='_blank' href='productinfo_product.action?proid="+data[i].proid+"'>"+data[i].proname+"</a></dd>" +
 					"<dd>" +
 					"<span class='thing_pri left'>¥ "+data[i].bqpri+"</span>" +
 					"<span class=' thing_num right'>已售"+data[i].prosales+"</span>" +
