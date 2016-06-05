@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <title>My JSP 'shoppingSearch.jsp' starting page</title>
     <base href="<%=basePath+"front/"%>">
+    <meta charset="utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -48,12 +49,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	        <div id="s-search">
 	        	热门搜索：
-	        	<a target="" href="#">狗粮</a>
-	            <a target="" href="#">宠物用品</a>
-	            <a target="" href="#">金毛</a>
-	            <a target="" href="#">贵宾犬</a>
-	            <a target="" href="#">哈士奇</a>
-	            <a target="" href="#">雪纳瑞</a>
+	        	<a target="" href="proSearch_findSearchPro.action?order=proid&ci=狗粮&ye=1">狗粮</a>
+	            <a target="" href="proSearch_findSearchPro.action?order=proid&ci=宠物用品&ye=1">宠物用品</a>
+	            <a target="" href="proSearch_findSearchPro.action?order=proid&ci=金毛&ye=1">金毛</a>
+	            <a target="" href="proSearch_findSearchPro.action?order=proid&ci=贵宾犬&ye=1">贵宾犬</a>
+	            <a target="" href="proSearch_findSearchPro.action?order=proid&ci=哈士奇&ye=1">哈士奇</a>
+	            <a target="" href="proSearch_findSearchPro.action?order=proid&ci=雪纳瑞&ye=1">雪纳瑞</a>
 	            <a target="" href="#">更多>></a>
 	        </div>
 	        <div id="ad-right">
@@ -189,15 +190,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	<div id="filter-container">
 	                	<div id="filter-title">品牌</div>
 	                    <div id="filter-con-list">
-							<c:forEach items="${allpinpai}" var="addr"  varStatus="stat">
-							<c:choose> 
-								<c:when test="${stat.index % 2 == 0}">
-								<a href="#" class="filter-item-pinpai" onmouseover="changeColor1(this)" onmouseout="reColor1(this)">${addr}
-								</c:when>
-								<c:otherwise>  
-								(${addr})</a>
-								</c:otherwise>  
-							</c:choose> 
+							<c:forEach items="${allpinpai}" var="addr">
+								<a href="proSearch_findSearchPro.action?order=proid&ci=${addr.brandName}&ye=1" class="filter-item-pinpai" onmouseover="changeColor1(this)" onmouseout="reColor1(this)">${addr.brandName}</a>
 							</c:forEach>
 
 	                    </div>
@@ -224,14 +218,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <img  src="shoppingimg/sale-donw.png"/>
 	                        </a>
 	                        
-	                        <span id="span-totalgoods">共${allsearch}件商品</span>
+	                        <span id="span-totalgoods">共${searchTotal}件商品</span>
 	                            <span id="sort-page">
-	                            	<em id="thisYe">1</em>
-	                                /
+	                            	<em id="thisYe">${thisPage }</em>
+	                                /<fmt:formatNumber type="number" value="${(searchTotal+20-searchTotal%20)/20}" maxFractionDigits="0"/>
 	                                <em id="allye"></em>
 	                      	</span>
-	                        <a id="sort-right-a1" href="#"><</a>
-	                        <a id="sort-right-a2" href="#">></a>    
+	                        <a id="sort-right-a1" href="proSearch_findPagePro.action?ye=${thisPage-1 }"><</a>
+	                        <a id="sort-right-a2" href="proSearch_findPagePro.action?ye=${thisPage+1 }">></a>    
 	                </div>
 	                <div class="product-container">
 	                	<ul>
@@ -273,12 +267,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    </ul>
 	                </div>
 	                <div id="pagination" style="float:right;">
-	              		  	<a id="beginpage" class="thisye1" onclick="beginpage()">首页</a>
-	                		<a id="lastpage" class="thisye1" onclick="lastpage()">上一页></a>
+	              		  	<a id="beginpage" class="thisye1" href="proSearch_findPagePro.action?ye=1">首页</a>
+	                		<a id="lastpage" class="thisye1" href="proSearch_findPagePro.action?ye=${thisPage-1 }">上一页></a>
 							<span id="thisthere"></span>
-	                        <a id="nextpage" class="thisye1" onclick="nextpage()">下一页></a>
-	                        <a id="endpage" class="thisye1" onclick="endpage()">末页</a>
-	                        <span class="total_page">共<fmt:formatNumber type="number" value="${(allsearch+20-allsearch%20)/20}" maxFractionDigits="0"/>页</span>
+	                        <a id="nextpage" class="thisye1" href="proSearch_findPagePro.action?ye=${thisPage+1 }">下一页></a>
+	                        <a id="endpage" class="thisye1" href="proSearch_findPagePro.action?ye=${(searchTotal+20-searchTotal%20)/20 }">">末页</a>
+	                        <span class="total_page">共<fmt:formatNumber type="number" value="${(searchTotal+20-searchTotal%20)/20}" maxFractionDigits="0"/>页</span>
 	                        <span>
 	                        	到第
 	                            <input class="page_text" type="text"/>
@@ -627,16 +621,18 @@ function beginpage(){
 }
 function skippage(){
 	var skipye = $(".page_text").val();
-	var turl = location.search;
-	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
-	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
-	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
-	if(skipye == yeye){
-	}else if(skipye>0 && skipye<=${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+skipye;
-	}else if(skipye>${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
-	}
+	
+	//var turl = location.search;
+	//var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)));  //当前的页码
+	//var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
+	//var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
+	//if(skipye == yeye){
+	//}else if(skipye>0 && skipye<=${(allsearch+20-allsearch%20)/20}){
+		//window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+skipye;
+	//}else if(skipye>${(allsearch+20-allsearch%20)/20}){
+		//window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
+	//}
+	window.location.href="proSearch_findPagePro.action?ye="+skipye;
 }
 //综合排序
 function orderBy(){

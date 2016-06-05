@@ -20,6 +20,8 @@ create table bquserinfo(  --18
   test1 varchar2(200),      --预留字段
   test2 varchar2(200)   --预留字段
   )
+  select seq_usid.nextval from dual
+  select seq_usid.currval from dual
 create sequence seq_usid  start with 1001 increment by 1;
 insert into bquserinfo values(1001,'js','a','a',null,'男','122121121212',10,0,null,'美国','小巷','人',1212121212,'sdfasfsa@qq.com','狗狗',1,null,null);
 insert into bquserinfo values(1003,'mi','a','a',null,'男','122121121212',10,0,null,'美国','小巷','人',1212121212,'sddsfffasfsa@qq.com','狗狗',1,null,null);
@@ -143,6 +145,10 @@ select o.orderid,o.proid,o.nature,o.pronum,o.bqpri,o.status,proname from orderfo
 drop table productinfo;
 select * from productinfo;
 
+
+select *from 
+
+
 insert into productinfo values(seq_proid.nextval,'离乳期幼犬奶糕1kg','1Kg',1001,2,'狗狗','ji',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
 insert into productinfo values(seq_proid.nextval,'泰迪贵成犬粮专用狗粮','100Kg',1001,2,'狗狗','j',102.0,79.0,20,'一款热卖的狗粮',234,1,'',''); 
 
@@ -157,8 +163,12 @@ where rownum<5) b where rn>0
 
 select * from (select t.*,row_number() over (partition by t.tid order by t.proid desc) RN from productinfo t) where RN <=8
 
+select proid,proname,nature,b.brandname,s.tname,suitpet,pictrue,promarprice,bqpri,prosales,prointro,inventory,p.status from productinfo p,brand b,secondmenu s where p.brandid=b.brandid and p.tid=s.tid 
 
 
+select proid,proname,nature,b.brandname,s.tname,suitpet,pictrue,promarprice,bqpri,prosales,prointro,inventory,p.status from productinfo p
+left join brand b on p.brandid=b.brandid
+left join secondmenu s on p.tid=s.tid where brandname like '%皇家%' or tname like '%成犬粮%'
 
 insert into productinfo values(seq_proid.nextval,'狗狗2','1Kg',1001,1,'gougou','ji',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
 insert into productinfo values(seq_proid.nextval,'狗狗','1Kg',1001,1,'gougou','ji',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
@@ -166,6 +176,11 @@ insert into productinfo values(seq_proid.nextval,'狗狗2','2Kg',1001,1,'gougou'
 insert into productinfo values(seq_proid.nextval,'狗狗2','20Kg',1001,1,'gougou','ji',100.0,89.0,20,'一款热卖的狗粮',234,1,'',''); 
 
 select nature from productinfo where proname='狗狗'
+
+select * from(select a.*,rownum rn from (select proid,proname,nature,b.brandname,s.tname,suitpet,pictrue,promarprice,bqpri,prosales,prointro,inventory,p.status from productinfo p
+left join brand b on p.brandid=b.brandid
+left join secondmenu s on p.tid=s.tid order by proid) 
+a where rownum<=10) b where rn>0
 
 commit;
 select proid,proname,nature from productinfo where proname='狗狗' union select proid,proname,nature from productinfo where proname='狗狗2' 
@@ -402,12 +417,19 @@ create table pet(
   petintro varchar2(400),    --简介
   conserveinfo varchar2(2000),  --养护知识
   feedinfo varchar2(2000),   --喂食要点
-  test25 varchar2(200),      --预留字段
+  family varchar2(200),      --预留字段
   test26 varchar2(200)   --预留字段
   )
 create sequence seq_petid start with 1001 increment by 1;
 drop table pet;
 select * from pet;
+alter table scott.pet rename colnum test25 to family
+ALTER TABLE SCOTT.PET RENAME COLUMN test25 TO family
+
+select seq_petid from dual
+select last_number from sequence where sequence_name='seq_petid';
+
+update pet set family='狗' where petid=1002
 
 insert into pet values(seq_petid.nextval,'哈士奇','宠物狗','hashiqi','',15,1000.0,'','','','','','');   --插入失败  
 功能：多种商品列表，商品搜索，商品购买，

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.boqi.mapper.PetMapper" >
+	<!-- 分页查询 -->
+	<select id="findPetByFamily" parameterType="map" resultType="Pet">
+		select * from(select a.*,rownum rn from (select petid,petname,petpic,pettype,engname,ancehome,life,petprice,character,petintro,conserveinfo,feedinfo
+		from pet where family=#{family} order by petid)a where rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
+	</select>
+	<select id="findPetByid" parameterType="int" resultType="Pet">
+		select *from pet where petid=#{petid}
+	</select>
+	<insert id="addPet" parameterType="Pet">
+		<selectKey keyColumn="petid" keyProperty="petid" order="AFTER" resultType="int">
+			select max(petid) petid from pet
+		</selectKey>
+		insert into pet values(seq_petid.nextval,#{petname},#{petpic},#{pettype},#{engname},#{ancehome},#{life},#{petprice},#{character},#{petintro},#{conserveinfo},#{feedinfo},#{family},'')
+	</insert>
+	<update id="updatePet" parameterType="Pet">
+		update pet set petname=#{petname},petpic=#{petpic},pettype=#{pettype},engname=#{engname},ancehome=#{ancehome},life=#{life},petprice=#{petprice},character=#{character},petintro=#{petintro},conserveinfo=#{conserveinfo},feedinfo=#{feedinfo} where petid=#{petid}
+	</update>
+	<delete id="deletePet" parameterType="int">
+		delete from pet where petid=#{petid}
+	</delete>
+</mapper>

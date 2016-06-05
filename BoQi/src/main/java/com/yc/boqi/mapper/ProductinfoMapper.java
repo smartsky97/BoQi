@@ -19,4 +19,6 @@ public interface ProductinfoMapper {
 	 * @return
 	 */
 	public boolean addProduct(Productinfo productinfo);
+	public List<Productinfo> searchPro(Map<String,Object> map);
+	
 }

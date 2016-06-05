@@ -19,8 +19,8 @@ $(function(){
 	var statusObj=[{sid:0,sname:'不可用'},{sid:1,sname:'可用'}];
 	
 	datagrid=$('#dogBk_info').datagrid({
-		url:'dogBkServlet',
-		queryParams:{op:"getPageDogBkInfo"},
+		url:'baike_findDogPet.action',
+		//queryParams:{op:"getPageDogBkInfo"},
 		fitColumns:true,
 		striped:true,
 		loadMsg:"数据加载中...",
@@ -56,7 +56,7 @@ $(function(){
 		<label>宠物属性:</label><input type=text name="pettype"id="dogBk_pettype" class="myinput"><br /> <br /> 
 		<label>英文名:</label><input type=text name="engname"id="dogBk_engname" class="myinput"><br /> <br />
 		<label>祖籍:</label><input type=text name="ancehome"id="dogBk_ancehome" class="myinput"><br /> <br />
-		<label>宠物图片:</label><input type=file name="petpic" id="dogBk_pic" multiple="multiple" onchange="previewMultipleImage(this,'addBk_pic_show')"><br /> <br /> 
+		<label>宠物图片:</label><input type=file name="pictrues" id="dogBk_pic" multiple="multiple" onchange="previewMultipleImage(this,'addBk_pic_show')"><br /> <br /> 
 		<label>寿命:</label><input type=text name="life"id="dogBk_life" class="myinput"><br /> <br /> 
 		<label>市场价:</label><input type=text name="petprice"id="dogBk_petprice" class="myinput"><br /> <br /> 
 		<label style="float:left;">性格特点:</label><textarea maxlength="500" name="character" id="dogBk_character" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br />
@@ -98,7 +98,7 @@ $(function(){
 		<label>宠物属性:</label><input type=text name="pettype"id="uptdogBk_pettype" class="myinput"><br /> <br /> 
 		<label>英文名:</label><input type=text name="engname"id="uptdogBk_engname" class="myinput"><br /> <br />
 		<label>祖籍:</label><input type=text name="ancehome"id="uptdogBk_ancehome" class="myinput"><br /> <br />
-		<label>宠物图片:</label><input type=file name="petpic" id="uptdogBk_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptBk_pic_show')"><br /> <br /> 
+		<label>宠物图片:</label><input type=file name="pictrues" id="uptdogBk_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptBk_pic_show')"><br /> <br /> 
 		<label>寿命:</label><input type=text name="life"id="uptdogBk_life" class="myinput"><br /> <br /> 
 		<label>市场价:</label><input type=text name="petprice"id="uptdogBk_petprice" class="myinput"><br /> <br /> 
 		<label style="float:left;">性格特点:</label><textarea maxlength="500" name="character" id="uptdogBk_character" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br />
@@ -116,6 +116,20 @@ $(function(){
 </div>
 <script>
 function addDogBkButton(){
+	
+	$("#dogBk_petname").val("");
+	$("#dogBk_pettype").val("");
+	$("#dogBk_engname").val("");
+	$("#dogBk_ancehome").val("");
+	$("#dogBk_pic").val("");
+	$("#dogBk_life").val("");
+	$("#dogBk_petprice").val("");
+	$("#dogBk_character").val("");
+	$("#dogBk_petintro").val("");
+	$("#dogBk_conserveinfo").val("");
+	$("#dogBk_feedinfo").val("");
+	$("#addBk_pic_show").html("");
+	
 	$("#dogBk_add").dialog("open");
 }
 function uptDogBkButton(){
@@ -132,24 +146,24 @@ var  rows=datagrid.datagrid("getChecked")[0];
 		var petid=rows.petid;
 		uptPetid=petid;
 		$("#dogBk_upt").dialog("open");
-		$.post("dogBkServlet",{op:"findBkByPetid",petid:petid},function(data){
-			var pet=data.pt;
+		$.post("baike_finDogByid",{petid:petid},function(data){
+			var pet=data.data;
 			
-			$("#uptdogBk_petname").val(pet[0].petname);
-			$("#uptdogBk_pettype").val(pet[0].pettype);
-			$("#uptdogBk_engname").val(pet[0].engname);
-			$("#uptdogBk_ancehome").val(pet[0].ancehome);
-			$("#uptdogBk_life").val(pet[0].life);
-			$("#uptdogBk_petprice").val(pet[0].petprice);
-			$("#uptdogBk_character").val(pet[0].character);
-			$("#uptdogBk_petintro").val(pet[0].petintro);
-			$("#uptdogBk_conserveinfo").val(pet[0].conserveinfo);
-			$("#uptdogBk_feedinfo").val(pet[0].feedinfo);
+			$("#uptdogBk_petname").val(pet.petname);
+			$("#uptdogBk_pettype").val(pet.pettype);
+			$("#uptdogBk_engname").val(pet.engname);
+			$("#uptdogBk_ancehome").val(pet.ancehome);
+			$("#uptdogBk_life").val(pet.life);
+			$("#uptdogBk_petprice").val(pet.petprice);
+			$("#uptdogBk_character").val(pet.character);
+			$("#uptdogBk_petintro").val(pet.petintro);
+			$("#uptdogBk_conserveinfo").val(pet.conserveinfo);
+			$("#uptdogBk_feedinfo").val(pet.feedinfo);
 			var str="";
 			
-			var pics=pet[0].petpic.split(",");
+			var pics=pet.petpic.split(",");
 			for(var i=0;i<pics.length;i++){
-				str+="<img src='"+pics[i]+"' width='100px' height='100px'/>"
+				str+="<img src=../upload/"+petid+"/"+pics[i]+" width='100px' height='100px'/>"
 			}
 			$("#uptBk_pic_show").html($(str));
 		},"json");
@@ -174,8 +188,8 @@ function rmvDogBkButton(){
 				petids+=rows[i].petid;
 						
 				//将要删除aid发送到服务器
-				$.post("dogBkServlet",{op:"delBkInfo",petids:petids},function(data){
-					if(data==1){   //删除成功
+				$.post("baike_deleteDogInfo.action",{petids:petids},function(data){
+					if(data.result==1){   //删除成功
 						$.messager.show({
 							title:"删除提示",
 							msg:"新闻信息删除成功...",
@@ -207,7 +221,7 @@ function addDogBk(){
 	var feedinfo=$("#dogBk_feedinfo").val();
 	
 	$.ajaxFileUpload({
-		url:"dogBkServlet?op=addDogBk",
+		url:"baike_addDogPet",
 		secureuri:false,
 		fileElementId:"dogBk_pic",
 		dataType:"json",
@@ -221,10 +235,12 @@ function addDogBk(){
 			character:character,
 			petintro:petintro,
 			conserveinfo:conserveinfo,
+			family:'狗',
 			feedinfo:feedinfo
 		},
 		success:function(data,status){
-			if(parseInt($.trim(data))==1){
+			console.info(data);
+			if(parseInt($.trim(data.result))==1){
 				$.messager.show({title:'成功提示',msg:'百科信息添加成功....',timeout:2000,showType:'slide'});
 				$("#dogBk_add").dialog("close");
 				$("#dogBk_info").datagrid("reload");
@@ -253,24 +269,24 @@ function addDogBk(){
 function showBkDetail(petid){
 	$("#dogBk_show").dialog("open");
 	
-	$.post("dogBkServlet",{op:"findBkByPetid",petid:petid},function(data){
-		var pet=data.pt;
+	$.post("baike_finDogByid",{petid:petid},function(data){
+		var pet=data.data;
 		
-		$("#showdogBk_petname").val(pet[0].petname);
-		$("#showdogBk_pettype").val(pet[0].pettype);
-		$("#showdogBk_engname").val(pet[0].engname);
-		$("#showdogBk_ancehome").val(pet[0].ancehome);
-		$("#showdogBk_life").val(pet[0].life);
-		$("#showdogBk_petprice").val(pet[0].petprice);
-		$("#showdogBk_character").val(pet[0].character);
-		$("#showdogBk_petintro").val(pet[0].petintro);
-		$("#showdogBk_conserveinfo").val(pet[0].conserveinfo);
-		$("#showdogBk_feedinfo").val(pet[0].feedinfo);
+		$("#showdogBk_petname").val(pet.petname);
+		$("#showdogBk_pettype").val(pet.pettype);
+		$("#showdogBk_engname").val(pet.engname);
+		$("#showdogBk_ancehome").val(pet.ancehome);
+		$("#showdogBk_life").val(pet.life);
+		$("#showdogBk_petprice").val(pet.petprice);
+		$("#showdogBk_character").val(pet.character);
+		$("#showdogBk_petintro").val(pet.petintro);
+		$("#showdogBk_conserveinfo").val(pet.conserveinfo);
+		$("#showdogBk_feedinfo").val(pet.feedinfo);
 		var str="";
 		
-		var pics=pet[0].petpic.split(",");
+		var pics=pet.petpic.split(",");
 		for(var i=0;i<pics.length;i++){
-			str+="<img src='"+pics[i]+"' width='100px' height='100px'/>"
+			str+="<img src=../upload/"+petid+"/"+pics[i]+" width='100px' height='100px'/>"
 		}
 		$("#showBk_pic_show").html($(str));
 	},"json");
@@ -289,7 +305,7 @@ function uptDogBk(){
 	var feedinfo=$("#uptdogBk_feedinfo").val();
 	
 	$.ajaxFileUpload({
-		url:"dogBkServlet?op=uptDogBk",
+		url:"baike_updateDogInfo.action",
 		secureuri:false,
 		fileElementId:"uptdogBk_pic",
 		dataType:"json",
@@ -307,8 +323,8 @@ function uptDogBk(){
 			feedinfo:feedinfo
 		},
 		success:function(data,status){
-			if(parseInt($.trim(data))==1){
-				$.messager.show({title:'成功提示',msg:'百科信息添加成功....',timeout:2000,showType:'slide'});
+			if(parseInt($.trim(data.result))==1){
+				$.messager.show({title:'成功提示',msg:'百科信息修改成功....',timeout:2000,showType:'slide'});
 				$("#dogBk_upt").dialog("close");
 				$("#dogBk_info").datagrid("reload");
 				

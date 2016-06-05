@@ -1,3 +1,4 @@
+charset='uft-8';
 //搜索的商品
 function search(){
 	if($(".search").val()=="" || $(".search").val()==null){
@@ -5,8 +6,9 @@ function search(){
 	}else{
 		var ci = $(".search").val();
 		var ye = 1;
-		ci=encodeURI(encodeURI(ci));
-		window.location.href="../productServlet?order=proid&op=searchBy&ci="+ci+"&ye="+ye;
+		
+		//ci=encodeURI(encodeURI(ci));
+		window.location.href="proSearch_findSearchPro?order=proid&op=searchBy&ci="+ci+"&ye="+ye;
 	}
 }
 function search2(){

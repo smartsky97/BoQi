@@ -22,4 +22,14 @@
 		insert into productinfo values(seq_proid.nextval,#{proname},#{nature},#{brandid},#{tid},#{suitpet}
 		,#{pictrue},#{promarprice},#{bqpri},#{prosales},#{prointro},#{inventory},#{status},null,null)
 	</insert>
+	<select id="searchPro" parameterType="map" resultType="Productinfo">
+		select * from(select a.*,rownum rn from (select proid,proname,nature,b.brandname,
+		s.tname,suitpet,pictrue,promarprice,bqpri,prosales,prointro,inventory,p.status 
+		from productinfo p
+		left join brand b on p.brandid=b.brandid
+		left join secondmenu s on p.tid=s.tid where proname like '%${info}%' or nature like '%${info}%' or brandname
+		like '%${info}%' or tname like '%${info}%' or suitpet like '%${info}%' or prointro like '%${info}%'
+		order by #{order}) 
+		a where rownum<![CDATA[<]]>=${one}) b where rn<![CDATA[>]]>${two}
+	</select>
 </mapper>

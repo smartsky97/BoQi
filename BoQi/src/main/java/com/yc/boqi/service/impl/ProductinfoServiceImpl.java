@@ -41,6 +41,12 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		return productinfoMapper.addProduct(productinfo);
 	}
 
+	@Override
+	public List<Productinfo> searchPro(Map<String,Object> map) {
+		
+		return productinfoMapper.searchPro(map);
+	}
+
 	
 
 }

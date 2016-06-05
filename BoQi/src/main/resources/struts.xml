@@ -33,6 +33,25 @@
     		<result name="selectUsers" type="json">
     			<param name="root">rows</param>
     		</result>
+    		<result name="DogPet" type="json">
+    			<param name="root">jasonObject</param>
+    		</result>
+    		<result name="IdDog" type="json">
+    			<param name="root">pet</param>
+    		</result>
+    		<result name="addDog" type="json">
+    			<param name="root">jasonObject</param>
+    		</result>
+    		<result name="IdDog" type="json">
+    			<param name="root">jasonObject</param>
+    		</result>
+    		<result name="uptDog" type="json">
+    			<param name="root">jasonObject</param>
+    		</result>
+    		<result name="dltDog" type="json">
+    			<param name="root">jasonObject</param>
+    		</result>
+    		<result name="searchPro">/front/shoppingSearch.jsp</result>
     		<result name="{2}">/front/{2}.jsp</result>
     	</action>
     	

@@ -54,7 +54,7 @@ public class PetDaoImpl implements IPetDao {
 		}
 		
 		
-		temp=pet.getPetpic();
+		//temp=pet.getPetpic();
 		if(temp!=null && !"".equals(temp)){
 			sql+=",petpic=? ";
 			params.add(temp);
