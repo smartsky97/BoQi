@@ -108,4 +108,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public List<UserInfo> findUserByInfo(Map<String, Object> map) {
 		return userInfoMapper.findUserByInfo(map);
 	}
+	@Override
+	public int updateyue(int usid) {
+		return userInfoMapper.updateyue(usid);
+		
+	}
+
+
+	@Override
+	public double selectmoney(int usid) {
+		return userInfoMapper.selectmoney(usid);
+	}
 }

@@ -77,14 +77,15 @@ $(function(){
 	<center>
 	<div id="content_show" id="content_show">
 		<div class="content_buyer wwidth">
-			<label class="tt" style="margin-left:20px;">买&nbsp;家&nbsp;昵&nbsp;称&nbsp;：</label><span class="tt" id="content_buyer_name"></span>
-			<label class="tt" style="margin-left:60px;">买&nbsp;家&nbsp;电&nbsp;话&nbsp;：</label><span class="tt" id="content_buyer_tel"></span></br/><br/></br/><br/>
-			<label class="tt" style="margin-left:20px;">收货人姓名：</label><span class="tt" id="content_shou_name"></span></br/><br/>
-			<label class="tt" style="margin-left:20px;">收货人电话：</label><span class="tt" id="content_shou_tel"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">买&nbsp;家&nbsp;昵&nbsp;称&nbsp;：</label><span class="tt" id="content_buyer_name" style="width:240px;text-align: left;"></span>
+			<label class="tt">买&nbsp;家&nbsp;电&nbsp;话&nbsp;：</label><span class="tt" id="content_buyer_tel"></span></br/><br/></br/><br/>
+			<label class="tt" style="margin-left:20px;">收货人姓名：</label><span class="tt" id="content_shou_name" style="width:240px;text-align: left;"></span>
+			<label class="tt">收货人电话：</label><span class="tt" id="content_shou_tel"></span></br/><br/>
 			<label class="tt" style="margin-left:20px;">收&nbsp;货&nbsp;地&nbsp;址&nbsp;：</label><span class="tt" id="content_shou_addr"></span></br/><br/>
 		</div>
 		<div id="content_up" class="wwidth">
-			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id" style="width:240px;text-align: left;"></span>
+			<label class="tt" >邮&nbsp;政&nbsp;编&nbsp;码&nbsp;：</label><span class="tt" id="content_shou_postcode"></span></br/><br/>
 			<label class="tt" style="margin-left:20px;">创&nbsp;建&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_maketime"></span>
 			<label class="tt" style="margin-left:60px;">付&nbsp;款&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_paytime"></span>
 			<label class="tt" style="margin-left:60px;">确&nbsp;认&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_suretime"></span>
@@ -121,6 +122,7 @@ $(function(){
 	<center>
 	<div id="content_show">
 		<div id="buyerID" style="display:none;"></div>
+		<div id="addidID" style="display:none;"></div>
 		<div class="content_buyer wwidth">
 			<label class="tt" style="margin-left:20px;">买&nbsp;家&nbsp;昵&nbsp;称&nbsp;：</label><span class="tt" id="content_buyer_name2"></span>
 			<label class="tt" style="margin-left:60px;">买&nbsp;家&nbsp;电&nbsp;话&nbsp;：</label><span class="tt" id="content_buyer_tel2"></span></br/><br/></br/><br/>
@@ -136,7 +138,8 @@ $(function(){
 				<input style="width:420px;margin-left: 90px;" class="tt" id="content_shou_addr2"></input>
 		</div></br/>
 		<div id="content_up" class="wwidth">
-			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id2"></span></br/><br/>
+			<label class="tt" style="margin-left:20px;">订&nbsp;单&nbsp;编&nbsp;号&nbsp;：</label><span class="tt" id="content_id2"></span>
+			<label class="tt" style="margin-left:175px;">邮&nbsp;政&nbsp;编&nbsp;码&nbsp;：</label><input class="tt" id="content_shou_postcode2"/></br/><br/>
 			<label class="tt" style="margin-left:20px;">成&nbsp;交&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_maketime2"></span>
 			<label class="tt" style="margin-left:60px;">付&nbsp;款&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_paytime2"></span>
 			<label class="tt" style="margin-left:60px;">确&nbsp;认&nbsp;时&nbsp;间&nbsp;：</label><span class="tt" id="content_suretime2"></span>
@@ -171,15 +174,15 @@ $(function(){
 	</center>
 </div>
 <script>
-var yuanName;
-var yuantel;
-var yuanshen;
-var yuanshi;
-var yuanxian;
-var yuanxiang;
-var yuanaddr;
-
-
+//用于是否需要添加新的地址
+var yuanName;	//修改前的收货人名字
+var yuanpostcode;//修改前的邮政编码
+var yuantel;	//修改前的电话
+var yuanshen;	//修改前的省
+var yuanshi;	//修改前的市
+var yuanxian;	//修改前的县
+var yuanxiang;	//修改前的乡镇
+var yuanaddr;	//修改前的详细地址
 
 //订单状态转到配货
 function changeToPai(){
@@ -206,9 +209,8 @@ function changeToPai(){
 			for( i = 0;i<rows.length-1;i++){
 				orderids += rows[i].orderid+",";
 			}
-			///console.info("last="+i);
 			orderids += rows[i].orderid;
-			$.post("orderContentServlet",{op:"changeToPei",orderids:orderids},function(data){
+			$.post("ordercontent_changeToPei.action",{orderids:orderids},function(data){
 				console.info(data);
 				if(data == 1){//添加成功
 					$.messager.show({
@@ -352,18 +354,29 @@ function showNewsDetail2(orderid){
 		$("#content_shou_tel2").val("");
 		$("#content_tbody2").empty();
 		
+		yuanName=ordercontent.addname;
+		yuanpostcode=ordercontent.postcode;
+		yuantel=ordercontent.atel;
+		yuanshen=ordercontent.shen;
+		yuanshi=ordercontent.shi;
+		yuanxian=ordercontent.xian;
+		yuanxiang=ordercontent.zhenjie;
+		yuanaddr=ordercontent.readdr;
+		
 		$("#content_id2").html(ordercontent.orderid);
 		$("#content_maketime2").html(starttime);
 		$("#content_paytime2").html(paytime);
 		$("#content_suretime2").html(endtime);
 		$("#content_shou_name2").val(ordercontent.addname);
 		$("#content_shou_tel2").val(ordercontent.atel);
+		$("#content_shou_postcode2").val(ordercontent.postcode);
 		$("#content_buyer_name2").html(ordercontent.uname);  //买家姓名
 		$("#content_buyer_tel2").html(ordercontent.utel);	//买家电话
 		initLocation({sheng_val:ordercontent.shen,shi_val:ordercontent.shi,xian_val:ordercontent.xian,xiang_val:"<?php echo $v['street']?>"});
 		$("#xiang").val(ordercontent.zhenjie);
 		$("#content_shou_addr2").val(ordercontent.readdr);
-		$("#buyerID").html(ordercontent.addid);
+		$("#buyerID").html(ordercontent.usid);
+		$("#addidID").html(ordercontent.addid);
 		//向方框中加值
       	for(var i=0;i<ordercontent.goods.length;i++){
       		$("#content_tbody2").append("<tr><th>"+ordercontent.goods[i]['proname']
@@ -398,8 +411,9 @@ function showNewsDetail2(orderid){
 			
 			$("#content_id").html(ordercontent.orderid);  //订单编号
 			$("#content_maketime").html(starttime);  //创建时间
-			$("#content_paytime").html(paytime);  //付款时间
 			$("#content_suretime").html(endtime);  //收货时间
+			$("#content_paytime").html(paytime);  //付款时间
+			$("#content_shou_postcode").html(ordercontent.postcode);//邮政编码
 			$("#content_buyer_name").html(ordercontent.uname);  //买家姓名
 			$("#content_buyer_tel").html(ordercontent.utel);	//买家电话
 			$("#content_shou_name").html(ordercontent.addname);  //收货人姓名
@@ -478,6 +492,9 @@ function showNewsDetail2(orderid){
 	//提交修改的内容
 	function sendInfo(){
 		var allString="";
+		//用户的编号
+		var usid = $("#buyerID").html();
+		var postcode = $("#content_shou_postcode2").val();
 		//买家姓名
 		var addname=$("#content_shou_name2").val();
 		//买家电话
@@ -488,24 +505,14 @@ function showNewsDetail2(orderid){
 		var xian = $("#xian").val();
 		var xiang = $("#xiang").val();
 		var readdr=$("#content_shou_addr2").val();
+		//标识是否要添加新的地址
+		var ifAddAddress = 0;
 		//订单编号
 		var contentBigId = $("#content_id2").html();
 		//订单的id
-		var addid = $("#buyerID").html();
+		var addid = $("#addidID").html();
 		//订单需付的金额
 		var allmo = $("#total_money2").html();
-		$.post("orderContentServlet",{op:"updateMoney",allmo:allmo,contentBigId:contentBigId},function(data){
-			console.info(data);
-		})
-		//更新收货人的信息
-		/* $.post("addressServlet",{op:"updateSomeInfo",addname:addname,tel:tel,readdr:readdr,addid:addid},function(data){
-			if(data==1){
-				//alert("修改成功");
-				//$("#ordercontent_show_ordercontentInfo2").dialog("close");
-			}else{
-				//alert("修改失败")
-			}
-		},"json"); */
 		//更新订单的详细信息
 		for(var i=0;i<tty;i++){
 			var shangID = $("#content_tbody2").children("tr").eq(i).children("th").eq(4).children("#chage_proid").html()+",";
@@ -517,9 +524,13 @@ function showNewsDetail2(orderid){
 			var status = $("#content_tbody2").children("tr").eq(i).children("th").eq(4).html().substr(0,1)+",";
 			allString+=shangID+danjia+numb+status+xiangID;
 		}
-		console.info(allString);
-		$.post("backOrder_updateBackOrder",{allString:allString,addname:addname,atel:tel,shen:shen,shi:shi,xian:xian,zhenjie:xiang,readdr:readdr,addid:addid},function(data){
-		 if(data==1){
+		if(yuanName!=addname || yuanpostcode!=postcode || yuantel!=tel || yuanshen!=shen || yuanshi!=shi || yuanxian!=xian || yuanxiang!= xiang || readdr!=yuanaddr){
+			ifAddAddress=1;
+		}
+		console.info(postcode);
+		$.post("backOrder_updateBackOrder.action",{allString:allString,addname:addname,postcode:postcode,usid:usid,atel:tel,shen:shen,shi:shi,xian:xian,zhenjie:xiang,readdr:readdr,addid:addid,ifAddAddress:ifAddAddress},function(data){
+		 	alert("后台的数据："+data);
+			if(data==1){
 				alert("修改成功");
 				$("#ordercontent_show_ordercontentInfo2").dialog("close");
 			}else{
@@ -550,7 +561,6 @@ function showNewsDetail2(orderid){
 		var ndate=$("#show_order_ndate").datebox('getValue');  //下订单时间
 		var oid = $.trim($("#ccstatus").val());   //订单状态
 		
-		console.info(orderid+" - "+uname+" - "+ndate+" - "+oid+" - ");
 		$('#ordercontent_info').datagrid({
 			url:'orderContentServlet',
 			queryParams:{op:"findOrdersByInfo",orderid:orderid,uname:uname,ndate:ndate,oid:oid}

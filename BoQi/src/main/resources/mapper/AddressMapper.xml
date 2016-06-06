@@ -13,4 +13,13 @@
 	<insert id="addOne" parameterType="Address">
 		insert into address values(seq_add.nextval,#{usid},#{postcode},#{addname},#{tel},#{shen},#{shi},#{xian},#{zhenjie},#{readdr},1,'','')
 	</insert>
+	
+	<insert id="addOneMap" parameterType="map">
+		insert into address values(seq_add.nextval,#{usid},#{postcode},#{addname},#{tel},#{shen},#{shi},#{xian},#{zhenjie},#{readdr},1,'','')
+	</insert>
+	
+	<update id="updateAddress" parameterType="map">
+		update address set usid=#{usid},postcode=#{postcode},addname=#{addname},tel=#{tel},
+		shen=#{shen},shi=#{shi},xian=#{xian},zhenjie=#{zhenjie},readdr=#{readdr} where addid=#{addid}
+	</update>
 </mapper>

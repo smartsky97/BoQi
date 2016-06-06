@@ -6,7 +6,9 @@ import java.util.List;
 public class BackOrderContentBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private int usid;
 	private String uname;
+	private String postcode;
 	private String utel;
 	private int addid;
 	private String addname;
@@ -21,6 +23,18 @@ public class BackOrderContentBean implements Serializable{
 	private String paytime;
 	private String endtime;
 	private List<BackOrderFromBean> goods;
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public int getUsid() {
+		return usid;
+	}
+	public void setUsid(int usid) {
+		this.usid = usid;
+	}
 	public int getAddid() {
 		return addid;
 	}
@@ -111,21 +125,28 @@ public class BackOrderContentBean implements Serializable{
 	public void setGoods(List<BackOrderFromBean> goods) {
 		this.goods = goods;
 	}	
+	public BackOrderContentBean() {
+		super();
+	}
 	@Override
 	public String toString() {
-		return "BackOrderContentBean [uname=" + uname + ", utel=" + utel
-				+ ", addid=" + addid + ", addname=" + addname + ", atel="
-				+ atel + ", shen=" + shen + ", shi=" + shi + ", xian=" + xian
-				+ ", zhenjie=" + zhenjie + ", readdr=" + readdr + ", orderid="
-				+ orderid + ", starttime=" + starttime + ", paytime=" + paytime
+		return "BackOrderContentBean [usid=" + usid + ", uname=" + uname
+				+ ", postcode=" + postcode + ", utel=" + utel + ", addid="
+				+ addid + ", addname=" + addname + ", atel=" + atel + ", shen="
+				+ shen + ", shi=" + shi + ", xian=" + xian + ", zhenjie="
+				+ zhenjie + ", readdr=" + readdr + ", orderid=" + orderid
+				+ ", starttime=" + starttime + ", paytime=" + paytime
 				+ ", endtime=" + endtime + ", goods=" + goods + "]";
 	}
-	public BackOrderContentBean(String uname, String utel, int addid,
-			String addname, String atel, String shen, String shi, String xian,
-			String zhenjie, String readdr, int orderid, String starttime,
-			String paytime, String endtime, List<BackOrderFromBean> goods) {
+	public BackOrderContentBean(int usid, String uname, String postcode,
+			String utel, int addid, String addname, String atel, String shen,
+			String shi, String xian, String zhenjie, String readdr,
+			int orderid, String starttime, String paytime, String endtime,
+			List<BackOrderFromBean> goods) {
 		super();
+		this.usid = usid;
 		this.uname = uname;
+		this.postcode = postcode;
 		this.utel = utel;
 		this.addid = addid;
 		this.addname = addname;
@@ -141,10 +162,5 @@ public class BackOrderContentBean implements Serializable{
 		this.endtime = endtime;
 		this.goods = goods;
 	}
-	public BackOrderContentBean() {
-		super();
-	}
 	
-	
-
 }

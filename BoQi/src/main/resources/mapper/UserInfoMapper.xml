@@ -60,4 +60,11 @@
 		</choose>
 		order by usid) a where rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
 	</select>
+	<update id="updateyue" parameterType="java.lang.Integer">
+		update bquserinfo set money=money-#{ordersum} where usid=#{usid}
+	</update>
+	
+	<select id="selectmoney" parameterType="double" resultType="UserInfo">
+		select money from bquserinfo where usid=#{usid}
+	</select>
 </mapper>

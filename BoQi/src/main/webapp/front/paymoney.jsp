@@ -45,7 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(addressID == ""){
 				alert("请填写您的收货地址");
 			}else{
-				$.post("ordercontent_uploadorder.action",{addid:addressID,ordersum:ordersum,orders:orders});
+				//$.post("ordercontent_uploadorder.action",{addid:addressID,ordersum:ordersum,orders:orders});
+				window.location.href="ordercontent_uploadorder.action?addid="+addressID+"&ordersum="+ordersum+"&orders="+orders;
 			}
 		} 
 		//点击关闭

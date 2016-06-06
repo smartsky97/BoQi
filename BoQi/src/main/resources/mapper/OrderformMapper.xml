@@ -4,4 +4,19 @@
  	<insert id="addfrom" parameterType="OrderForm">
  		insert into orderform values(#{orderid},#{proid},#{pronum},1,orderform_add.nextval,null)
  	</insert>
+ 	<!-- 修改一个订单的所有商品状态的情况 -->
+ 	<update id="updateOrderFromStatusById" parameterType="map">
+ 		update orderform set status=#{status} where orderid=#{id}
+ 	</update>
+ 	<!-- 修改多个订单的所有商品状态的情况 -->
+ 	<update id="updateOrderFromStatusByIds" parameterType="map">
+ 		update orderform set status=#{status} where orderid in
+ 		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+        	#{item}
+        </foreach>
+ 	</update>
+ 
+	<update id="updateorderform" parameterType="OrderForm">
+ 		update orderform set status=2 where orderid=#{orderid}
+ 	</update>
 </mapper>

@@ -10,7 +10,7 @@ public interface OrdercontentService {
 	 * 添加一个订单
 	 * @param orderContent
 	 */
-	public void addOrder(OrderContent orderContent,String orders);
+	public int addOrder(OrderContent orderContent,String orders);
 	/**
 	 * 查询所有的订单
 	 * @param page：页
@@ -28,4 +28,23 @@ public interface OrdercontentService {
 	 * @param ids:id号
 	 */
 	public int updateOrderToLing(String ids);
+	/**
+	 * 后台未付款订单的修改
+	 * @param allstring：商品信息
+	 * @param backOrderContentBean：地址信息
+	 * @param updateStatus：判断是否添加新地址
+	 * @return
+	 */
+	public int updateOrderByAddress(String allstring,BackOrderContentBean backOrderContentBean,int updateStatus);
+	/**
+	 * 订单状态的修改
+	 * @param ids：订单的id
+	 * @param status:订单的状态
+	 * @return
+	 */
+	public int updateOrderByids(String ids,int status);
+	/**
+	 * 改变订单状态
+	 */
+	public int updateStatu(int orderid);
 }

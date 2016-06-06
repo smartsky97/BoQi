@@ -41,4 +41,8 @@ public interface UserInfoService {
 	UserInfo getUserByUsid(int usid);
 	//筛选查询
 	List<UserInfo> findUserByInfo(Map<String,Object> map);
+	
+	int updateyue(int usid);
+	
+	double selectmoney(int usid);
 }

@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getBackOrder" parameterType="int" resultMap="getBackOrderMap">
-		select b.uname,b.tel utel,a.addname,a.tel atel,a.shen,a.shi,a.xian,a.zhenjie,a.readdr,o.orderid,o.starttime,o.paytime,o.endtime 
+		select b.uname,b.tel utel,b.usid,a.addid,a.addname,a.postcode,a.tel atel,a.shen,a.shi,a.xian,a.zhenjie,a.readdr,o.orderid,o.starttime,o.paytime,o.endtime 
 		from bquserinfo b,address a,ordercontent o where b.usid=o.usid and a.addid=o.addid and o.orderid=#{proid}
 	</select>
 	
@@ -39,15 +39,27 @@
         	#{ids}
         </foreach>
 	</update>
-	
+	<!-- 修改订单状态 -->
 	<update id="updateOrderById" parameterType="string">
 		update ordercontent set orderstate=0 where orderid=#{id}
 	</update>
-	
-	
-	
-	
-	
-	
-	
+	<!-- 修改订单详情的相关信息 -->
+	<update id="updateOrderFrom" parameterType="map">
+		update orderform set proid=#{m1},bqpri=#{m2},pronum=#{m3},status=#{m4} where orrmid=#{m5}
+	</update>
+	<!-- 修改订单到指定的状态 -->
+	<update id="updateOrderStatusById" parameterType="map">
+		update ordercontent set orderstate=#{status} where orderid=#{id}
+	</update>
+	<!-- 修改多个订单详情的相关信息 -->
+	<update id="updateOrderStatusByIds" parameterType="map">
+		update ordercontent set orderstate=#{status} where orderid in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+        	#{item}
+        </foreach>
+	</update>
+	<!-- 修改订单状态 -->
+	<update	id="updateStatu" parameterType="OrderContent">
+		update ordercontent set orderstate=2 where orderid=#{orderid}
+	</update>
 </mapper>
