@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yc.boqi.entity.IndexProductBean;
 import com.yc.boqi.entity.Productinfo;
+import com.yc.boqi.entity.ProductinfoBean;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 
 public interface ProductinfoService {
@@ -25,7 +26,7 @@ public interface ProductinfoService {
 
 	// 添加商品
 
-	public boolean addProduct(Productinfo productinfo);
+	public boolean addProduct(ProductinfoBean productinfo);
 
 	
 	public List<Productinfo> searchPro(Map<String,Object> map);
@@ -58,4 +59,5 @@ public interface ProductinfoService {
 	 */
 	public List<Productinfo> findPriceByNaNa(String name,String nature);
 
+	public ProductinfoBean findProById(int id);
 }

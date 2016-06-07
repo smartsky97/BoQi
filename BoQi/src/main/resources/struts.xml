@@ -65,6 +65,9 @@
     		<result name="updatebackorder" type="json">
     			<param name="root">sta</param>
     		</result>
+    		<result name="productinfo" type="json">
+    			<param name="root">productinfo</param>
+    		</result>
     		<result name="paymoney">/front/paymoney.jsp</result>
     		<result name="index">/front/index.jsp</result>
     		<result name="registerSuccess">/front/login.jsp</result>

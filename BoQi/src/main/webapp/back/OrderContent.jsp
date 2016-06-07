@@ -259,9 +259,8 @@ function changeToFa(){
 			for( i = 0;i<rows.length-1;i++){
 				orderids += rows[i].orderid+",";
 			}
-			///console.info("last="+i);
 			orderids += rows[i].orderid;
-			$.post("orderContentServlet",{op:"changeToFa",orderids:orderids},function(data){
+			$.post("ordercontent_changeToFaHuo.action",{orderids:orderids},function(data){
 				console.info(data);
 				if(data == 1){//添加成功
 					$.messager.show({
@@ -547,10 +546,14 @@ function showNewsDetail2(orderid){
 		}else if(data==2){
 			return "待发货";
 		}else if(data==3){
-			return "等待收货";
+			return "配货准备中";
 		}else if(data==4){
-			return "交易完成";
+			return "已发货";
 		}else if(data==5){
+			return "已收货";
+		}else if(data==6){
+			return "已收货但删除";
+		}else if(data==7){
 			return "退货";
 		}
 	}

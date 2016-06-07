@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yc.boqi.entity.IndexProductBean;
 import com.yc.boqi.entity.Productinfo;
+import com.yc.boqi.entity.ProductinfoBean;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 
 public interface ProductinfoMapper {
@@ -19,7 +20,7 @@ public interface ProductinfoMapper {
 	 * @param productinfo：商品类
 	 * @return
 	 */
-	public boolean addProduct(Productinfo productinfo);
+	public boolean addProduct(ProductinfoBean productinfo);
 	//查找商品
 	public List<Productinfo> searchPro(Map<String,Object> map);
 	
@@ -44,5 +45,10 @@ public interface ProductinfoMapper {
 	public List<Productinfo> findNatureByName(String[] names);
 	//根据商品名和商品属性查询商品
 	public List<Productinfo> findPriceByNaNa(Map<String, Object> so);
-
+	/**
+	 * jp 查询商品的相关信息
+	 * @param id：商品id
+	 * @return
+	 */
+	public ProductinfoBean findProductsInfo(int id);
 }

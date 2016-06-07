@@ -1,0 +1,14 @@
+.color_blue {
+	text-align: right;
+	width: 110px;
+	background: #F5FAFE;
+}
+.color_w{
+	width: 110px;
+	text-align: left;
+	background: white;
+}
+.pro_show{
+	margin-top:15px;
+	background: #ccc;
+}

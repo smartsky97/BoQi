@@ -18,7 +18,7 @@
 		select count(proid)  from productinfo where suitpet=#{type}
 	</select>
 	<!-- 添加商品 -->
-	<insert id="addProduct" parameterType="Productinfo">
+	<insert id="addProduct" parameterType="ProductinfoBean">
 		insert into productinfo values(seq_proid.nextval,#{proname},#{nature},#{brandid},#{tid},#{suitpet}
 		,#{pictrue},#{promarprice},#{bqpri},#{prosales},#{prointro},#{inventory},#{status},null,null)
 	</insert>
@@ -64,8 +64,13 @@
         	#{names}
         </foreach>
 	</select>
-	
+	<!-- 查询商品根据商品名和属性 -->
 	<select id="findPriceByNaNa" parameterType="map" resultType="Productinfo">
 		select * from productinfo where proname=#{name} and nature=#{nature}
+	</select>
+	
+	<select id="findProductsInfo" parameterType="int" resultType="ProductinfoBean">
+		select distinct f.fid,b.brandname,f.fname,s.tname,p.* from firstmenu f,secondmenu s,productinfo p,brand b where 
+		p.proid=#{id} and p.tid=s.tid and s.fid=f.fid and p.brandid=b.brandid
 	</select>
 </mapper>

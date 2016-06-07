@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yc.boqi.entity.IndexProductBean;
 import com.yc.boqi.entity.Productinfo;
+import com.yc.boqi.entity.ProductinfoBean;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 import com.yc.boqi.mapper.ProductinfoMapper;
 import com.yc.boqi.service.ProductinfoService;
@@ -38,7 +39,7 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 	}
 
 	@Override
-	public boolean addProduct(Productinfo productinfo) {
+	public boolean addProduct(ProductinfoBean productinfo) {
 		return productinfoMapper.addProduct(productinfo);
 	}
 
@@ -80,6 +81,11 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		so.put("name", name);
 		so.put("nature", nature);
 		return productinfoMapper.findPriceByNaNa(so);
+	}
+
+	@Override
+	public ProductinfoBean findProById(int id) {
+		return productinfoMapper.findProductsInfo(id);
 	}
 
 }

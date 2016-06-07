@@ -6,6 +6,7 @@ encoding//src/main/java/com/yc/boqi/action/OrdercontentAction.java=UTF-8
 encoding//src/main/java/com/yc/boqi/action/ProductinfoAction.java=GBK
 encoding//src/main/java/com/yc/boqi/entity/OrderContent.java=UTF-8
 encoding//src/main/java/com/yc/boqi/entity/Productinfo.java=UTF-8
+encoding//src/main/java/com/yc/boqi/entity/ProductinfoBean.java=UTF-8
 encoding//src/main/java/com/yc/boqi/entity/Top8ProductinfoBean.java=UTF-8
 encoding//src/main/java/com/yc/boqi/entity/UserInfo.java=UTF-8
 encoding//src/main/java/com/yc/boqi/mapper/ProductinfoMapper.java=GBK

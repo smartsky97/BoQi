@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
  <body class="easyui-layout">
 	<div data-options="region:'north',border:false" id="newslogo">
-	
+	<img alt="yy" src="../upload/1.jpg">
 	</div>
 	<!-- 左侧列表 -->
 	<div data-options="region:'west',split:true,title:'导航'" style="width:200px;">

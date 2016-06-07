@@ -24,6 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.yc.boqi.entity.Brand;
 import com.yc.boqi.entity.FirstMenu;
 import com.yc.boqi.entity.Productinfo;
+import com.yc.boqi.entity.ProductinfoBean;
 import com.yc.boqi.entity.SecondMenu;
 import com.yc.boqi.entity.Top8ProductinfoBean;
 import com.yc.boqi.service.BrandService;
@@ -32,10 +33,13 @@ import com.yc.boqi.service.ProductinfoService;
 import com.yc.boqi.service.SecondMenuService;
 import com.yc.boqi.util.AllSessions;
 @Controller
-public class ProductinfoAction implements ServletRequestAware,ServletResponseAware,ModelDriven<Productinfo>{
+public class ProductinfoAction implements ServletRequestAware,ServletResponseAware,ModelDriven<ProductinfoBean>{
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	private Productinfo productinfo;
+	private ProductinfoBean productinfo;
+	public ProductinfoBean getProductinfo() {
+		return productinfo;
+	}
 	@Autowired
 	private ProductinfoService productinfoService;
 	@Autowired
@@ -98,8 +102,8 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	}
 	
 	@Override
-	public Productinfo getModel() {
-		productinfo = new Productinfo();
+	public ProductinfoBean getModel() {
+		productinfo = new ProductinfoBean();
 		return productinfo;
 	}
 
@@ -187,5 +191,10 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	public String getPriceByNaNa(){
 		natureo = productinfoService.findPriceByNaNa(productinfo.getProname(), productinfo.getNature());
 		return "natureo";
+	}
+	//后台根据商品编号查询商品的信息
+	public String findProByProid(){
+		productinfo = productinfoService.findProById(productinfo.getProid());
+		return "productinfo";
 	}
 }

@@ -100,14 +100,14 @@ public class OrdercontentAction implements ServletRequestAware,
 		return "updatetoling";
 	}
 
-	// 把付款的订单状态转为在配送中
+	// 把付款的订单状态从付款转为在配送中
 	public String changeToPei() {
-		changeRows = ordercontentService.updateOrderByids(orderids, 2);
+		changeRows = ordercontentService.updateOrderByids(orderids, 3);
 		return "updatetoling";
 	}
-	
+	//把付款的订单状态从配货转为在已发货
 	public String changeToFaHuo(){
-		changeRows = ordercontentService.updateOrderByids(orderids, 3);
+		changeRows = ordercontentService.updateOrderByids(orderids, 4);
 		return "updatetoling";
 	}
 
