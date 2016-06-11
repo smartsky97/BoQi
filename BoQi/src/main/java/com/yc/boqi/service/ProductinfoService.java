@@ -60,4 +60,10 @@ public interface ProductinfoService {
 	public List<Productinfo> findPriceByNaNa(String name,String nature);
 
 	public ProductinfoBean findProById(int id);
+	/**
+	 * 后台修改商品的信息
+	 * @param productinfo：商品类
+	 * @return
+	 */
+	public String updateProduct(ProductinfoBean productinfo);
 }

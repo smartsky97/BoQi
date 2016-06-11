@@ -51,4 +51,10 @@ public interface ProductinfoMapper {
 	 * @return
 	 */
 	public ProductinfoBean findProductsInfo(int id);
+	/**
+	 * 后台修改商品的信息
+	 * @param productinfo：商品类
+	 * @return
+	 */
+	public int updateProduct(ProductinfoBean productinfo);
 }

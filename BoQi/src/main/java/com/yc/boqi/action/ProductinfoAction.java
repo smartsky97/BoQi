@@ -3,7 +3,6 @@ package com.yc.boqi.action;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yc.boqi.entity.Brand;
 import com.yc.boqi.entity.FirstMenu;
@@ -57,6 +55,10 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	JsonParser parser = new JsonParser();
 	Gson gson = new Gson();
 	PrintWriter out;
+	private String flag;
+	public String getFlag() {
+		return flag;
+	}
 	//图片上传
 	private File[] pictrues;//上传文件
 	private String[] pictruesFileName;//上传文件名
@@ -175,11 +177,47 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	    productinfo.setSuitpet("狗");
 	    productinfoService.addProduct(productinfo);
 	}
+	//后台查询商品获取数据
+	public String getProductInfo(){
+		productinfo = productinfoService.findProById(productinfo.getProid());
+		return "productinfo";
+	}
 
 	public String product(){
 		Productinfo pro = productinfoService.findAproduct(productinfo.getProid());
 		request.getSession().setAttribute(AllSessions.PRODUCT_ONE, pro);
 		return "product";
+	}
+	//后台修改订单
+	public String changeproducttt(){
+		String path =ServletActionContext.getServletContext().getRealPath("upload/");
+		System.out.println("-->"+productinfo);
+		String picture="";
+		if(pictruesFileName!=null){
+			for(int i = 0;i<pictrues.length;i++) {
+	    		//要使用绝对地址
+	    		try {			
+	    			FileUtils.copyFile(pictrues[i], new File(path+"/"+pictruesFileName[i]));//开始上传
+	    			//为了方便多次测试，把上传到服务器的文件中，在工程中也传一份，开发完成后在删除
+	    			FileUtils.copyFile(pictrues[i], new File("D:\\pictrues"+"/"+pictruesFileName[i]));//开始上传
+	    			System.out.println("上传成功！");
+	    		} catch (IOException e) {
+	    			System.out.println("上传失败！");
+	    			e.printStackTrace(); 
+	    		}
+		    }
+			if(pictruesFileName.length==1){
+		    	picture = pictruesFileName[0];
+		    }else if(pictruesFileName.length>1){
+			    for(String as:pictruesFileName){
+			    	picture += as+",";
+			    }
+			    picture = picture.substring(0, picture.length()-1);
+		    }
+		    productinfo.setPictrue(picture);
+		}
+		flag=productinfoService.updateProduct(productinfo);
+		return "flag";
 	}
 
 	//后台获取商品属性
@@ -197,4 +235,5 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		productinfo = productinfoService.findProById(productinfo.getProid());
 		return "productinfo";
 	}
+	
 }

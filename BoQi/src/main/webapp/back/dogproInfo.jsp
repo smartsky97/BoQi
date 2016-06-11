@@ -22,6 +22,8 @@
 <script>
 var uptProid;
 var datagrid;
+	var yiji = document.getElementById('uptdogPro_finame');  
+	var lei=new Array();  
 $(function(){
 	var editRow=undefined;
 	var op;
@@ -35,16 +37,25 @@ $(function(){
 			var obj=$("#dogPro_brname");
 			var obj1=$("#dogPro_tpname");
 			var obj2=$("#dogPro_status");
-			var obj3=$("#uptdogPro_brname");
+			var obj3=$("#uptdogPro_brname");//修改品牌id
 			var obj4=$("#uptdogPro_tpname");
-			var obj5=$("#uptdogPro_status");
+			var obj5=$("#uptdogPro_status");//修改二级表
 			var obj6=$("#Fir_select");
 			var obj6_5=$("#dogPro_finame");
 			var obj7=$("#Sec_select");
 			var obj8=$("#Bra_select");
-			var obj9=$("#uptdogPro_brname"); //修改品牌id
 			var obj10=$("#uptdogPro_finame");  //修改一级表
-			var obj11=$("#uptdogPro_tpname");  //修改二级表
+			obj.empty();
+			obj1.empty();
+			obj2.empty();
+			obj3.empty();
+			obj4.empty();
+			obj5.empty();
+			obj6.empty();
+			obj6_5.empty();
+			obj7.empty();
+			obj8.empty();
+			obj10.empty();
 			
 			var opt;
 			$.each(data.brand,function(index,item){
@@ -52,13 +63,33 @@ $(function(){
 				obj.append($(opt));
 				obj3.append($(opt));
 				obj8.append($(opt));
-				obj9.append($(opt));
 			});
 			//订单的二级类
+			var temp="";
+			var i=0;
+			var qw=0;
 			$.each(data.type,function(index,item){
 				opt="<option value='"+item.tid+"'>"+item.tname+"</option>";
 				obj1.append($(opt));
-				/* obj4.append($(opt)); */
+				if(index==0){
+					lei[qw]=new Array();
+					lei[qw][i]=new Option(item.tname,item.tid);
+					temp=item.fid;
+					i++;
+				}else{
+					if(temp==item.fid){
+						lei[qw][i]=new Option(item.tname,item.tid);
+						temp=item.fid;
+						i++;
+					}else{
+						qw++;
+						i=0;
+						lei[qw]=new Array();
+						lei[qw][i]=new Option(item.tname,item.tid);
+						temp=item.fid;
+						i++;
+					}
+				}
 			});
 			//订单的一级类
 			$.each(data.fir,function(index,item){
@@ -108,7 +139,16 @@ $(function(){
 		toolbar:"#dogproduct_toolbar"
 	});
 });	
-	
+
+function changeER(){
+	var erji=document.getElementById('uptdogPro_tpname');  
+    erji.options.length=0;  
+    var index=yiji.selectedIndex;  
+    for(var x in lei[index]){  
+        erji.options[x]=lei[index][x]  
+    }
+}
+
 function ftos(){
 	var changefid=$("#Fir_select").val();
 	var obj=$("#Sec_select");
@@ -123,6 +163,7 @@ function ftos(){
 			$.each(data,function(index,item){
 				opt="<option value='"+item.tid+"'>"+item.tname+"</option>";
 				obj.append($(opt));
+				$("#uptdogPro_tpname").append($(opt));
 			});
 		},"json");
 	}
@@ -197,20 +238,21 @@ function ftos(){
 
 <div id="dogPro_upt" class="easyui-dialog" title="更改狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
 	<form action="" style="padding:20px 0 0 250px;float:left;display:inline-block;">
-		<label>商品名称：</label><input type=text name="name"id="uptdogPro_name" class="myinput">
+		<label>商品名称：</label><input type=text name="proname"id="uptdogPro_name" class="myinput">
 		<label style="padding-left:100px;">商品规格：</label><input type=text name="nature"id="uptdogPro_nature" class="myinput"><br /> <br /> 
 		<label>品牌名称：</label><select name="brandid" id="uptdogPro_brname"class="myinput"  style="width:145px;"></select>
-		<label style="padding-left:100px;">商品图片：</label><input type=file name="pic" id="uptdogPro_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptpro_pic_show')"><br /> <br /> 
-		<label>所属类型：</label><select name="fid" id="uptdogPro_finame"class="myinput" style="width:145px;"></select>
+		<label style="padding-left:100px;">商品图片：</label><input type=file name="pictrues" id="uptdogPro_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptpro_pic_show')"><br /> <br /> 
+		<label>所属类型：</label><select name="fid" id="uptdogPro_finame"class="myinput" style="width:145px;" onChange="changeER()"></select>
 		<label style="padding-left:100px;">所属分类：</label><select name="tid" id="uptdogPro_tpname"class="myinput"></select><br /> <br />
-		<label>市 场 价 ： </label><input type=text name="marpri"id="uptdogPro_marpri" class="myinput">
+		<label>市 场 价 ： </label><input type=text name="promarprice"id="uptdogPro_marpri" class="myinput">
 		<label style="padding-left:100px;">波 奇 价 ： </label><input type=text name="bqpri"id="uptdogPro_bqpri" class="myinput"><br /> <br /> 
-		<label>商品销量：</label><input type=text name="sales"id="uptdogPro_sales" class="myinput">
-		<label style="padding-left:100px;">商品库存：</label><input type=text name="inven"id="uptdogPro_inven" class="myinput"><br /> <br /> 
-		<label style="float:left;">商品介绍：</label><textarea maxlength="25" name="intro" id="uptdogPro_intro" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br /> 
+		<label>商品销量：</label><input type=text name="prosales"id="uptdogPro_sales" class="myinput">
+		<label style="padding-left:100px;">商品库存：</label><input type=text name="inventory"id="uptdogPro_inven" class="myinput"><br /> <br /> 
+		<label style="float:left;">商品介绍：</label><textarea maxlength="25" name="prointro" id="uptdogPro_intro" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br /> 
 		<label>商品状态：</label><select name="status" id="uptdogPro_status"class="myinput"></select><br /> <br />   
 		
 		<a href="javascript:uptDogProInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+		<input type="submit" value="gg">
 	</form>
 	<div style="float:right;width:380px;margin-right:20px;">
 		<fieldset id="uptpro_pic_show">
@@ -234,7 +276,6 @@ function addDogProInfoButton(){
 	$("#dogPro_add").dialog("open");
 }
 function addDogProInfo(){
-	
 	var proname=$("#dogPro_name").val();
 	var nature=$("#dogPro_nature").val();
 	var brandid=$("#dogPro_brname").val();
@@ -308,14 +349,13 @@ function showProDetail(proid){
 		
 		var pics=data.pictrue.split(",");
 		for(var i=0;i<pics.length;i++){
-			str+="<img src='"+pics[i]+"' width='100px' height='100px'/>"
+			str+="<img src='upload/"+pics[i]+"' width='100px' height='100px'/>"
 		}
 		$("#news_pic_show_info").html($(str));
 	},"json");
 }
-
+//获取修改信息
 function uptDogProInfoButton(){
-	
 	var  rows=datagrid.datagrid("getChecked")[0];
 	
 	if(rows==undefined){
@@ -329,44 +369,43 @@ function uptDogProInfoButton(){
 		var proid=rows.proid;
 		uptProid=proid;
 		$("#dogPro_upt").dialog("open");
-		$.post("productServlet",{op:"findProByProid",proid:proid},function(data){
-			var pro=data.pro;
-			var bra=data.bra;
-			var sm=data.sm;
-			$("#uptdogPro_name").val(pro[0].proname);
-			$("#uptdogPro_nature").val(pro[0].nature);
+		$.post("productinfo_getProductInfo",{proid:proid},function(data){
+			$("#uptdogPro_name").val(data.proname);
+			$("#uptdogPro_nature").val(data.nature);
 			$("#uptdogPro_brname option").map(function(){
 				var temp=$(this).text();
-				if(temp==bra[0].brandName){
+				if(temp==data.brandname){
 					$(this).attr("selected",true);
 				}
 			});
+			$("#uptdogPro_finame").val(data.fid);
+			
+			changeER();
 			$("#uptdogPro_tpname option").map(function(){
 				var temp=$(this).text();
-				if(temp==sm[0].tname){
+				if(temp==data.tname){
 					$(this).attr("selected",true);
 				}
 			});
-			$("#uptdogPro_marpri").val(pro[0].promarprice);
-			$("#uptdogPro_bqpri").val(pro[0].bqpri);
-			$("#uptdogPro_sales").val(pro[0].prosales);
-			$("#uptdogPro_intro").val(pro[0].prointro);
-			$("#uptdogPro_inven").val(pro[0].inventory);
+			$("#uptdogPro_marpri").val(data.promarprice);
+			$("#uptdogPro_bqpri").val(data.bqpri);
+			$("#uptdogPro_sales").val(data.prosales);
+			$("#uptdogPro_intro").val(data.prointro);
+			$("#uptdogPro_inven").val(data.inventory);
 			$("#uptdogPro_status option").map(function(){
 				var temp=$(this).val();
-				if(temp==pro[0].status){
+				if(temp==data.status){
 					$(this).attr("selected",true);
 				}
 			});
 			var str="";
-			
-			var pics=pro[0].pictrue.split(",");
+			var pics=data.pictrue.split(",");
 			for(var i=0;i<pics.length;i++){
-				str+="<img src='"+pics[i]+"' width='100px' height='100px'/>"
+				str+="<img src='upload/"+pics[i]+"' width='100px' height='100px'/>"
 			}
-			$("#news_pic_show_info").html($(str));
+			$("#uptpro_pic_show").html($(str));
 		},"json");
-	}	
+	}
 }
 function rmvDogProInfoButton(){
 	var rows=datagrid.datagrid("getChecked");
@@ -405,6 +444,20 @@ function rmvDogProInfoButton(){
 	}		
 }
 
+function edi(){
+	$("#dogPro_upt").ajaxSubmit({
+	    type: 'post',
+	    url: "productinfo_changeproducttt.action" ,
+	    success: function(data){
+	        alert( "success");
+	        $( "#wfAuditForm").resetForm();
+	    },
+	    error: function(XmlHttpRequest, textStatus, errorThrown){
+	        alert( "error");
+	    }
+	});
+}
+
 function uptDogProInfo(){
 	var proname=$("#uptdogPro_name").val();
 	var nature=$("#uptdogPro_nature").val();
@@ -419,7 +472,7 @@ function uptDogProInfo(){
 	var status=$("#uptdogPro_status").val();
 	
 	$.ajaxFileUpload({
-		url:"productServlet?op=uptDogProInfo",
+		url:"productinfo_changeproducttt.action",
 		secureuri:false,
 		fileElementId:"uptdogPro_pic",
 		dataType:"json",
@@ -438,11 +491,11 @@ function uptDogProInfo(){
 			status:status
 		},
 		success:function(data,status){
+			console.info(data.aaa);
 			if(parseInt($.trim(data))==1){
 				$.messager.show({title:'成功提示',msg:'商品信息修改成功....',timeout:2000,showType:'slide'});
 				$("#dogPro_upt").dialog("close");
 				$("#dogpro_info").datagrid("reload");
-				
 				$("#uptdogPro_name").val("");
 				$("#uptdogPro_nature").val("");
 				$("#uptdogPro_pic").val("");
@@ -452,7 +505,6 @@ function uptDogProInfo(){
 				$("#uptdogPro_intro").val("");
 				$("#uptdogPro_inven").val("");
 				$("#uptpro_pic_show").html("");
-				
 			}else{
 				$.messager.alert("失败提示","商品信息修改失败....","error");
 			}

@@ -88,4 +88,9 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		return productinfoMapper.findProductsInfo(id);
 	}
 
+	@Override
+	public String updateProduct(ProductinfoBean productinfo) {
+		return productinfoMapper.updateProduct(productinfo)+"";
+	}
+
 }

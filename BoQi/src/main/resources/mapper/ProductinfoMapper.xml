@@ -68,9 +68,19 @@
 	<select id="findPriceByNaNa" parameterType="map" resultType="Productinfo">
 		select * from productinfo where proname=#{name} and nature=#{nature}
 	</select>
-	
+	<!-- 后台商品信息(包括商品类型) -->
 	<select id="findProductsInfo" parameterType="int" resultType="ProductinfoBean">
 		select distinct f.fid,b.brandname,f.fname,s.tname,p.* from firstmenu f,secondmenu s,productinfo p,brand b where 
 		p.proid=#{id} and p.tid=s.tid and s.fid=f.fid and p.brandid=b.brandid
 	</select>
+	<!-- 后台修改商品信息 -->
+	<update id="updateProduct" parameterType="ProductinfoBean">
+		update productinfo set proname=#{proname},nature=#{nature},brandid=#{brandid},
+		<if test="pictrue != null">
+			pictrue=#{pictrue},
+		</if>
+		tid=#{tid},
+		promarprice=#{promarprice},bqpri=#{bqpri},prosales=#{prosales},inventory=#{inventory},prointro=#{prointro},
+		status=#{status} where proid=#{proid}
+	</update>
 </mapper>
