@@ -59,7 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <tr class="pmenu">
                         <td class="pname">商品</td>
                         <td class="price">波奇价(元)</td>
-                       <!--  <td class="cheap">优惠</td> -->
                         <td class="acounts">数量</td>
                         <td class="mall">小计(元)</td>
                         <td class="active">操作</td>

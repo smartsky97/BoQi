@@ -15,6 +15,7 @@ import com.yc.boqi.mapper.AddressMapper;
 import com.yc.boqi.mapper.OrdercontentMapper;
 import com.yc.boqi.mapper.OrderformMapper;
 import com.yc.boqi.mapper.ProductinfoMapper;
+import com.yc.boqi.mapper.ShopCarMapper;
 import com.yc.boqi.service.OrdercontentService;
 @Service("ordercontentService")
 public class OrdercontentServiceImpl implements OrdercontentService {
@@ -24,6 +25,8 @@ public class OrdercontentServiceImpl implements OrdercontentService {
 	private OrderformMapper orderformMapper;
 	@Autowired
 	private AddressMapper addressMapper;
+	@Autowired
+	private ShopCarMapper shopCarMapper;
 	@Autowired
 	private ProductinfoMapper productinfoMapper;
 	private Map<String, Object> addfrom  = new HashMap<String, Object>();
@@ -53,12 +56,34 @@ public class OrdercontentServiceImpl implements OrdercontentService {
 			addfrom.put("proid",os[0]);
 			addfrom.put("pronum",os[1]);
 			addfrom.put("bqpri",os[2]);
-			//添加订单详情
-			addfo(addfrom);
 			//修改商品库存
 			updateGood(addfrom);
+			//添加订单详情
+			addfo(addfrom);
+			//把购物车中的商品删除
+			shopCarMapper.delshopid(Integer.parseInt(os[0]));
 		}
 		return oc.getOrderid();
+	}
+	@Transactional
+	public int ifgou(String orders){
+		String[] orde = orders.split(";");
+		for(int i=0;i<orde.length;i++){
+			String[] os = orde[i].split(",");
+			/*addfrom.put("proid",os[0]);
+			addfrom.put("pronum",os[1]);
+			addfrom.put("bqpri",os[2]);
+			//修改商品库存
+			updateGood(addfrom);
+			//添加订单详情
+			addfo(addfrom);*/
+			int kucun = Integer.parseInt(os[0]);
+			int yaode = Integer.parseInt(os[1]);
+			if(yaode>productinfoMapper.getproNum(kucun)){
+				return -1;
+			}
+		}
+		return 1;
 	}
 	@Override
 	public List<OrderContent> findAll(int page, int rows) {
@@ -172,6 +197,10 @@ public class OrdercontentServiceImpl implements OrdercontentService {
 	@Override @Transactional
 	public int updateStatu(int orderid) {
 		return ordercontentMapper.updateStatu(orderid);
+	}
+	@Override
+	public int getTotal() {
+		return ordercontentMapper.total();
 	}
 
 }

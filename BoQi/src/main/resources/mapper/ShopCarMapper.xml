@@ -12,4 +12,8 @@
 	<select id="getAllInfo" parameterType="int" resultType="ShopCarBean">
 		select p.proid,proname,nature,bqpri,pictrue,usid,s.inventory from shopcar s,productinfo p where s.proid=p.proid and s.usid=#{usid}
 	</select>
+	
+	<delete id="delshopid" parameterType="int">
+		DELETE FROM shopcar WHERE proid = #{proid}
+	</delete>
 </mapper>

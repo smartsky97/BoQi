@@ -11,4 +11,8 @@ public class AllSessions {
 	public static final String SHOPCAR = "shopinfo";
 	//用户所有的地址
 	public static final String ADDRESSBYUSID = "oneusersaddress";
+	//后台管理员信息
+	public static final String LOGIN_ADMIN = "loginAdmin";
+	//后台管理员信息
+	public static final String PRODUCT_BUTINFO = "buyersinfo";
 }

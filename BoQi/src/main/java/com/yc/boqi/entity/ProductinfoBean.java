@@ -24,7 +24,28 @@ public class ProductinfoBean implements Serializable{
 	private int status;
 	private String brandname;
 	private String tname;
+	private String uname;
+	private int pronum;
+	private String starttime;
 	
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	public int getPronum() {
+		return pronum;
+	}
+	public void setPronum(int pronum) {
+		this.pronum = pronum;
+	}
+	public String getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
 	public int getFid() {
 		return fid;
 	}
@@ -168,13 +189,14 @@ public class ProductinfoBean implements Serializable{
 				+ promarprice + ", bqpri=" + bqpri + ", prosales=" + prosales
 				+ ", prointro=" + prointro + ", inventory=" + inventory
 				+ ", status=" + status + ", brandname=" + brandname
-				+ ", tname=" + tname + "]";
+				+ ", tname=" + tname + ", uname=" + uname + ", pronum="
+				+ pronum + ", starttime=" + starttime + "]";
 	}
 	public ProductinfoBean(int proid, String proname, String nature,
 			int brandid, int fid, String fname, int tid, String suitpet,
 			String pictrue, double promarprice, double bqpri, int prosales,
 			String prointro, int inventory, int status, String brandname,
-			String tname) {
+			String tname, String uname, int pronum, String starttime) {
 		super();
 		this.proid = proid;
 		this.proname = proname;
@@ -193,6 +215,9 @@ public class ProductinfoBean implements Serializable{
 		this.status = status;
 		this.brandname = brandname;
 		this.tname = tname;
+		this.uname = uname;
+		this.pronum = pronum;
+		this.starttime = starttime;
 	}
-	
+
 }

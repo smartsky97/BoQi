@@ -1,17 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>My JSP 'shoppingSearch.jsp' starting page</title>
+    <title>搜索</title>
     <base href="<%=basePath+"front/"%>">
     <meta charset="utf-8">
 	<meta http-equiv="pragma" content="no-cache">
@@ -21,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link href="css/shopping.css" rel="stylesheet" type="text/css" />
 	<link href="css/publicThing.css" type="text/css" rel="stylesheet"> 
-
+	<script type="text/javascript" src="jquery/jquery-1.11.3.min.js"></script>
   </head>
   
   <body>
@@ -232,8 +231,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	
 	                	<c:forEach items="${getSearch}" var="item">
 	                    	<li>
-	                        	<a href="../productServlet?op=openThePro&pid=${item.proid}">
-	                            	<img src="../${item.firstPic }" alt="商品图片" style="height:210px;width:210px;">
+	                        	<a href="productinfo_product.action?proid=${item.proid}" target="_blank">
+	                        		<c:choose>
+			                			<c:when test="${fn:contains(item.pictrue, ',')}">
+			                				<img src="../upload/${fn:substringBefore(item.pictrue,',' ) }" alt="图片暂时为空" style="height:210px;width:210px;">
+			                			</c:when>
+			                			<c:otherwise>
+			                				<img src="../upload/${item.pictrue }" alt="图片暂时为空" style="height:210px;width:210px;">
+			                			</c:otherwise>
+		                			</c:choose>
 	                            </a>
 	                            <p class="product-p1">
 	                            	<strong>¥ ${item.bqpri }</strong>
@@ -242,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                <em class="spanX">免运费</em>
 	                            </p>
 	                            <p class="product-p2">
-	                            	<a href="../productServlet?op=openThePro&pid=${item.proid}">${item.proname}</a>
+	                            	<a href="productinfo_product.action?proid=${item.proid}" target="_blank">${item.proname}</a>
 	                            </p>
 	                            <p class="product-p3">送50个波奇豆抵5元现金使用 16省免运费</p>
 	                            <div class="product-status" style="margin-top:5px;">
@@ -271,7 +277,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		<a id="lastpage" class="thisye1" href="proSearch_findPagePro.action?ye=${thisPage-1 }">上一页></a>
 							<span id="thisthere"></span>
 	                        <a id="nextpage" class="thisye1" href="proSearch_findPagePro.action?ye=${thisPage+1 }">下一页></a>
-	                        <a id="endpage" class="thisye1" href="proSearch_findPagePro.action?ye=${(searchTotal+20-searchTotal%20)/20 }">">末页</a>
+	                        <a id="endpage" class="thisye1" href="proSearch_findPagePro.action?ye=${(searchTotal+20-searchTotal%20)/20 }">末页</a>
 	                        <span class="total_page">共<fmt:formatNumber type="number" value="${(searchTotal+20-searchTotal%20)/20}" maxFractionDigits="0"/>页</span>
 	                        <span>
 	                        	到第
@@ -466,18 +472,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	</div>
   </body>
-</html>
-<script type="text/javascript" src="jquery/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/shopping.js"></script>
-<script type="text/javascript" src="js/shoppingSearch.js"></script>
 <script>
 //最下面的页面选择显示
 function showPage(){
-	var yeshi = parseInt(${(allsearch+19)/20});
+	var yeshi = parseInt(${(searchTotal+19)/20});
 	$("#allye").replaceWith(yeshi);
-	if((${allsearch})<21){
+	if(${searchTotal}<21){
 		$("#pagination").css("display","none");
-	}else if((${allsearch})<181){
+	}else if((${searchTotal})<181){
 		$("#pagination").css("display","block");
 		for(var i=1;i<=yeshi;i++){
 			var turl = location.search;
@@ -506,7 +508,7 @@ function showPage(){
 		$("#lastpage").css("display","inline");
 	}
 	//判断是否显示下一页，末页
-	if(yeye == ${(allsearch+20-allsearch%20)/20}){
+	if(yeye == ${(searchTotal+20-searchTotal%20)/20}){
 		$("#nextpage").css("display","none");
 		$("#endpage").css("display","none");
 	}else{
@@ -585,7 +587,7 @@ function nextpage(){
 	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
 	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
 	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
-	if(yeye<=${(allsearch+20-allsearch%20)/20}){
+	if(yeye<=${(searchTotal+20-searchTotal%20)/20}){
 		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+yeye;
 	}
 }
@@ -605,8 +607,8 @@ function endpage(){
 	var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
 	var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
 	var yeye = parseInt((turl.substring(turl.indexOf("ye=")+3)))+1;
-	if(yeye<=${(allsearch+20-allsearch%20)/20}){
-		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
+	if(yeye<=${(searchTotal+20-searchTotal%20)/20}){
+		window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(searchTotal+20-searchTotal%20)/20};
 	}
 }
 //首页
@@ -627,10 +629,10 @@ function skippage(){
 	//var hehe = turl.substring(turl.indexOf("ci=")+3,turl.lastIndexOf("&")); //搜索关键词的转码
 	//var order = turl.substring(turl.indexOf("order")+6,turl.indexOf("&op")); //搜索关键词的排序方法
 	//if(skipye == yeye){
-	//}else if(skipye>0 && skipye<=${(allsearch+20-allsearch%20)/20}){
+	//}else if(skipye>0 && skipye<=${(searchTotal+20-searchTotal%20)/20}){
 		//window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+skipye;
-	//}else if(skipye>${(allsearch+20-allsearch%20)/20}){
-		//window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(allsearch+20-allsearch%20)/20};
+	//}else if(skipye>${(searchTotal+20-searchTotal%20)/20}){
+		//window.location.href="../productServlet?order="+order+"&op=searchBy&ci="+hehe+"&ye="+${(searchTotal+20-searchTotal%20)/20};
 	//}
 	window.location.href="proSearch_findPagePro.action?ye="+skipye;
 }
@@ -687,3 +689,6 @@ function orderByTime(){
 }
 window.onload=showPage(); 
 </script>
+<script type="text/javascript" src="js/shopping.js"></script>
+<script type="text/javascript" src="js/shoppingSearch.js"></script>
+</html>

@@ -42,7 +42,7 @@ public interface UserInfoService {
 	//筛选查询
 	List<UserInfo> findUserByInfo(Map<String,Object> map);
 	
-	int updateyue(int usid);
+	int updateyue(int usid,double money,int id);
 	
 	double selectmoney(int usid);
 }

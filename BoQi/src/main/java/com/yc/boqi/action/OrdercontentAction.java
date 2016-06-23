@@ -1,7 +1,9 @@
 package com.yc.boqi.action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yc.boqi.entity.OrderContent;
 import com.yc.boqi.entity.UserInfo;
+import com.yc.boqi.mapper.ProductinfoMapper;
 import com.yc.boqi.service.OrdercontentService;
 import com.yc.boqi.service.OrderformService;
+import com.yc.boqi.service.ProductinfoService;
+import com.yc.boqi.service.UserInfoService;
 import com.yc.boqi.util.AllSessions;
 import com.yc.boqi.util.PaymentUtil;
 
@@ -29,13 +34,19 @@ public class OrdercontentAction implements ServletRequestAware,
 	private DateTime dateTime = new DateTime();
 	@Autowired
 	private OrdercontentService ordercontentService;
+	@Autowired
+	private ProductinfoService productinfoService;
 	private String orders;
 	private String orderids;// 后台删除数据的id；拼接
-	private List<OrderContent> ords;
+	private List<OrderContent> ordss;
+	private Map<String, Object> ords = new HashMap<String, Object>();
 	private int changeRows;// 数据执行的条数
 	@Autowired
 	private OrderformService orderformService;
+	@Autowired
+	private UserInfoService userInfoService;
 	private String zhvalue;
+	private Map<String, Object> map = new HashMap<String, Object>();
 
 	public String getZhvalue() {
 		return zhvalue;
@@ -53,7 +64,7 @@ public class OrdercontentAction implements ServletRequestAware,
 		this.orderids = orderids;
 	}
 
-	public List<OrderContent> getOrds() {
+	public Map<String, Object> getOrds() {
 		return ords;
 	}
 
@@ -69,6 +80,15 @@ public class OrdercontentAction implements ServletRequestAware,
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
+	
+	public String ifgou(){
+		map.put("num", productinfoService.ifgou(orders));
+		return "map";
+	}
+
+	public Map<String, Object> getMap() {
+		return map;
+	}
 
 	// 提交一个订单
 	public String uploadorder(){
@@ -79,6 +99,8 @@ public class OrdercontentAction implements ServletRequestAware,
 		request.getSession().setAttribute("orderid", orderid);
 		request.getSession().setAttribute("ordersum",
 				orderContent.getOrdersum());
+		request.getSession().setAttribute("money",userInfoService.selectmoney(user.getUsid()));
+		
 		return "bank";
 	}
 
@@ -86,11 +108,11 @@ public class OrdercontentAction implements ServletRequestAware,
 	public String findAllOrders(){
 		String page = request.getParameter("page");
 		String rows = request.getParameter("rows");
-
-		ords = ordercontentService.findAll(Integer.parseInt(page),
-				Integer.parseInt(rows));
+		ordss = ordercontentService.findAll(Integer.parseInt(page),Integer.parseInt(rows));
+		int total = ordercontentService.getTotal();
+		ords.put("rows", ordss);
+		ords.put("total",total);
 		
-		ords = ordercontentService.findAll(Integer.parseInt(page),Integer.parseInt(rows));
 		return "findAllOrder";
 	}
 

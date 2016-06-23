@@ -19,6 +19,11 @@ public class UserInfoAction implements ModelDriven<UserInfo>, SessionAware {
 	private UserInfo userInfo;
 	private Map<String, Object> session;
 	private List<UserInfo> rows;
+	private double ordersum;
+
+	public void setOrdersum(double ordersum) {
+		this.ordersum = ordersum;
+	}
 
 	@Autowired
 	private UserInfoService userInfoService;
@@ -118,10 +123,8 @@ public class UserInfoAction implements ModelDriven<UserInfo>, SessionAware {
 
 	// 使用余额支付
 	public String updatemoney() {
-		double money = userInfoService.selectmoney(userInfo.getUsid());
-		session.put("money", money);
-		int data = userInfoService.updateyue(userInfo.getUsid());
-		System.out.println("更新余额===ID" + userInfo.getUsid());
+		System.out.println("us:"+userInfo.getUsid()+" -mo:"+ordersum+" -or:"+userInfo.getOrderid());
+		int data = userInfoService.updateyue(userInfo.getUsid(),ordersum,userInfo.getOrderid());
 		if (data > 0) {
 			System.out.println("余额更新成功！！");
 			return "yuemsg";
@@ -129,7 +132,5 @@ public class UserInfoAction implements ModelDriven<UserInfo>, SessionAware {
 			System.out.println("余额更新失败！！");
 			return "bank";
 		}
-
 	}
-
 }

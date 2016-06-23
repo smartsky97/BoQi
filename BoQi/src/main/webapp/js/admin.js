@@ -6,3 +6,4 @@ function showOrHidden(id){
 		$("#"+id).css("display","none");
 	}
 }
+

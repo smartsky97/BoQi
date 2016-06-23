@@ -57,4 +57,16 @@ public interface ProductinfoMapper {
 	 * @return
 	 */
 	public int updateProduct(ProductinfoBean productinfo);
+	/**
+	 * 查询商品的数量
+	 * @param proid：商品Id
+	 * @return
+	 */
+	public int getproNum(int proid);
+	/**
+	 * 获取一个商品的购买信息
+	 * @param proid：商品的id
+	 * @return
+	 */
+	public List<ProductinfoBean> getBuysInfo(int proid);
 }

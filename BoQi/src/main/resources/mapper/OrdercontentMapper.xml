@@ -62,4 +62,12 @@
 	<update	id="updateStatu" parameterType="OrderContent">
 		update ordercontent set orderstate=2 where orderid=#{orderid}
 	</update>
+	<!-- 订单的数量 -->
+	<select id="total" resultType="int">
+		select count(*) from ordercontent where orderstate!=0
+	</select>
+	<!-- 修改订单的付款时间 -->
+	<update id="updateOrderPayTime" parameterType="map">
+		update ordercontent set paytime=to_date(#{time},'yyyy-mm-dd hh24:mi:ss') where orderid=#{id}
+	</update>
 </mapper>

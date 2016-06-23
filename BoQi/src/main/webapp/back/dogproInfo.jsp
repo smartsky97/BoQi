@@ -168,10 +168,29 @@ function ftos(){
 		},"json");
 	}
 }
-</script>
+//表单提交前的验证
+var obj = document.getElementById('addDogInfo');
+var check = function(){
+	if($("#dogPro_name").val()!=null && $("#dogPro_nature").val()!=null && $("#dogPro_brname").val()!=null && $("#dogPro_pic").val()!=null
+			&& $("#dogPro_finame").val()!="" && $("#dogPro_tpname").val()!="" && $("#dogPro_marpri").val()!=""
+			&& $("#dogPro_bqpri").val()!="" && $("#dogPro_sales").val()!="" && $("#dogPro_inven").val()!=""
+			&& $("#dogPro_status").val()!="" && $("#dogPro_info").val()!=""){
+		alert("gou");
+		return true;
+	}else{
+		alert("请填写所有信息");
+		return false;
+	}
+}
+obj.onsubmit = function(){
+	return check();
+}
 
+
+</script>
+<script type="text/javascript" src="js/jquery.form.min.js"></script>
 <div id="dogPro_add" class="easyui-dialog" title="添加狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
-	<form action="productinfo_AddProduction" style="padding:20px 0 0 250px;float:left;display:inline-block;" method="post"  enctype="multipart/form-data">
+	<form id="addDogInfo" action="productinfo_AddProduction" style="padding:20px 0 0 250px;float:left;display:inline-block;" method="post" enctype="multipart/form-data"  target="hiddenIFrame"> 
 		<label>商品名称：</label><input type=text name="proname"id="dogPro_name" class="myinput">
 		<label style="padding-left:100px;">商品规格：</label><input type=text name="nature"id="dogPro_nature" class="myinput"><br /> <br /> 
 		<label>品牌名称：</label><select name="brandid" id="dogPro_brname" class="myinput" style="width:145px;"></select>
@@ -182,8 +201,9 @@ function ftos(){
 		<label style="padding-left:100px;">波  奇  价 ：  </label><input type=text name="bqpri"id="dogPro_bqpri" class="myinput"><br /> <br /> 
 		<label>商品销量：</label><input type=text name="prosales"id="dogPro_sales" class="myinput">
 		<label style="padding-left:100px;">商品库存：</label><input type=text name="inventory"id="dogPro_inven" class="myinput"><br /> <br /> 
-		<label style="float:left;">商品介绍：</label><textarea maxlength="25" name="prointro" id="dogPro_intro" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br /> 
 		<label>商品状态：</label><select name="status" id="dogPro_status"class="myinput"></select><br /> <br />  
+		<label style="float:left;">商品介绍：</label><input type=file name="prointros" id="dogPro_info" onchange="previewMultipleImage(this,'proinfo_pic_show')"><br /> <br /> 
+		
 		<input type="submit" value="添加"/>
 	</form>
 	<div style="float:right;width:380px;margin-right:20px;">
@@ -191,8 +211,12 @@ function ftos(){
 			<legend>图片预览</legend>
 		</fieldset>
 	</div>
+	<div style="margin:310px 0 0 250px;width: 800px;">
+		<fieldset id="proinfo_pic_show">
+			<legend>图片预览</legend>
+		</fieldset>
+	</div>
 </div>
-
 <div id="dogPro_show" class="easyui-dialog" title="查看狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
 	<center>
 	<h3 style="margin-top:10px;">商品信息</h3>
@@ -230,15 +254,18 @@ function ftos(){
 				<td class="color_w" id="showdogPro_status"></td>
 			</tr>
 		</tbody>
-	</table>
-	<label>商品介绍:</label>
-	<textarea maxlength="25" name="intro" id="showdogPro_intro" class="myinput" readonly="readonly" style="width:150px;height:50px;"></textarea><br /> <br /> 
+	</table><br/>
+	<label><h2>商品介绍:</h2></label>
+	<div  name="intro" id="showdogPro_intro">
+	
+	</div>
 	</center>
 </div>
 
 <div id="dogPro_upt" class="easyui-dialog" title="更改狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
-	<form action="" style="padding:20px 0 0 250px;float:left;display:inline-block;">
+	<form id="pro_change" style="padding:20px 0 0 250px;float:left;display:inline-block;">
 		<label>商品名称：</label><input type=text name="proname"id="uptdogPro_name" class="myinput">
+		<input type="hidden" name="proid" id="upproid" value="${loginUser.vuid}"/>  
 		<label style="padding-left:100px;">商品规格：</label><input type=text name="nature"id="uptdogPro_nature" class="myinput"><br /> <br /> 
 		<label>品牌名称：</label><select name="brandid" id="uptdogPro_brname"class="myinput"  style="width:145px;"></select>
 		<label style="padding-left:100px;">商品图片：</label><input type=file name="pictrues" id="uptdogPro_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptpro_pic_show')"><br /> <br /> 
@@ -247,15 +274,18 @@ function ftos(){
 		<label>市 场 价 ： </label><input type=text name="promarprice"id="uptdogPro_marpri" class="myinput">
 		<label style="padding-left:100px;">波 奇 价 ： </label><input type=text name="bqpri"id="uptdogPro_bqpri" class="myinput"><br /> <br /> 
 		<label>商品销量：</label><input type=text name="prosales"id="uptdogPro_sales" class="myinput">
-		<label style="padding-left:100px;">商品库存：</label><input type=text name="inventory"id="uptdogPro_inven" class="myinput"><br /> <br /> 
-		<label style="float:left;">商品介绍：</label><textarea maxlength="25" name="prointro" id="uptdogPro_intro" class="myinput" style="width:150px;height:50px;"></textarea><br /> <br /> 
+		<label style="padding-left:100px;">商品库存：</label><input type=text name="inventory" id="uptdogPro_inven" class="myinput"><br /> <br /> 
 		<label>商品状态：</label><select name="status" id="uptdogPro_status"class="myinput"></select><br /> <br />   
-		
+		<label style="float:left;">商品介绍：</label><input type=file name="prointros" id="uptdogPro_intro" onchange="previewMultipleImage(this,'upproinfo_pic_show')"><br /> <br /> 
 		<a href="javascript:uptDogProInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
-		<input type="submit" value="gg">
 	</form>
 	<div style="float:right;width:380px;margin-right:20px;">
 		<fieldset id="uptpro_pic_show">
+			<legend>图片预览</legend>
+		</fieldset>
+	</div>
+	<div style="margin:310px 0 0 250px;width: 800px;">
+		<fieldset id="upproinfo_pic_show">
 			<legend>图片预览</legend>
 		</fieldset>
 	</div>
@@ -342,9 +372,9 @@ function showProDetail(proid){
 		$("#showdogPro_marpri").html(data.promarprice);
 		$("#showdogPro_bqpri").html(data.bqpri);
 		$("#showdogPro_sales").html(data.prosales);
-		$("#showdogPro_intro").val(data.prointro);
+		$("#showdogPro_intro").html("<img src='upload/"+data.prointro+"' width='800px'>");
 		$("#showdogPro_inven").html(data.inventory);
-		$("#showdogPro_status").html(data.status);
+		$("#showdogPro_status").html(onDown(data.status));
 		var str="";
 		
 		var pics=data.pictrue.split(",");
@@ -353,6 +383,13 @@ function showProDetail(proid){
 		}
 		$("#news_pic_show_info").html($(str));
 	},"json");
+}
+function onDown(data){
+	if(data==0){
+		return "下架";
+	}else{
+		return "上架";
+	}
 }
 //获取修改信息
 function uptDogProInfoButton(){
@@ -369,6 +406,7 @@ function uptDogProInfoButton(){
 		var proid=rows.proid;
 		uptProid=proid;
 		$("#dogPro_upt").dialog("open");
+		$("#upproid").val(uptProid);
 		$.post("productinfo_getProductInfo",{proid:proid},function(data){
 			$("#uptdogPro_name").val(data.proname);
 			$("#uptdogPro_nature").val(data.nature);
@@ -390,8 +428,8 @@ function uptDogProInfoButton(){
 			$("#uptdogPro_marpri").val(data.promarprice);
 			$("#uptdogPro_bqpri").val(data.bqpri);
 			$("#uptdogPro_sales").val(data.prosales);
-			$("#uptdogPro_intro").val(data.prointro);
 			$("#uptdogPro_inven").val(data.inventory);
+			$("#upproinfo_pic_show").html("<img src='upload/"+data.prointro+"' width='800px'>");
 			$("#uptdogPro_status option").map(function(){
 				var temp=$(this).val();
 				if(temp==data.status){
@@ -459,40 +497,15 @@ function edi(){
 }
 
 function uptDogProInfo(){
-	var proname=$("#uptdogPro_name").val();
-	var nature=$("#uptdogPro_nature").val();
-	var brandid=$("#uptdogPro_brname").val();
-	var tid=$("#uptdogPro_tpname").val();
-	var suitpet=$("#uptdogPro_suitpet").val();
-	var promarprice=$("#uptdogPro_marpri").val();
-	var bqpri=$("#uptdogPro_bqpri").val();
-	var prosales=$("#uptdogPro_sales").val();
-	var prointro=$("#uptdogPro_intro").val();
-	var inventory=$("#uptdogPro_inven").val();
-	var status=$("#uptdogPro_status").val();
-	
-	$.ajaxFileUpload({
+	//表单提交后的操作使用jquery.from.js  
+	var ajax_option={
 		url:"productinfo_changeproducttt.action",
-		secureuri:false,
-		fileElementId:"uptdogPro_pic",
-		dataType:"json",
-		data:{
-			proid:uptProid,
-			proname:proname,
-			nature:nature,
-			brandid:brandid,
-			tid:tid,
-			suitpet:suitpet,
-			promarprice:promarprice,
-			bqpri:bqpri,
-			prosales:prosales,
-			prointro:prointro,
-			inventory:inventory,
-			status:status
-		},
-		success:function(data,status){
-			console.info(data.aaa);
-			if(parseInt($.trim(data))==1){
+		type:"post",
+		//dataType:'script',
+		beforeSubmit:checkUppro,
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		success:function(data){
+			if(data==1){
 				$.messager.show({title:'成功提示',msg:'商品信息修改成功....',timeout:2000,showType:'slide'});
 				$("#dogPro_upt").dialog("close");
 				$("#dogpro_info").datagrid("reload");
@@ -506,12 +519,22 @@ function uptDogProInfo(){
 				$("#uptdogPro_inven").val("");
 				$("#uptpro_pic_show").html("");
 			}else{
-				$.messager.alert("失败提示","商品信息修改失败....","error");
+				alert("修改失败");
 			}
-		},
-		error:function(data,status,e){
-			$.messager.alert("错误提示","商品信息修改有误....\n"+e,"error");
 		}
-	});
+	}
+	$('#pro_change').ajaxSubmit(ajax_option);
+}
+
+function checkUppro(){
+	if($("#uptdogPro_name").val()!=null && $("#uptdogPro_nature").val()!=null && $("#uptdogPro_brname").val()!=null
+			&& $("#uptdogPro_tpname").val()!="" && $("#uptdogPro_marpri").val()!="" && $("#uptdogPro_bqpri").val()!=""
+			&& $("#uptdogPro_sales").val()!="" && $("#uptdogPro_inven").val()!="" && $("#uptdogPro_status").val()!=""
+			&& $("#uptdogPro_finame").val()!=""){
+		return true;
+	}else{
+		alert("请填写所有信息");
+		return false;
+	}
 }
 </script>

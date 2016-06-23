@@ -1,13 +1,19 @@
 package com.yc.boqi.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.crypto.Data;
+
+import org.pojava.datetime.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.boqi.entity.OrderForm;
 import com.yc.boqi.entity.UserInfo;
+import com.yc.boqi.mapper.OrdercontentMapper;
+import com.yc.boqi.mapper.OrderformMapper;
 import com.yc.boqi.mapper.UserInfoMapper;
 import com.yc.boqi.service.UserInfoService;
 
@@ -15,6 +21,10 @@ import com.yc.boqi.service.UserInfoService;
 public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
+	@Autowired
+	private OrdercontentMapper ordercontentMapper;
+	@Autowired
+	private OrderformMapper orderformMapper;
 	  
 	@Override
 	public UserInfo login(UserInfo user) {
@@ -109,11 +119,29 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfoMapper.findUserByInfo(map);
 	}
 	@Override
-	public int updateyue(int usid) {
-		return userInfoMapper.updateyue(usid);
+	public int updateyue(int usid,double money,int id){
+		Map<String, Object> pa = new HashMap<String, Object>();
+		pa.put("usid", usid);
+		pa.put("money", money);
+		int a = userInfoMapper.updateyue(pa);
+		pa.clear();
+		pa.put("id", id);
+		pa.put("status", 2);
+		int b = ordercontentMapper.updateOrderStatusById(pa);
+		int c = orderformMapper.updateOrderFromStatusById(pa);
 		
+		DateTime dt = new DateTime();
+		pa.clear();
+		pa.put("time", dt.toString("yyyy-MM-dd HH:mm:ss"));
+		pa.put("id", id);
+		int d = ordercontentMapper.updateOrderPayTime(pa);
+		
+		if(a==1 & b==1 & c==1 & d==1){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
-
 
 	@Override
 	public double selectmoney(int usid) {

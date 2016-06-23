@@ -47,4 +47,9 @@ public interface OrdercontentService {
 	 * 改变订单状态
 	 */
 	public int updateStatu(int orderid);
+	/**
+	 * 获取订单的条数
+	 * @return总数
+	 */
+	public int getTotal();
 }

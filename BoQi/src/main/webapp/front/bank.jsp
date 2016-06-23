@@ -20,8 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript" src="jquery/jquery-1.11.3.js"></script>
 <script language="javascript">
-	
-
 	function getTime() {
 		now = new Date();
 		y2k = new Date("Jan 1 2016 00:60:00");
@@ -59,28 +57,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function yuepay(){
 		var paypwds=$(".mima").val();
 		var paypwdtrue=$(".paypwd").val();
-		var ordersum=$(".ordersum").val();
+		var ordersum=$(".ordersum").html();
 		var orderid=$(".orderid").val();
 		var usid=$(".usid").val();
 		var money=$(".money").val();
 		if(paypwds==paypwdtrue){
 			alert("密码正确！");
-			if(money>orderid){
-			$.post("userInfo_updatemoney.action?usid="+usid+"&ordersum="+ordersum,function(){
-				alert(232323);
-				window.location.href="yuemsg.jsp";				
-			});
-		}else{
-			alert("账户余额不足");
-	        window.open ("payfail.html", "newwindow", "height=250, width=350, top=300, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
-		}
+			if(money>parseInt(ordersum)){
+				$.post("userInfo_updatemoney.action",{usid:usid,ordersum:ordersum,orderid:orderid},function(){
+					window.location.href="yuemsg.jsp";				
+				});
+			}else{
+				alert("账户余额不足");
+		        window.open ("payfail.html", "newwindow", "height=250, width=350, top=300, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
+			}
 		}else{
 			alert("密码错误！");
 	        window.open ("payfail.html", "newwindow", "height=250, width=350, top=300, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
 		}
 	}
-	
-	
 </script>
 </head>
 

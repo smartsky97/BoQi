@@ -93,4 +93,28 @@ public class ProductinfoServiceImpl implements ProductinfoService {
 		return productinfoMapper.updateProduct(productinfo)+"";
 	}
 
+	@Override
+	public int getproNum(int pro) {
+		return productinfoMapper.getproNum(pro);
+	}
+
+	@Override
+	public int ifgou(String orders) {
+		String[] orde = orders.split(";");
+		for(int i=0;i<orde.length;i++){
+			String[] os = orde[i].split(",");
+			int kucun = Integer.parseInt(os[0]);
+			int yaode = Integer.parseInt(os[1]);
+			if(yaode>productinfoMapper.getproNum(kucun)){
+				return -1;
+			}
+		}
+		return 1;
+	}
+
+	@Override
+	public List<ProductinfoBean> getBuersInfo(int proid) {
+		return productinfoMapper.getBuysInfo(proid);
+	}
+
 }

@@ -66,4 +66,18 @@ public interface ProductinfoService {
 	 * @return
 	 */
 	public String updateProduct(ProductinfoBean productinfo);
+	/**
+	 * 获取商品的数量
+	 * @param pro
+	 * @return
+	 */
+	public int getproNum(int pro);
+	/**
+	 * 判断库存是够足够
+	 * @param orders
+	 * @return
+	 */
+	public int ifgou(String orders);
+	
+	public List<ProductinfoBean> getBuersInfo(int proid);
 }

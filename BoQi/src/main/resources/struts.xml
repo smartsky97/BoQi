@@ -10,11 +10,38 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
     <package name="default" namespace="/" extends="json-default">
+    	<interceptors>
+    		<interceptor name="frontLoginInterCeptor" class="com.yc.boqi.util.FrontLoginInterCeptor"/>
+    		<interceptor name="backLoginInterCeptor" class="com.yc.boqi.util.BackLoginInterCeptor"/>
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="defaultStack"/>
+    			<interceptor-ref name="frontLoginInterCeptor">
+    				<param name="includeMethods">shopcar,uploadorder,showAll</param>
+    			</interceptor-ref>
+    		</interceptor-stack>
+    		<interceptor-stack name="myStack2">
+    			<interceptor-ref name="defaultStack"/>
+    			<interceptor-ref name="backLoginInterCeptor">
+    				<param name="includeMethods">getPageBrandInfo,getPageBrandShowInfo,getUserInfo,getPageDogProInfo,
+    					findAllOrders,getUserByUsid,getBrand_sell_info,findProByProid,findBackOrderContent
+    				</param>
+    			</interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+    	<global-results>
+    		<result name="login" type="redirect">/front/login.jsp</result>
+    		<result name="backlogin" type="redirect">/back/login.jsp</result>
+    	</global-results>
+    
     	<action name="back-*" class="backAction" method="{1}">
+    		<interceptor-ref name="myStack2"/>
     		<result name="{1}">/back/{1}.jsp</result>
     	</action>
     
     	<action name="*_*" class="{1}Action" method="{2}">
+    		<interceptor-ref name="myStack"/>
+    		<interceptor-ref name="myStack2"/>
     		<result name="GetTop" type="json">
     			<param name="root">productinfos</param>
     		</result>
@@ -35,6 +62,12 @@
     		</result>
     		<result name="selectUsers" type="json">
     			<param name="root">rows</param>
+    		</result>
+    		<result name="rows" type="json">
+    			<param name="root">rows</param>
+    		</result>
+    		<result name="map" type="json">
+    			<param name="root">map</param>
     		</result>
     		<result name="DogPet" type="json">
     			<param name="root">jasonObject</param>
@@ -70,6 +103,9 @@
     		</result>
     		<result name="flag" type="json">
     			<param name="root">flag</param>
+    		</result>
+    		<result name="xflag" type="json">
+    			<param name="root">xflag</param>
     		</result>
     		<result name="paymoney">/front/paymoney.jsp</result>
     		<result name="index">/front/index.jsp</result>

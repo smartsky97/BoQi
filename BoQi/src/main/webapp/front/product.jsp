@@ -30,7 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}else{
 			var proid=$(".bianhao").html();
 			var inventory = $(".counts").val();
-			$.post("shopCar_shopcar.action?proid="+proid+"&inventory="+inventory,function(){window.location.href="boqi_shopcar.action"});
+			if(inventory==0){
+				alert("库存不足");
+			}else{
+				$.post("shopCar_shopcar.action?proid="+proid+"&inventory="+inventory,function(){window.location.href="boqi_shopcar.action"});
+		
+			}
 		}
 	}
 		
@@ -49,10 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div id="top-search">
 				<div style="padding: 1px; background: #F30; height: 38px;">
-					<input id="search-text" type="text" action="shopping.html"
-						method="get" placeholder="请输入商品名称!" /> <input type="submit"
-						id="button" value="搜索" /> <input type="hidden" id="hidden"
-						value="${loginUser.uname }" />
+					<input id="search-text" type="text" action="shopping.html" method="get" placeholder="请输入商品名称!" /> 
+					<input type="submit" id="button" value="搜索" /> 
+					<input type="hidden" id="hidden" value="${loginUser.uname }" />
 				</div>
 			</div>
 			<div id="s-search">
@@ -102,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:when>
 					<c:otherwise>
 						<img src="../upload/${Aproductinfo.pictrue }" alt="图片暂时为空"
-							style="width: 100px; height: 100px;" />
+							style="width: 300px; height: 300px;"  id="midimg"/>
 					</c:otherwise>
 				</c:choose>
 				<div style="display: none;" id="winSelector"></div>
@@ -266,12 +270,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="content">
 		<ul>
 			<a href="#information"><li>商品介绍</li></a>
-			<a href="#pinglun"><li>商品评论</li></a>
-			<a href="#service"><li>售后服务</li></a>
-			<a href="#salecount"><li>购买记录</li></a>
+			<a href="javascript:void(0)" onclick="document.getElementById('pinglun').scrollIntoView();"><li>商品评论</li></a>
+			<a href="javascript:void(0)" onclick="document.getElementById('service').scrollIntoView();"><li>售后服务</li></a>
+			<a href="javascript:void(0)" onclick="document.getElementById('salecount').scrollIntoView();"><li>购买记录</li></a>
 		</ul>
 		<div id="information">
-			<img src="productimg/introduct.png" />
+			<img src="../upload/${Aproductinfo.prointro}" width="760px" style="padding:10px 0 10px 100px;"/>
 		</div>
 	</div>
 	<div id="pinglun">
@@ -438,54 +442,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>规格</th>
 					<th>购买时间</th>
 				</tr>
-				<tr class="tables">
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
-				<tr>
-					<td>bq***71</td>
-					<td>1</td>
-					<td>默认规格</td>
-					<td>2015-11-18 00:31:22</td>
-				</tr>
+				<c:forEach items="${buyersinfo}" var="item">
+					<tr class="tables">
+						<td>${item.uname}</td>
+						<td>${item.pronum}</td>
+						<td>${item.nature}</td>
+						<td>${item.starttime}</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</center>
 	</div>

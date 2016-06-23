@@ -24,7 +24,14 @@ public class UserInfo implements Serializable{
 	private String hobbypet;
 	private int status;
 	private String yanzheng;
+	private int orderid;
 	
+	public int getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
 	public int getUsid() {
 		return usid;
 	}
@@ -133,6 +140,8 @@ public class UserInfo implements Serializable{
 	public void setYanzheng(String yanzheng) {
 		this.yanzheng = yanzheng;
 	}
+	public UserInfo() {
+	}
 	@Override
 	public String toString() {
 		return "UserInfo [usid=" + usid + ", uname=" + uname + ", registerpwd="
@@ -141,12 +150,14 @@ public class UserInfo implements Serializable{
 				+ ", money=" + money + ", birthday=" + birthday + ", city="
 				+ city + ", street=" + street + ", profession=" + profession
 				+ ", qq=" + qq + ", email=" + email + ", hobbypet=" + hobbypet
-				+ ", status=" + status + ", yanzheng=" + yanzheng + "]";
+				+ ", status=" + status + ", yanzheng=" + yanzheng
+				+ ", orderid=" + orderid + "]";
 	}
 	public UserInfo(int usid, String uname, String registerpwd, String paypwd,
 			String userpic, String sex, String tel, int bqdou, double money,
 			String birthday, String city, String street, String profession,
-			int qq, String email, String hobbypet, int status, String yanzheng) {
+			int qq, String email, String hobbypet, int status, String yanzheng,
+			int orderid) {
 		super();
 		this.usid = usid;
 		this.uname = uname;
@@ -166,7 +177,7 @@ public class UserInfo implements Serializable{
 		this.hobbypet = hobbypet;
 		this.status = status;
 		this.yanzheng = yanzheng;
+		this.orderid = orderid;
 	}
-	public UserInfo() {
-	}
+	
 }

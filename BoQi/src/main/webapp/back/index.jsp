@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="easyui/css/index.css">
 	<link rel="stylesheet" type="text/css" href="easyui/css/OrderContnet.css">
 	
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="easyui/js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/js/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="easyui/js/index.js" charset="utf-8"></script>
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <li id="brandinfo_manager">  
 		                        <span>品牌信息</span>  
 		                    </li>
-		                    <li>  
+		                    <li id="brandshowinfo_manager">  
 		                        <span>品牌销量统计</span>  
 		                    </li>   
 		                </ul>  

@@ -3,10 +3,11 @@ package com.yc.boqi.service;
 import java.util.List;
 
 import com.yc.boqi.entity.Brand;
+import com.yc.boqi.entity.BrandBean;
 
 public interface BrandService {
 	//分页查询
-	public List<Brand> find(Integer pageNo, Integer pageSize);
+	public List<BrandBean> find(Integer pageNo, Integer pageSize);
 	//查询多少 个品牌
 	public int total();
 	/**
@@ -19,4 +20,14 @@ public interface BrandService {
 	 * @return
 	 */
 	public List<Brand> findAllBrand();
+	/**
+	 * 品牌销售信息
+	 * @return
+	 */
+	public List<BrandBean> findBrandShowInfo();
+	/**
+	 * 一个品牌的销售信息
+	 * @return
+	 */
+	public List<BrandBean> findBrandSellInfo(int id);
 }

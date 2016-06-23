@@ -80,7 +80,22 @@
 			pictrue=#{pictrue},
 		</if>
 		tid=#{tid},
-		promarprice=#{promarprice},bqpri=#{bqpri},prosales=#{prosales},inventory=#{inventory},prointro=#{prointro},
+		promarprice=#{promarprice},bqpri=#{bqpri},prosales=#{prosales},inventory=#{inventory},
+		<if test="prointro != null">
+			prointro=#{prointro},
+		</if>
 		status=#{status} where proid=#{proid}
 	</update>
+	<!-- 获取商品库存 -->
+	<select id="getproNum" parameterType="int" resultType="int">
+		select inventory from productinfo where proid=#{pro}	
+	</select>
+	<!-- 获取商品的购买信息 -->
+	<select id="getBuysInfo" parameterType="int" resultType="ProductinfoBean">
+		select * from
+			(select u.uname,om.pronum,p.nature,oc.starttime from 
+			bquserinfo u,ordercontent oc,orderform om,productinfo p where p.proid=om.proid and
+			u.usid=oc.usid and oc.orderid=om.orderid and p.proid=#{proid} and oc.orderstate<![CDATA[>]]>=2 order by oc.starttime desc) 
+		where rownum<![CDATA[<]]>21
+	</select>
 </mapper>

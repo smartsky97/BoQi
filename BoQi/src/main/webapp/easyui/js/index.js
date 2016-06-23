@@ -35,6 +35,17 @@ $(function(){
 						href:"back-BrandInfo.action"
 					});
 				}
+			}else if(node.id=="brandshowinfo_manager"){
+				if(obj.tabs("exists","品牌销量统计")){
+					obj.tabs("select","品牌销量统计");
+				}else{
+					obj.tabs("add",{
+						title:"品牌销量统计",
+						closable:true,
+						fit:true,
+						href:"back-BrankShowInfo.action"
+					});
+				}
 			}else if(node.id=="dogpro_manager"){
 				if(obj.tabs("exists","狗狗商品信息管理")){
 					obj.tabs("select","狗狗商品信息管理");

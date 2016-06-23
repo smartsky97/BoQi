@@ -28,7 +28,7 @@ public interface UserInfoMapper {
 	UserInfo getUserByUsid(int usid);
 	//筛选查询
 	List<UserInfo> findUserByInfo(Map<String,Object> map);
-	int updateyue(int usid);
+	int updateyue(Map<String, Object> pa);
 	
 	double selectmoney(int usid);
 }

@@ -39,15 +39,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="o-box-down"  style="table-layout:fixed;">
             <div class="error-box"></div>
             
-            <form class="registerform"action="demo/ajax_post.jsp">
+            <form class="registerform" action="demo/ajax_post.jsp">
                 <div class="fm-item">
                     <label for="logonId" class="form-label">波奇系统登陆：</label>
-                    <input type="text"  placeholder="请输入账号" maxlength="20" id="username" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  >    
+                    <input type="text"  placeholder="请输入账号" maxlength="20" id="username" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  value="as">    
                 </div>
                     
                 <div class="fm-item">
                     <label for="logonId" class="form-label">登陆密码：</label>
-                    <input type="password" placeholder="请输入密码" maxlength="20" id="password" class="i-text" datatype="*6-20" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！">    
+                    <input type="password" placeholder="请输入密码" maxlength="20" id="password" class="i-text" datatype="*6-20" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" value="a">    
                     <div class="ui-form-explain"></div>
                 </div>
                     
@@ -78,12 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var pwd = $.trim($("#password").val());
 		var cc = $.trim($("#yzm").val());//获取输入的验证码
 	
-		$.post("adminServlet",{op:"Adminlogin",cc:cc,uname:uname,pwd:pwd},function(data){
+		$.post("admin_AdminLogin",{cc:cc,aname:uname,pwd:pwd},function(data){
 			if(parseInt($.trim(data))==2){
 				alert("验证码有误！");
 			}else if(parseInt($.trim(data))==0){
-				alert("用户名或密码错误！"+parseInt($.trim(data)))
-			}else{
+				alert("用户名或密码错误！")
+			}else if(parseInt($.trim(data))==1){
 				window.location.href="back/index.jsp";
 			}
 		});

@@ -17,7 +17,7 @@ function search2(){
 	}else{
 		var ci = $(".search2").val();
 		var ye = 1;
-		ci=encodeURI(encodeURI(ci));
-		window.location.href="../productServlet?order=proid&op=searchBy&ci="+ci+"&ye="+ye;
+		//ci=encodeURI(encodeURI(ci));
+		window.location.href="proSearch_findSearchPro?order=proid&op=searchBy&ci="+ci+"&ye="+ye;
 	}
 }

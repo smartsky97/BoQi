@@ -85,33 +85,15 @@
 	                       <span></span>
 	                   </div>
 	                   <div class="show_body">
-	                   	<span>
-	                       	<a href="shopping.html" target="_blank">狗粮</a>
-	                       </span>
-	                       <span>
-	                       	<a href="shopping.html" target="_blank">狗罐头</a>
-	                       </span>
-	                       <span>
-	                       	<a href="shopping.html" target="_blank">狗零食</a>
-	                       </span>
-	                       <span>
-	                       	<a href="shopping.html" target="_blank">医疗</a>
-	                       </span>
-	                       <span>
-	                       	<a href="shopping.html" target="_blank">保健</a>
-	                       </span>
-	                       <span>
-	                       	<a href="shopping.html" target="_blank">沐浴露</a>
-	                       </span>
-	                       <span>
-	                       	<a href="#" target="_blank">日用品</a>
-	                       </span>
-	                       <span>
-	                       	<a href="#" target="_blank">玩具</a>
-	                       </span>
-	                       <span>
-	                       	<a href="#" target="_blank">衣服</a>
-	                       </span>
+	                   		<span><a href="shopping.html" target="_blank">狗粮</a></span>
+	                    	<span><a href="shopping.html" target="_blank">狗罐头</a></span>
+	                        <span><a href="shopping.html" target="_blank">狗零食</a></span>
+	                        <span><a href="shopping.html" target="_blank">医疗</a></span>
+	                        <span><a href="shopping.html" target="_blank">保健</a></span>
+	                        <span><a href="shopping.html" target="_blank">沐浴露</a></span>
+	                        <span><a href="#" target="_blank">日用品</a></span>
+	                        <span><a href="#" target="_blank">玩具</a></span>
+	                        <span><a href="#" target="_blank">衣服</a></span>
 	                   </div>
 	               </div>
 	               <!--没有显示的一部分-->
@@ -120,7 +102,7 @@
 	                   	<dl class="ttop">
 	                       	<dt><a href="shopping.html" target="_blank">宠物狗粮</a></dt>
 	                           <dd>|
-	                           	<a href="shopping.html" target="_blank">离乳期犬粮</a>|
+	                           	   <a href="shopping.html" target="_blank">离乳期犬粮</a>|
 	                               <a href="shopping.html" target="_blank">幼犬粮</a>|
 	                               <a href="shopping.html" target="_blank">成犬粮</a>|
 	                               <a href="shopping.html" target="_blank">老犬粮</a>|
@@ -898,22 +880,14 @@
 								name='衣服窝'></div>
 						</div>
 						<div class="dog_r_down">
-							<a href="#" target="_blank" name=""><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a> <a
-								class='last_small_pic' href="#" target="_blank"><img
-								src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
+							<a href="#" target="_blank" name=""><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a> 
+							<a class='last_small_pic' href="#" target="_blank"><img src="shoppingindeximg/shoppicpath1429493993.jpg"></a>
 						</div>
 					</div>
 					<div class="dog_s right ss">

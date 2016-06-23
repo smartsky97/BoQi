@@ -18,4 +18,21 @@
 	<select id="getProBrand" resultType="Brand">
 		select * from brand where status=1
 	</select>
+	<!-- 品牌的销售所有信息 -->
+	<select id="getBrandShowInfo" resultType="BrandBean">
+		 select b.brandid,b.brandname,sum(o.pronum*p.bqpri) br_pro_total,sum(o.pronum) br_num_total from 
+		 brand b,orderform o,productinfo p where 
+		 b.brandid=p.brandid and o.proid=p.proid and o.status>=2 group by b.brandid,b.brandname
+	</select>
+	<!-- 一个品牌的销量和销售金额:每一天的情况 -->
+	<select id="getOneBrand_sell" parameterType="int" resultType="BrandBean">
+		select brandid,brandname,paytime,sum(br_pro_total) br_pro_total,sum(br_num_total) br_num_total from 
+			(select b.brandid,b.brandname,to_char(paytime,'YYYY-MM-DD') as paytime,sum(o.pronum*p.bqpri) br_pro_total,
+				sum(o.pronum) br_num_total from 
+				brand b,orderform o,productinfo p,ordercontent ot where 
+				b.brandid=p.brandid and o.proid=p.proid and o.orderid=ot.orderid and o.status>=2 and b.brandid=#{id}
+			group by b.brandid,b.brandname,paytime)
+		group by brandid,brandname,paytime
+		order by paytime
+	</select>
 </mapper>

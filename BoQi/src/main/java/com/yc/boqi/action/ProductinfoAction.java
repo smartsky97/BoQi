@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,14 +56,22 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 	JsonParser parser = new JsonParser();
 	Gson gson = new Gson();
 	PrintWriter out;
-	private String flag;
-	public String getFlag() {
-		return flag;
+	private Map<String, Object> map;
+	public Map<String, Object> getMap() {
+		return map;
+	}
+	private String xflag;
+	public String getXflag() {
+		return xflag;
 	}
 	//图片上传
 	private File[] pictrues;//上传文件
 	private String[] pictruesFileName;//上传文件名
 	private String[] pictruesContentType;//上传文件类型
+	
+	private File[] prointros;//上传文件
+	private String[] prointrosFileName;//上传文件名
+	private String[] prointrosContentType;//上传文件类型
 	
 	
 	public File[] getPictrues() {
@@ -172,20 +181,64 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		    }
 		    picture = picture.substring(0, picture.length()-1);
 	    }
+	    System.out.println("介绍图片："+prointros+prointrosFileName);
+	    try {			
+			FileUtils.copyFile(prointros[0], new File(path+"/"+prointrosFileName[0]));//开始上传
+			
+			System.out.println("上传成功！");
+		} catch (IOException e) {
+			System.out.println("上传失败！");
+			e.printStackTrace(); 
+		}
 	    System.out.println("pp:"+picture);
+	    productinfo.setProintro(prointrosFileName[0]);
 	    productinfo.setPictrue(picture);
 	    productinfo.setSuitpet("狗");
 	    productinfoService.addProduct(productinfo);
 	}
+	public File[] getProintros() {
+		return prointros;
+	}
+
+	public void setProintros(File[] prointros) {
+		this.prointros = prointros;
+	}
+
+	public String[] getProintrosFileName() {
+		return prointrosFileName;
+	}
+
+	public void setProintrosFileName(String[] prointrosFileName) {
+		this.prointrosFileName = prointrosFileName;
+	}
+
+	public String[] getProintrosContentType() {
+		return prointrosContentType;
+	}
+
+	public void setProintrosContentType(String[] prointrosContentType) {
+		this.prointrosContentType = prointrosContentType;
+	}
+
 	//后台查询商品获取数据
 	public String getProductInfo(){
 		productinfo = productinfoService.findProById(productinfo.getProid());
 		return "productinfo";
 	}
-
+	//前台获取商品的信息展示
 	public String product(){
 		Productinfo pro = productinfoService.findAproduct(productinfo.getProid());
+		List<ProductinfoBean> buys = productinfoService.getBuersInfo(productinfo.getProid());
+		for(ProductinfoBean i:buys){
+			String name = i.getUname();
+			i.setUname(name.substring(0, 1)+"***"+name.substring(name.length()-2, name.length()-1));
+			if(i.getNature().equals("") || i.getNature().equals(null)){
+				i.setNature("默认规格");
+			}
+		}
 		request.getSession().setAttribute(AllSessions.PRODUCT_ONE, pro);
+		request.getSession().setAttribute(AllSessions.PRODUCT_BUTINFO, buys);
+		System.out.println("信息："+buys);
 		return "product";
 	}
 	//后台修改订单
@@ -193,7 +246,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		String path =ServletActionContext.getServletContext().getRealPath("upload/");
 		System.out.println("-->"+productinfo);
 		String picture="";
-		if(pictruesFileName!=null){
+		if(pictruesFileName!=null && pictruesFileName.equals("")){
 			for(int i = 0;i<pictrues.length;i++) {
 	    		//要使用绝对地址
 	    		try {			
@@ -215,9 +268,22 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 			    picture = picture.substring(0, picture.length()-1);
 		    }
 		    productinfo.setPictrue(picture);
+		    System.out.println("后台的修改信息："+productinfo);
 		}
-		flag=productinfoService.updateProduct(productinfo);
-		return "flag";
+		if(prointrosFileName!=null && prointrosFileName.equals("")){
+			System.out.println("介绍图片："+prointros+prointrosFileName);
+		    try {			
+				FileUtils.copyFile(prointros[0], new File(path+"/"+prointrosFileName[0]));//开始上传
+				
+				System.out.println("上传成功！");
+			} catch (IOException e) {
+				System.out.println("上传失败！");
+				e.printStackTrace(); 
+			}
+		    productinfo.setProintro(prointrosFileName[0]);
+		}
+		xflag=productinfoService.updateProduct(productinfo);
+		return "xflag";
 	}
 
 	//后台获取商品属性

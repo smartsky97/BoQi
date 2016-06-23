@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.boqi.entity.Brand;
+import com.yc.boqi.entity.BrandBean;
 import com.yc.boqi.mapper.BrandMapper;
 import com.yc.boqi.service.BrandService;
 @Service("brandService")
@@ -16,7 +17,7 @@ public class BrandServiceImpl implements BrandService {
 	private BrandMapper brandMapper;
 
 	@Override
-	public List<Brand> find(Integer pageNo, Integer pageSize) {
+	public List<BrandBean> find(Integer pageNo, Integer pageSize) {
 		Map<String, Object> brand = new HashMap<String, Object>();
 		brand.put("yi", pageNo*pageSize);
 		brand.put("er", (pageNo-1)*pageSize);
@@ -36,6 +37,16 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public List<Brand> findAllBrand() {
 		return brandMapper.getAllBrand();
+	}
+
+	@Override
+	public List<BrandBean> findBrandShowInfo() {
+		return brandMapper.getBrandShowInfo();
+	}
+
+	@Override
+	public List<BrandBean> findBrandSellInfo(int id) {
+		return brandMapper.getOneBrand_sell(id);
 	}
 
 	

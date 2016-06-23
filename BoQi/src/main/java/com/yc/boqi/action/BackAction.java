@@ -9,6 +9,10 @@ public class BackAction {
 		return "UserInfo";
 	}
 
+	public String BrankShowInfo(){
+		return "BrankShowInfo";
+	}
+	
 	public String BrandInfo(){
 		return "BrandInfo";
 	}

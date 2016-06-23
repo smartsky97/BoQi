@@ -89,7 +89,6 @@ function onclick_reduce(b) {
 	}
 }
 
-
 function showTotal(){
 	var total=0;
 	//获得已选中复选框

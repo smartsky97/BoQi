@@ -59,5 +59,21 @@ public interface OrdercontentMapper {
 	 * @return
 	 */
 	public int updateOrderStatusByIds(Map<String, Object> add);
+	/**
+	 * 修改订单的状态
+	 * @param orderid
+	 * @return
+	 */
 	public int updateStatu(int orderid);
+	/**
+	 * 获取订单的数量
+	 * @return
+	 */
+	public int total();
+	/**
+	 * 修改订单付款时间
+	 * @param data
+	 * @return
+	 */
+	int updateOrderPayTime(Map<String, Object> add);
 }

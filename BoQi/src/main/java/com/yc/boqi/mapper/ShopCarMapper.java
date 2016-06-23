@@ -10,4 +10,6 @@ public interface ShopCarMapper {
 	public ShopCar checkIfSave(Map<String, Object> car);
 	public void addAInfo(Map<String, Object> car);
 	public List<ShopCarBean> getAllInfo(int usid);
+	
+	public void delshopid(int proid);
 }

@@ -55,15 +55,7 @@ public class testAll {
 		assertNotNull("出错了",mi);
 	}
 
-	@Test
-	public void testbrand() {
-		Map<String, Object> ha = new HashMap<String, Object>();
-		ha.put("pageNo", 1);
-		ha.put("pageSize", 2);
-		List<Brand> mi = brandMapper.findFenYe(ha);
-		System.out.println("aaa:"+mi);
-		assertNotNull("出错了",mi);
-	}
+
 	
 	@Test
 	public void testpro() {
