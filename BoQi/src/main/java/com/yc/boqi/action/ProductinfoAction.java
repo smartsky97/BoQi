@@ -246,7 +246,7 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		String path =ServletActionContext.getServletContext().getRealPath("upload/");
 		System.out.println("-->"+productinfo);
 		String picture="";
-		if(pictruesFileName!=null && pictruesFileName.equals("")){
+		if(pictruesFileName!=null){
 			for(int i = 0;i<pictrues.length;i++) {
 	    		//要使用绝对地址
 	    		try {			
@@ -270,7 +270,8 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 		    productinfo.setPictrue(picture);
 		    System.out.println("后台的修改信息："+productinfo);
 		}
-		if(prointrosFileName!=null && prointrosFileName.equals("")){
+		//System.out.println("商品的："+pictruesFileName.toString());
+		if(prointrosFileName!=null){
 			System.out.println("介绍图片："+prointros+prointrosFileName);
 		    try {			
 				FileUtils.copyFile(prointros[0], new File(path+"/"+prointrosFileName[0]));//开始上传

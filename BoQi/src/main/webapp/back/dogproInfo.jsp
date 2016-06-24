@@ -501,7 +501,6 @@ function uptDogProInfo(){
 	var ajax_option={
 		url:"productinfo_changeproducttt.action",
 		type:"post",
-		//dataType:'script',
 		beforeSubmit:checkUppro,
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		success:function(data){
