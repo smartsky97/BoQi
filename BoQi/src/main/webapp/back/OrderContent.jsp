@@ -16,6 +16,8 @@
 		<option value="5">已收货</option>
 		<option value="6">已收货但删除</option>
 		<option value="7">退货</option>
+		<option value="8">未评价</option>
+		<option value="9">已评价</option>
 	</select>
 	&nbsp;&nbsp;<a href="javascript:findOrderInfoByInfo()" style="margin-top:-5px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">查询</a>
 	<a href="javascript:changeToPai()" style="margin-top:-5px;margin-left:15px;" class="easyui-linkbutton" data-option="iconCls:'icon-add'">转配货</a>
@@ -554,7 +556,12 @@ function showNewsDetail2(orderid){
 			return "已收货但删除";
 		}else if(data==7){
 			return "退货";
+		}else if(data==8){
+			return "未评价";
+		}else if(data==9){
+			return "已评价";
 		}
+		
 	}
 	//根据条件来查询订单
 	function findOrderInfoByInfo(){

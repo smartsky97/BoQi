@@ -16,24 +16,79 @@
 	
 	<select id="selectOrderInfo" parameterType="UserInfo" resultType="OrderForm">
   		select oc.orderid,o.proid,p.nature,p.proname,o.pronum,p.bqpri,oc.ordersum,a.addname,o.status from ordercontent oc, orderform o, productinfo p, address a 
-  		where p.proid=o.proid and oc.usid=a.usid and oc.orderid=o.orderid and oc.usid=1001 and orderstate!=0 and orderstate!=6 order by oc.orderid asc
+  		where p.proid=o.proid and oc.usid=a.usid and oc.orderid=o.orderid and oc.usid=#{usid} and o.status!=0 and o.status!=6 order by oc.orderid asc
 	</select>
 	
 	<select id="selectwzg" resultType="int">
-		select count(orderid) from orderform where status=1 
+		select count(orderid) from ordercontent where orderstate=1 
 	</select>
 	
 	<select id="selectfinish" resultType="int">
-		select count(orderid) from orderform where status=4 
+		select count(orderid) from ordercontent where orderstate=4 
 	</select>
 	
 	<select id="selectpingjia" resultType="int">
-		select count(orderid) from orderform where status=6 
+		select count(orderid) from ordercontent where orderstate=6 
 	</select>
 	
 	<delete id="delOrder" parameterType="int">
 		delete from orderform where orderid=#{orderid}
 	</delete>
+	
+	<delete id="delOrder1">
+		delete from ordercontent where orderid=#{orderid}
+	</delete>
+	
+	<update id="changeUserInfo" parameterType="userInfo">
+		update bquserinfo set 
+		<if test="#{uname} != null and #{uname} != ''">
+			uname=#{uname},
+		</if>
+		<if test="#{sex} != null and #{sex} != ''">
+			sex=#{sex},
+		</if>
+		<if test="#{birthday} != null and #{birthday} != ''">
+			birthday=to_date(#{birthday},'yyyy-mm-dd'),
+		</if>
+		<if test="#{city} != null and #{city} != ''">
+			city=#{city},
+		</if>
+		<if test="#{street} != null and #{street} != ''">
+			street=#{street},
+		</if>
+		<if test="#{profession} != null and #{profession} != ''">
+			profession=#{profession},
+		</if>
+		<if test="#{qq} != null and #{qq} != ''">
+			qq=#{qq}
+		</if>
+		where usid=#{usid}
+	</update>
+	<!-- 查询订单商品图片 -->
+	<select id="getpicInfo" parameterType="int" resultType="orderPicture">
+		select o.orderid,o.proid,p.pictrue from productinfo p,orderform o where  p.proid in(select o.proid from orderform o,ordercontent oc where o.orderid=oc.orderid and oc.usid=#{usid}) and o.proid=p.proid
+	</select>
+	
+	<!-- 获取概要订单表信息 -->
+	<select id="getbasicorder" parameterType="int" resultType="orderBasic">
+		select oc.orderid,a.addname,oc.ordersum,oc.orderstate from ordercontent oc,address a where oc.usid=#{usid} and a.addid=oc.addid order by oc.orderid desc
+	</select>
+	
+	<!-- 确认收货 -->
+	<select id="getOrderStatusByid" parameterType="int" resultType="int">
+		select orderstate from ordercontent where orderid=#{orderid}
+	</select>
+	
+	<update id="checkshouhuo" parameterType="int">
+		update ordercontent set orderstate=5 where orderid=#{orderid}
+	</update>
+	
+	<update id="checkshouhuo1" parameterType="int">
+		update orderform set status=5 where orderid=#{orderid}
+	</update>
+	
+	
+	
 	<!-- 分页查询 -->
 	<select id="getPageUsers" parameterType="map" resultType="UserInfo">
 		select * from(select a.*,rownum rn from (select *from bquserinfo order by usid) a where
@@ -67,4 +122,7 @@
 	<select id="selectmoney" parameterType="int" resultType="double">
 		select money from bquserinfo where usid=#{usid}
 	</select>
+	<!-- <select id="getCollectInfo">
+		select ct.proid,pi.proname,pi.pictrue from collectpro ct,productinfo pi  where ct.proid=pi.proid and ct.usid=#{usid}
+	</select> -->
 </mapper>

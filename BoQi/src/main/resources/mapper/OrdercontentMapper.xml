@@ -14,7 +14,8 @@
 	</insert>
 	<!-- 查询所有的订单 -->
 	<select id="getAll" parameterType="map" resultType="OrderContent">
-		select * from(select a.*,rownum rn from (select o.*,b.uname from ordercontent o,bquserinfo b where o.orderstate!=0 order by orderid) a where
+		select * from(select a.*,rownum rn from (select o.*,b.uname from ordercontent o,bquserinfo b where o.orderstate!=0 and b.status=1
+		 and o.usid=b.usid order by orderid) a where
 		rownum<![CDATA[<]]>=#{one}) b where rn<![CDATA[>]]>#{two}
 	</select>
 	

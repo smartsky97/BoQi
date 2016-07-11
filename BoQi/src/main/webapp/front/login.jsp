@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="utf-8">
 <title>波奇商城---登录</title>
 <link href="css/login.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="indeximg/head11.jpg">
 <script type="text/javascript" src="jquery/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 </head>

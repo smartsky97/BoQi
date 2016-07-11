@@ -109,6 +109,11 @@
 		    <version>4.1.6.RELEASE</version>
 		</dependency>
 		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-context-support</artifactId>
+  			<version>4.1.6.RELEASE</version>
+		</dependency>
+		<dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>1.8.9</version>
@@ -144,6 +149,12 @@
 		    <groupId>org.pojava</groupId>
 		    <artifactId>datetime</artifactId>
 		    <version>3.0.2</version>
+		</dependency>
+		<!-- 邮件发送包 -->
+		<dependency>
+ 			 <groupId>com.sun.mail</groupId>
+  			 <artifactId>javax.mail</artifactId>
+ 			 <version>1.5.5</version>
 		</dependency>
 	</dependencies>
 	<build>

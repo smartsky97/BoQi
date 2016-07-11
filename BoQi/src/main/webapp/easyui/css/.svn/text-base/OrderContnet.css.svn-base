@@ -1,0 +1,135 @@
+#content_show{
+	margin-top:30px;
+}
+#buchengda{
+	padding:0;
+	max-width:130px;
+	max-height:16px;
+}
+#content_table{
+	border-spacing: 0px;
+	position:relative;
+	overflow:hidden;
+	top:20px;
+	max-width:1000px;
+	z-index:10;
+}
+.yoyo{
+	background: #33e657 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 8px;
+    color: #fff;
+    margin-top:-15px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 37px;
+    width: 240px;
+    position:relative;
+    z-index:100;
+}
+.thing_proid{
+	display:none;
+}
+.content_total{
+	overflow:hidden;
+}
+#total_money,#total_money2{
+	font-size:20px;
+	color:red;
+}
+
+.wwidth{
+	width:640px;
+	overflow:hidden;
+}
+.wwidth .tt{
+	float:left;
+}
+.wwidth label{
+	margin-left:40px;
+}
+.content_top_title th{
+	padding: 8px 10px;
+    line-height: 130%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    font-weight: 400;
+}
+
+#haha{
+	overflow:hidden;
+	margin-top:20px;
+	float:right;
+}
+
+#content_tbody th{
+	padding: 8px 10px;
+    line-height: 130%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-weight: 400;
+}
+#content_tbody2 th{
+	padding: 8px 10px;
+    line-height: 130%;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-weight: 400;
+}
+
+#content_tbody .llas{
+	border-right: 1px solid #ddd;
+}
+#content_tbody2 .llas{
+	border-right: 1px solid #ddd;
+}
+.chacha{
+	border-right: 1px solid #ddd;
+}
+
+.content_top_title .content_goods{
+	min-width:350px;
+	border-left: 1px solid #ddd;
+}
+
+.content_top_title .content_attr{
+	min-width:110px;
+	border-left: 1px solid #ddd;
+}
+
+.content_top_title .content_pri{
+	min-width:90x;
+	border-left: 1px solid #ddd;
+}
+
+.content_top_title .content_num{
+	min-width:90px;
+	border-left: 1px solid #ddd;
+}
+.kanbujian{
+	display:none;
+}
+#news_newstype{
+	width:130px;
+}
+.content_jiage,.content_jiage2{
+	width:40px;
+	background:#fafafa;
+	outline:none;
+	border-style:soild;
+}
+.content_top_title .content_status{
+	min-width:90px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.content_top_title,.content_status2{
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.lastwo{
+	border-right: 1px solid #ddd;
+}

@@ -10,10 +10,16 @@ import org.pojava.datetime.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.boqi.entity.CollectPro;
 import com.yc.boqi.entity.OrderForm;
 import com.yc.boqi.entity.UserInfo;
+
+import com.yc.boqi.entity.orderBasic;
+import com.yc.boqi.entity.orderPicture;
+
 import com.yc.boqi.mapper.OrdercontentMapper;
 import com.yc.boqi.mapper.OrderformMapper;
+
 import com.yc.boqi.mapper.UserInfoMapper;
 import com.yc.boqi.service.UserInfoService;
 
@@ -99,6 +105,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return delo;
 	}
 	
+//	@Override  //获取收藏商品
+//	public List<CollectPro> getCollectPro(int usid) {
+//		System.out.println(usid);
+//		List<CollectPro> fav=userInfoMapper.getCollectInfo(usid);
+//		return fav;
+//	}
+	
 	@Override
 	public List<UserInfo> getPageUsers(Map<String, Object> map) {
 		return userInfoMapper.getPageUsers(map);
@@ -147,4 +160,53 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public double selectmoney(int usid) {
 		return userInfoMapper.selectmoney(usid);
 	}
+
+	//修改个人资料
+	@Override
+	public int updateUserInfo(UserInfo userInfo) {
+		int rst=userInfoMapper.changeUserInfo(userInfo);
+		return rst;
+	}
+
+
+	@Override
+	public List<orderPicture> getpicture(int usid) {
+		return userInfoMapper.getpicInfo(usid);
+	}
+
+
+	@Override
+	public List<orderBasic> selectBasic(int usid) {
+		
+		return userInfoMapper.getbasicorder(usid);
+	}
+
+
+	@Override
+	public int querenshouhuo(int orderid) {
+		return userInfoMapper.checkshouhuo(orderid);
+	}
+
+
+	@Override
+	public int deleteOrder1(int orderid) {
+		int delo1=userInfoMapper.delOrder1(orderid);
+		return delo1;
+	}
+
+
+	@Override
+	public int querenshouhuo1(int orderid) {
+		return userInfoMapper.checkshouhuo1(orderid);
+	}
+
+
+	@Override
+	public int getorderStatus(int orderid) {
+		
+		return userInfoMapper.getOrderStatusByid(orderid);
+	}
+
+
+
 }

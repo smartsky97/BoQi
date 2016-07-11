@@ -83,6 +83,41 @@ insert into firstmenu values(seq_fid.nextval,'嘉良','狗',1,'','');
 insert into firstmenu values(seq_fid.nextval,'狗粮','狗',1,'','');
 insert into firstmenu values(seq_fid.nextval,'狗罐头妙鲜包','狗',1,'','');
 insert into firstmenu values(seq_fid.nextval,'狗零食','狗',1,'','');
+--狗
+insert into firstmenu values(seq_fid.nextval,'狗粮','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'湿粮','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'零食','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'保健品','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'医疗','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'沐浴露','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'日用品','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'美容','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'玩具','狗',1,'','');
+insert into firstmenu values(seq_fid.nextval,'衣服窝','狗',1,'','');
+--猫
+insert into firstmenu values(seq_fid.nextval,'猫粮','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'湿粮','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'零食','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'保健品','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'香波','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'医疗','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'衣服窝','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'玩具','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'日用品','猫',1,'','');
+insert into firstmenu values(seq_fid.nextval,'美容','猫',1,'','');
+insert into secondmenu values(1,1001,'离乳期犬粮',1,'',''); 
+insert into secondmenu values(2,1001,'幼犬粮',1,'',''); 
+insert into secondmenu values(3,1001,'成犬粮',1,'','');
+insert into secondmenu values(4,1001,'老犬粮',1,'','');
+insert into secondmenu values(5,1001,'全犬粮',1,'','');
+
+insert into secondmenu values(6,1002,'成犬',1,'',''); 
+insert into secondmenu values(7,1002,'幼犬',1,'',''); 
+
+insert into secondmenu values(8,1003,'肉质零食',1,'',''); 
+insert into secondmenu values(9,1003,'咬骨素食',1,'',''); 
+insert into secondmenu values(10,1003,'奶质素食',1,'',''); 
+insert into secondmenu values(11,1003,'饼干素食',1,'',''); 
 
 commit;
 	
@@ -141,14 +176,11 @@ select o.orderid,o.proid,o.nature,o.pronum,o.bqpri,o.status,proname from orderfo
 drop table productinfo;
 select * from productinfo;
 
+insert into productinfo values(seq_proid.nextval,'离乳期幼犬奶糕5kg','1Kg',1003,1,'狗狗','ji2',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
+insert into productinfo values(seq_proid.nextval,'泰迪贵成犬粮专用狗粮','100Kg',1001,1,'狗狗','j',102.0,79.0,20,'一款热卖的狗粮',234,1,'',''); 
 
-select *from 
-
-
-insert into productinfo values(seq_proid.nextval,'离乳期幼犬奶糕1kg','1Kg',1001,2,'狗狗','ji',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
-insert into productinfo values(seq_proid.nextval,'泰迪贵成犬粮专用狗粮','100Kg',1001,2,'狗狗','j',102.0,79.0,20,'一款热卖的狗粮',234,1,'',''); 
-
-insert into productinfo values(seq_proid.nextval,'美国狗粮','1Kg',1001,1,'狗狗','ji',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
+insert into productinfo values(1049,'美国狗粮1','10Kg',1001,1,'狗狗','ji3',100.0,80.0,20,'一款热卖的狗粮',234,1,'',''); 
+update productinfo set pictrue='tuijian1,tuijian2' where proid=1049
 insert into productinfo values(1,'超级狗粮','100Kg',1001,1,'狗狗','j',102.0,79.0,1000,'一款热卖的狗粮',234,1,'',''); 
 
 
@@ -177,6 +209,8 @@ select * from(select a.*,rownum rn from (select proid,proname,nature,b.brandname
 left join brand b on p.brandid=b.brandid
 left join secondmenu s on p.tid=s.tid order by proid) 
 a where rownum<=10) b where rn>0
+--查询图片
+select o.orderid,p.pictrue from productinfo p,orderform o where  p.proid in(select o.proid from orderform o,ordercontent oc where o.orderid=oc.orderid and oc.usid=1001) and o.proid=p.proid
 
 commit;
 select proid,proname,nature from productinfo where proname='狗狗' union select proid,proname,nature from productinfo where proname='狗狗2' 
@@ -276,7 +310,7 @@ create table ordercontent(
     create sequence seq_orderid start with 1001 increment by 1;
 select o.orderid,orderstate,usid,readdr,starttime,paytime,endtime,ordersum,proname from ordercontent o,productinfo p,orderform om where om.orderid=o.orderid and om.proid=p.proid and o.orderid=1001
 
-update ordercontent set orderstate=2 where orderid=1004
+update ordercontent set orderstate=4 where orderid=1002
 drop table ordercontent;
 select * from ordercontent;
 
@@ -287,8 +321,9 @@ insert into ordercontent values(seq_orderid.nextval,2,1001,'dfsdfdf',to_date('20
 
 select max(orderid) from ordercontent where usid=1001
 
-
-
+	select distinct oc.orderid,o.proid,p.nature,p.proname,o.pronum,p.bqpri,oc.ordersum,a.addname,o.status from ordercontent oc, orderform o, productinfo p, address a 
+  		where p.proid=o.proid and oc.usid=a.usid and oc.orderid=o.orderid and oc.usid=1001 and orderstate!=0 and orderstate!=6 order by oc.orderid asc 
+			
 
 insert into ordercontent values(1001,1,1001,'china',to_date('2015-1-1','yyyy-mm-dd'),null,null,623,'','');     
 insert into ordercontent values(1004,1,1003,'china',to_date('2015-1-1','yyyy-mm-dd'),null,null,623,'','');     
@@ -302,6 +337,11 @@ select orderid,proid,nature,pronum,bqpri,status from orderform where orderid=100
 select distinct orderid,uname,starttime,orderstate,ordersum from ordercontent o,bquserinfo b where o.usid=b.usid and orderstate!=0 order by orderid
 commit;
 
+
+select * from(select a.*,rownum rn from (select o.*,b.uname from ordercontent o,bquserinfo b where o.orderstate!=0 and b.status=1 order by orderid) a where
+		rownum<=10) b where rn>0
+
+
 订单详情表
        订单编号        商品号      价格
 create table orderform(
@@ -311,13 +351,16 @@ create table orderform(
               constraint FH_proid references productinfo(proid),   --商品编号
 		pronum int,						--数量
         bqpri number(7,2) not null,   --波奇价
-		status int,     --订单状态   0：取消交易       1：未支付   2：待发货    3:等待收货     4：交易完成    5：退货
+		status int,     --订单状态   0：取消交易/失效    1：待支付   2：已支付    3:配货中  4：已发货    5：已收货    6：已收货，用户自行删除   7：退货
         orrmid varchar2(200),      --预留字段
         test20 varchar2(200)   --预留字段
        )
 drop table orderform;
 select * from orderform;
-insert into orderform values(1001,1100,1,10.2,1,orderform_add.nextval,'');   
+
+update orderform set status=4 where orderid=1002
+
+insert into orderform values(1002,1049,1,10.2,1,orderform_add.nextval,'');   
 
 select o.orderid,o.proid,o.nature,o.pronum,o.bqpri,o.status,proname,orrmid from orderform o,productinfo p where o.proid=p.proid and orderid=1001
 

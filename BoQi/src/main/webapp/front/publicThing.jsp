@@ -4,7 +4,7 @@
 	       <div class="login right">
 	           <ul>
 				<c:if test="${not empty loginUser }">
-		    		<li class="login"><a href="gerenzhuye.html"><font color="#FF0000" size="2">当前登陆用户:${loginUser.uname }</font></a></li>&nbsp;&nbsp;
+		    		<li class="login"><a href="user_userInfo.action"><font color="#FF0000" size="2">当前登陆用户:${loginUser.uname }</font></a></li>&nbsp;&nbsp;
 					<li class="login"><a href="javascript:loginOut()"><font color="#FF0000" size="2">[注销]</font></a></li>
 		    	</c:if>
 		    	<c:if test="${empty loginUser }">

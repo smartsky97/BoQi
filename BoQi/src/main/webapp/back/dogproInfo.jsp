@@ -23,6 +23,7 @@
 var uptProid;
 var datagrid;
 	var yiji = document.getElementById('uptdogPro_finame');  
+	var yiji2 = document.getElementById('dogPro_finame');  
 	var lei=new Array();  
 $(function(){
 	var editRow=undefined;
@@ -148,6 +149,14 @@ function changeER(){
         erji.options[x]=lei[index][x]  
     }
 }
+function changeER2(){
+	var erji=document.getElementById('dogPro_tpname');  
+    erji.options.length=0;  
+    var index=yiji2.selectedIndex;  
+    for(var x in lei[index]){  
+        erji.options[x]=lei[index][x]  
+    }
+}
 
 function ftos(){
 	var changefid=$("#Fir_select").val();
@@ -186,16 +195,38 @@ obj.onsubmit = function(){
 	return check();
 }
 
-
+function AddDogProInfo(){
+	//表单提交后的操作使用jquery.from.js  
+	var ajax_option1={
+		url:"productinfo_AddProduction.action",
+		type:"post",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		success:function(){
+			$.messager.show({title:'成功提示',msg:'商品信息修改成功....',timeout:2000,showType:'slide'});
+			$("#dogPro_add").dialog("close");
+			$("#dogpro_info").datagrid("reload");
+			$("#dogPro_name").val("");
+			$("#dogPro_nature").val("");
+			$("#dogPro_pic").val("");
+			$("#dogPro_marpri").val("");
+			$("#dogPro_bqpri").val("");
+			$("#dogPro_sales").val("");
+			$("#dogPro_intro").val("");
+			$("#dogPro_inven").val("");
+			$("#news_pic_show").html("");
+		}
+	}
+	$('#addDogInfo').ajaxSubmit(ajax_option1);
+}
 </script>
 <script type="text/javascript" src="js/jquery.form.min.js"></script>
 <div id="dogPro_add" class="easyui-dialog" title="添加狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
-	<form id="addDogInfo" action="productinfo_AddProduction" style="padding:20px 0 0 250px;float:left;display:inline-block;" method="post" enctype="multipart/form-data"  target="hiddenIFrame"> 
+	<form id="addDogInfo" style="padding:20px 0 0 250px;float:left;display:inline-block;" method="post" enctype="multipart/form-data"  target="hiddenIFrame"> 
 		<label>商品名称：</label><input type=text name="proname"id="dogPro_name" class="myinput">
 		<label style="padding-left:100px;">商品规格：</label><input type=text name="nature"id="dogPro_nature" class="myinput"><br /> <br /> 
 		<label>品牌名称：</label><select name="brandid" id="dogPro_brname" class="myinput" style="width:145px;"></select>
 		<label style="padding-left:100px;">商品图片：</label><input type=file name="pictrues" id="dogPro_pic" multiple="multiple" onchange="previewMultipleImage(this,'news_pic_show')"><br /> <br /> 
-		<label>所属类型：</label><select name="fid" id="dogPro_finame"class="myinput" style="width:145px;"></select>
+		<label>所属类型：</label><select name="fid" onChange="changeER2()" id="dogPro_finame"class="myinput" style="width:145px;"></select>
 		<label style="padding-left:100px;">所属分类：</label><select name="tid" id="dogPro_tpname"class="myinput" style="width:145px;"></select><br /> <br />
 		<label>市  场  价 ：  </label><input type=text name="promarprice"id="dogPro_marpri" class="myinput">
 		<label style="padding-left:100px;">波  奇  价 ：  </label><input type=text name="bqpri"id="dogPro_bqpri" class="myinput"><br /> <br /> 
@@ -203,8 +234,7 @@ obj.onsubmit = function(){
 		<label style="padding-left:100px;">商品库存：</label><input type=text name="inventory"id="dogPro_inven" class="myinput"><br /> <br /> 
 		<label>商品状态：</label><select name="status" id="dogPro_status"class="myinput"></select><br /> <br />  
 		<label style="float:left;">商品介绍：</label><input type=file name="prointros" id="dogPro_info" onchange="previewMultipleImage(this,'proinfo_pic_show')"><br /> <br /> 
-		
-		<input type="submit" value="添加"/>
+		<a href="javascript:AddDogProInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">添加</a>
 	</form>
 	<div style="float:right;width:380px;margin-right:20px;">
 		<fieldset id="news_pic_show">
@@ -265,7 +295,7 @@ obj.onsubmit = function(){
 <div id="dogPro_upt" class="easyui-dialog" title="更改狗狗商品"  data-options="fit:true,iconCls:'icon-add',resizeable:true,modal:true,closed:true" style="float:left;">
 	<form id="pro_change" style="padding:20px 0 0 250px;float:left;display:inline-block;">
 		<label>商品名称：</label><input type=text name="proname"id="uptdogPro_name" class="myinput">
-		<input type="hidden" name="proid" id="upproid" value="${loginUser.vuid}"/>  
+		<input type="hidden" name="proid" id="upproid"/>  
 		<label style="padding-left:100px;">商品规格：</label><input type=text name="nature"id="uptdogPro_nature" class="myinput"><br /> <br /> 
 		<label>品牌名称：</label><select name="brandid" id="uptdogPro_brname"class="myinput"  style="width:145px;"></select>
 		<label style="padding-left:100px;">商品图片：</label><input type=file name="pictrues" id="uptdogPro_pic" multiple="multiple" onchange="previewMultipleImage(this,'uptpro_pic_show')"><br /> <br /> 
@@ -303,6 +333,7 @@ function findProByInfo(){
 	});	
 }
 function addDogProInfoButton(){
+	changeER2();
 	$("#dogPro_add").dialog("open");
 }
 function addDogProInfo(){
@@ -406,7 +437,7 @@ function uptDogProInfoButton(){
 		var proid=rows.proid;
 		uptProid=proid;
 		$("#dogPro_upt").dialog("open");
-		$("#upproid").val(uptProid);
+		$("#upproid").val(proid);
 		$.post("productinfo_getProductInfo",{proid:proid},function(data){
 			$("#uptdogPro_name").val(data.proname);
 			$("#uptdogPro_nature").val(data.nature);

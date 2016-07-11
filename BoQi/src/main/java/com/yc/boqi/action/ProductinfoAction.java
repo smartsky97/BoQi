@@ -283,7 +283,17 @@ public class ProductinfoAction implements ServletRequestAware,ServletResponseAwa
 			}
 		    productinfo.setProintro(prointrosFileName[0]);
 		}
+		
 		xflag=productinfoService.updateProduct(productinfo);
+		
+		pictrues=null;//上传文件
+		pictruesFileName=null;//上传文件名
+		pictruesContentType=null;//上传文件类型
+		
+		prointros=null;//上传文件
+		prointrosFileName=null;//上传文件名
+		prointrosContentType=null;//上传文件类型
+		
 		return "xflag";
 	}
 

@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <link rel="stylesheet" type="text/css" href="css/bank.css">
+<link rel="shortcut icon" href="indeximg/head11.jpg">
 <link href="css/publicThing.css" type="text/css" rel="stylesheet">
 
 <script type="text/javascript" src="jquery/jquery-1.11.3.js"></script>
@@ -132,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><INPUT TYPE="radio" name="yh" value="BOCO-NET-B2C" checked="checked"/><img
 								name="BOCO-NET-B2C" src="bank_img/bcc.bmp" /></td>
 							<td><INPUT TYPE="radio" name="yh" value="ICBC-NET-B2C" checked="checked"/><img
-								name="ICBC-NET-B2C" src="bank_img/gongshang.bmp" /></td>
+								name="ICBC-NET-B2C" src="bank_img/gongShang.bmp" /></td>
 						</tr>
 						<tr class="allbanks">
 							<td><INPUT TYPE="radio" name="yh" value="CBHB-NET-B2C" checked="checked"/><img

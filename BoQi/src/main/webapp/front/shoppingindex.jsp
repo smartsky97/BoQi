@@ -15,6 +15,7 @@
 	<meta http-equiv="description" content="This is my page">
 	<link href="css/shoppingindex.css" type="text/css" rel="stylesheet"> 
 	<link href="css/publicThing.css" type="text/css" rel="stylesheet"> 
+	<link rel="shortcut icon" href="indeximg/head11.jpg">
 	
 	<script  type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js"></script>

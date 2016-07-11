@@ -118,6 +118,7 @@
     		<result name="asuccess" type="redirect">${zhvalue}</result>
     		<result name="bank">/front/bank.jsp</result>
     		<result name="{2}">/front/{2}.jsp</result>
+    		<result name="registerFalse">/front/register.html</result>
     	</action>
     	
     </package>

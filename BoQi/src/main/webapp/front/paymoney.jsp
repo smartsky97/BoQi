@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="css/car2.css">
 	<link href="css/publicThing.css" type="text/css" rel="stylesheet">
+	<link rel="shortcut icon" href="indeximg/head11.jpg">
 	<script type="text/javascript" src=jquery/jquery.1.4.2-min.js></script>
 	<script type="text/javascript" src=jquery/jquery-2.1.1.js></script>
 	<script type="text/javascript" src="js/GlobalProvinces_main.js"></script>

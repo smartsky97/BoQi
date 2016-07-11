@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+#copyright p{
+	color:purple;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+	padding:10px 0px;
+	margin:0px;
+	background:white;
+}
+
+#copyright a{
+	display:inline-block;
+	height:32px;
+	line-height:32px;
+	text-decoration:none;
+	font-size:14px;
+	font-weight:bold;
+	color:purple;
+	padding-left:30px;
+}
+
+#newslogo{
+	background:white ;
+	background-size:400px 100px;
+	padding:0px;
+	margin:0px;
+	height:100px;
+}

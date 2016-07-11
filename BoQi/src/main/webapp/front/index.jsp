@@ -15,114 +15,9 @@
 <meta charset="utf-8">
 <title>波奇网首页</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="shortcut icon" href="indeximg/head11.jpg">
 <script type="text/javascript" src="jquery/jquery-1.11.3.js"></script>
-<script language="javascript">
-function loginOut(){
-	window.location.href="user_loginOut.action";
-}
-	//顶部背景图片轮播
-	var counts = 12;
-	var myTimes;
-	function shows() {
-		alert(2);
-		for (var j = 11; j <= 15; j++) {
-			if (counts == j) {
-				// document.getElementsByClassName(j).parentNode.style.display = "block";
-				document.getElementsByClassName(j).style.display = "block";
-				document.getElementsByClassName('b' + j).style.display = "red";
-			} else {
-				//document.getElementsByClassName(j).parentNode.style.display = "none";
-				document.getElementsByClassName(j).style.display = "none";
-				document.getElementsByClassName('b' + j).style.display = "grey";
-			}
-		}
-		counts += 1;
-		if (counts > 15) {
-			counts = 11;
-		}
-	}
 
-	window.onload = function() {
-		alert(12);
-		myTimes = setInterval(shows, 2000);
-		for (var j = 11; j <= 15; j++) {
-			var sp = document.getElementsByClassName("b" + j);
-			sp.onmouseover = function() {
-				for (var j = 11; j <= 15; j++) {
-					if (counts == j) {
-						document.getElementsByClassName(j).style.display = "block";
-						document.getElementsByClassName('b' + j).style.display = "red";
-					} else {
-						document.getElementsByClassName(j).style.display = "none";
-						document.getElementsByClassName('b' + j).style.display = "grey";
-					}
-				}
-			}
-		}
-		var jDom = document.getElementById("beijing");
-		jDom.onmouseout = function() {
-			myTimes = setInterval(shows, 2000);
-			//myTimes=window.setTimeout('shows()',1000);
-		}
-		jDom.onmouseover = function() {
-			clearInterval(myTimes);
-		}
-	}
-
-	//中间图片轮播
-	var count = 2;
-	var myTime;
-	function show() { //图片自动轮播
-		for (var i = 1; i <= 3; i++) {
-			for (var a = 0; a <= 2; a++) {
-				if (count == i) {
-					//console.info(document.getElementsByClassName(i)[a].length);
-					document.getElementsByClassName(i)[a].parentNode.style.display = "block";
-					document.getElementsByClassName(i)[a].style.display = "block";
-					document.getElementsByClassName('a' + i)[a].style.backgroundColor = "red";
-				} else {
-					document.getElementsByClassName(i)[a].parentNode.style.display = "none";
-					document.getElementsByClassName(i)[a].style.display = "none";
-					document.getElementsByClassName('a' + i)[a].style.backgroundColor = "grey";
-				}
-			}
-		}
-		count += 1;
-		if (count > 3) {
-			count = 1;
-		}
-	}
-	window.onload = function() {
-
-		myTime = setInterval(show, 2000);
-		for (var i = 1; i <= 3; i++) {
-			var sp = document.getElementsByClassName("a" + i)[0];
-			sp.onmouseover = function() {
-				for (var i = 1; i <= 3; i++) {
-					if (this == document.getElementsByClassName("a" + i)[0]) {
-						document.getElementsByClassName(i)[0].parentNode.style.display = "block";
-						document.getElementsByClassName(i)[0].style.display = "block";
-						document.getElementsByClassName('a' + i)[0].style.backgroundColor = "red";
-					} else {
-
-						document.getElementsByClassName(i)[0].parentNode.style.display = "none";
-						document.getElementsByClassName(i)[0].style.display = "none";
-						document.getElementsByClassName('a' + i)[0].style.backgroundColor = "grey";
-					}
-				}
-
-			}
-		}
-		var iDom = document.getElementsByClassName("threeimgs")[0];
-		iDom.onmouseout = function() {
-			//myTime=window.setTimeout('show()',1000);
-			myTime = setInterval(show, 2000);
-		}
-		iDom.onmouseover = function() {
-			clearInterval(myTime);
-		}
-	}
-</script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		/*狗狗*/
@@ -304,7 +199,7 @@ function loginOut(){
 		<div id="left">
 			<ul>
 				<li><a target="_blank" href="#">波奇网</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
-				<li><a target="_blank" href="shoppingindex.html">波奇商城</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
+				<li><a target="_blank" href="shoppingindex.jsp">波奇商城</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
 				<li><a target="_blank" href="service.html">波奇服务</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
 				<li><a target="_blank" href="">波奇论坛</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
 				<li><a target="_blank" href="baike.html">波奇百科</a>&nbsp;&nbsp;</a>&nbsp;&nbsp;</a></li>
@@ -1051,6 +946,106 @@ function loginOut(){
 			</div>
 		</div>
 	</div>
+	<script language="javascript">
+function loginOut(){
+	window.location.href="user_loginOut.action";
+}
+//顶部背景图片轮播
+var counts = 12;
+var myTimes;
+function shows() {
+	for (var j = 11; j <= 15; j++) {
+		if (counts == j) {
+			// document.getElementsByClassName(j).parentNode.style.display = "block";
+			document.getElementsByClassName(j)[0].style.display = "block";
+			document.getElementsByClassName('b' + j)[0].style.backgroundColor = "red";
+		} else {
+			//document.getElementsByClassName(j).parentNode.style.display = "none";
+			document.getElementsByClassName(j)[0].style.display = "none";
+			document.getElementsByClassName('b' + j)[0].style.backgroundColor = "grey";
+		}
+	}
+	counts += 1;
+	if (counts > 15) {
+		counts = 11;
+	}
+}
+
+	//中间图片轮播
+	var count = 2;
+	var myTime;
+	function show() { //图片自动轮播
+		for (var i = 1; i <= 3; i++) {
+			for (var a = 0; a <= 2; a++) {
+				if (count == i) {
+					//console.info(document.getElementsByClassName(i)[a].length);
+					document.getElementsByClassName(i)[a].parentNode.style.display = "block";
+					document.getElementsByClassName(i)[a].style.display = "block";
+					document.getElementsByClassName('a' + i)[a].style.backgroundColor = "red";
+				} else {
+					document.getElementsByClassName(i)[a].parentNode.style.display = "none";
+					document.getElementsByClassName(i)[a].style.display = "none";
+					document.getElementsByClassName('a' + i)[a].style.backgroundColor = "grey";
+				}
+			}
+		}
+		count += 1;
+		if (count > 3) {
+			count = 1;
+		}
+	}
+	window.onload = function() {
+		myTimes = setInterval(shows, 2000);
+		for (var j = 11; j <= 15; j++) {
+			var sp = document.getElementsByClassName("b" + j)[0];
+			sp.onmouseover = function() {
+				for (var j = 11; j <= 15; j++) {
+					if (counts == j) {
+						document.getElementsByClassName(j)[0].style.display = "block";
+						document.getElementsByClassName('b' + j)[0].style.backgroundColor = "red";
+					} else {
+						document.getElementsByClassName(j)[0].style.display = "none";
+						document.getElementsByClassName('b' + j)[0].style.backgroundColor = "grey";
+					}
+				}
+			}
+		}
+		var jDom = document.getElementById("beijing");
+		jDom.onmouseout = function() {
+			myTimes = setInterval(shows, 2000);
+			//myTimes=window.setTimeout('shows()',1000);
+		}
+		jDom.onmouseover = function() {
+			clearInterval(myTimes);
+		}
+		myTime = setInterval(show, 2000);
+		for (var i = 1; i <= 3; i++) {
+			var jp = document.getElementsByClassName("a" + i)[0];
+			jp.onmouseover = function() {
+				for (var i = 1; i <= 3; i++) {
+					if (this == document.getElementsByClassName("a" + i)[0]) {
+						document.getElementsByClassName(i)[0].parentNode.style.display = "block";
+						document.getElementsByClassName(i)[0].style.display = "block";
+						document.getElementsByClassName('a' + i)[0].style.backgroundColor = "red";
+					} else {
+
+						document.getElementsByClassName(i)[0].parentNode.style.display = "none";
+						document.getElementsByClassName(i)[0].style.display = "none";
+						document.getElementsByClassName('a' + i)[0].style.backgroundColor = "grey";
+					}
+				}
+			}
+		}
+		var iDom = document.getElementsByClassName("threeimgs")[0];
+		iDom.onmouseout = function() {
+			//myTime=window.setTimeout('show()',1000);
+			myTime = setInterval(show, 2000);
+		}
+		iDom.onmouseover = function() {
+			clearInterval(myTime);
+		}
+	}
+</script>
 </body>
 </html>
 <script type="text/javascript" src="js/shoppingSearch.js"></script>
